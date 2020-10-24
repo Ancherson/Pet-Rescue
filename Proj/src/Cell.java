@@ -15,4 +15,7 @@ public class Cell {
 	public int getColor() {
 		return 0;
 	}
+	public boolean estVide() {
+		return true;
+	}
 }

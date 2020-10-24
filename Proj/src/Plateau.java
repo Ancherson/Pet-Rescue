@@ -66,11 +66,36 @@ public class Plateau {
 	
 	public void explose(int i, int j, int color) {
 		if(!correctInput(i, j)) return;
-		if(cells[i][j].explose(color)) {;
+		if(cells[i][j].explose(color)) {
 			explose(i + 1, j, color);
 			explose(i - 1, j, color);
 			explose(i, j + 1, color);
 			explose(i, j - 1, color);
+		}
+	}
+	
+	private void swap(int i1, int j1, int i2, int j2) {
+		Cell tmp = cells[i1][j1];
+		cells[i1][j1] = cells[i2][j2];
+		cells[i2][j2] = tmp;
+	}
+	
+	private boolean canFall(int i, int j) {
+		return (i < cells.length - 1 && cells[i + 1][j].estVide());
+	}
+	
+	private void cellFall(int i, int j) {
+		while(canFall(i, j)) {
+			swap(i,j,i+1,j);
+			i++;
+		}
+	}
+	
+	public void fall() {
+		for(int i = cells.length - 1; i >= 0; i--) {
+			for(int j = 0; j < cells[i].length; j++) {
+				cellFall(i,j);
+			}
 		}
 	}
 }

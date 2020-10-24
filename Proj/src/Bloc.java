@@ -16,6 +16,10 @@ public class Bloc extends Cell{
 		return true;
 	}
 	
+	public boolean estVide() {
+		return this.color == 0;
+	}
+	
 	public int getColor() {
 		return color;
 	}
