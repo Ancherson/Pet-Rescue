@@ -24,7 +24,18 @@ public class Plateau {
 		this(readFile(niveau));
 	}
 	
+	//TO DO: améliorer l'affichage pour plus tard
 	public void afficheT() {
+		for(int y = 1; y < cells.length - 1; y++) {
+			for(int x = 1; x < cells[y].length - 1; x++) {
+				cells[y][x].afficheT();
+				System.out.print(" ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public void afficheTout() {
 		for(int y = 0; y < cells.length; y++) {
 			for(int x = 0; x < cells[y].length; x++) {
 				cells[y][x].afficheT();
@@ -43,11 +54,14 @@ public class Plateau {
 				liste.add(sc.next());
 			}
 			//TO DO: Traiter le cas où la liste est vide
-			int[][] t = new int[liste.size()][liste.get(0).length()];
+			int[][] t = new int[liste.size() + 2][liste.get(0).length() + 2];
+			//TO DO or not TO DO: J'entoure de 0 pour faciliter plus tard les fonctions, mais peut-être changer ça plus tard
 			for(int y = 0; y < t.length; y++) {
-				String s = liste.get(y);
+				String s = "";
+				if(y != 0 && y != t.length - 1) s = liste.get(y - 1);
 				for(int x = 0; x < t[y].length; x++) {
-					t[y][x] = (s.charAt(x)) - 48;
+					if(y == 0 || y == t.length - 1 || x == 0 || x == t[y].length - 1) t[y][x] = 0;
+					else t[y][x] = (s.charAt(x - 1)) - 48;
 				}
 			}
 			return t;
