@@ -1,17 +1,18 @@
 
 public class Cell {
-	private Bloc bloc;
-	private int x;
-	private int y;
-	public Cell(int c, int x, int y) {
-		bloc = new Bloc(c);
-		this.x = x;
-		this.y = y;
+	private int i;
+	private int j;
+	public Cell(int i, int j) {
+		this.i = i;
+		this.j = j;
 	}
 	public void afficheT() {
-		if(bloc != null)
-			bloc.afficheT();
-		else
-			System.out.print(" ");
+		System.out.print(" ");
+	}
+	public boolean explose(int color) {
+		return false;
+	}
+	public int getColor() {
+		return 0;
 	}
 }
