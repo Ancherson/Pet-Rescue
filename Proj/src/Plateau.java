@@ -17,7 +17,10 @@ public class Plateau {
 		for(int i = 0; i < t.length; i++) {
 			for(int j = 0; j < t[i].length; j++) {
 				//TO DO: Faire un if pour voire si c'est un animal, pour plus tard
-				cells[i][j] = new Bloc(i, j, t[i][j]);
+				switch(t[i][j]) {
+					case -1: cells[i][j] = new Mur(); break;
+					default: cells[i][j] = new Bloc(/*i, j, */t[i][j]);
+				}
 			}
 		}
 	}
@@ -50,7 +53,8 @@ public class Plateau {
 			for(int i = 0; i < t.length; i++) {
 				String s = liste.get(i);
 				for(int j = 0; j < t[i].length; j++) {
-					t[i][j] = (s.charAt(j)) - 48;
+					if(s.charAt(j) == '#') t[i][j] = -1;
+					else t[i][j] = (s.charAt(j)) - 48;
 				}
 			}
 			return t;
@@ -81,7 +85,7 @@ public class Plateau {
 	}
 	
 	private boolean canFall(int i, int j) {
-		return (i < cells.length - 1 && cells[i + 1][j].estVide());
+		return (i < cells.length - 1 && !cells[i][j].estMur() && !cells[i][j].estVide() && cells[i + 1][j].estVide());
 	}
 	
 	private void cellFall(int i, int j) {
@@ -91,11 +95,24 @@ public class Plateau {
 		}
 	}
 	
-	public void fall() {
+	private void colonneFall(int j) {
 		for(int i = cells.length - 1; i >= 0; i--) {
-			for(int j = 0; j < cells[i].length; j++) {
-				cellFall(i,j);
-			}
+			cellFall(i,j);
 		}
 	}
+	
+	public void fall() {
+		for(int j = 0; j < cells[0].length; j++) {
+			colonneFall(j);
+		}
+	}
+	
+	/**
+	 * FAIRE LA FONCTION QUI DECALE SUR LA GAUCHE LES BLOCS
+	 * 
+	 * L'idée (peut être d'autres subtilités): Pour chaque bloc Mur (peut être les stocker quelque part) regarder a gauche: 
+	 * 	- si un bloc vide alors pour toute la suite de bloc audessus du bloc Mur, si cette suite peut aller sur la gauche, la déplacer sur la gauche
+	 *  - si un bloc Mur, regarder audessus de ce bloc et si bloc vide alors pour toute la suite de bloc audessus du bloc Mur, si cette suite peut aller sur la gauche, la déplacer sur la gauche
+	 *  - sinon ne rien faire
+	 */
 }

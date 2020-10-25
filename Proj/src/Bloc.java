@@ -2,8 +2,8 @@
 //       Autre Idee, Vu qu'il n'y a pas grand chose dans Cell, transformer Cell en Interface
 public class Bloc extends Cell{
 	private int color;
-	public Bloc(int i, int j, int c) {
-		super(i,j);
+	public Bloc(/*int i, int j, */int c) {
+		//super(i,j);
 		color = c;
 	}
 	public void afficheT() {
