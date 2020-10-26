@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Plateau {
 	private Cell[][] cells;
+	private int totPet = 0;
 	
 	//Peut être Retirer ?
 	private Plateau(Cell[][]c) {
@@ -64,18 +65,39 @@ public class Plateau {
 		}
 	}
 	
+	public boolean levelIsOver() {
+		return false;
+		//return totPet == 0;
+		//Il faudra vérifier également si le joueur peut encore jouer(si tout les blocs non vides ne peuvent être exploser)
+	}
+	
 	public boolean correctInput(int i, int j) {
 		return !(j < 0 || j >= cells[0].length || i < 0 || i >= cells.length);
 	}
 	
-	public void explose(int i, int j, int color) {
-		if(!correctInput(i, j)) return;
+	public boolean canExplose(int i, int j) {
+		if(!correctInput(i,j)) return false;
+		if(cells[i][j].estMur() || cells[i][j].estVide()) return false;
+		int color = cells[i][j].getColor();
+		if(correctInput(i - 1, j) && color == cells[i - 1][j].getColor()) return true;
+		if(correctInput(i + 1, j) && color == cells[i + 1][j].getColor()) return true;
+		if(correctInput(i, j - 1) && color == cells[i][j - 1].getColor()) return true;
+		if(correctInput(i, j + 1) && color == cells[i][j + 1].getColor()) return true;
+		return false;
+	}
+	
+	public int explose(int i, int j, int color) {
+		if(!correctInput(i, j)) return 0;
+		if(color == -1) color = cells[i][j].getColor();
 		if(cells[i][j].explose(color)) {
-			explose(i + 1, j, color);
-			explose(i - 1, j, color);
-			explose(i, j + 1, color);
-			explose(i, j - 1, color);
+			int tot = 1;
+			tot += explose(i + 1, j, color);
+			tot += explose(i - 1, j, color);
+			tot += explose(i, j + 1, color);
+			tot += explose(i, j - 1, color);
+			return tot;
 		}
+		return 0;
 	}
 	
 	private void swap(int i1, int j1, int i2, int j2) {
@@ -115,4 +137,6 @@ public class Plateau {
 	 *  - si un bloc Mur, regarder audessus de ce bloc et si bloc vide alors pour toute la suite de bloc audessus du bloc Mur, si cette suite peut aller sur la gauche, la déplacer sur la gauche
 	 *  - sinon ne rien faire
 	 */
+	
+	
 }
