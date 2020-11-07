@@ -1,11 +1,11 @@
 
 public class Cell {
-	/*private int i;
+	private int i;
 	private int j;
 	public Cell(int i, int j) {
 		this.i = i;
 		this.j = j;
-	}*/
+	}
 	public void afficheT() {
 		System.out.print(" ");
 	}
@@ -20,6 +20,9 @@ public class Cell {
 	}
 	
 	public boolean estMur() {
+		return false;
+	}
+	public boolean estPet() {
 		return false;
 	}
 }

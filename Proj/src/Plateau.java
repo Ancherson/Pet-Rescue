@@ -8,7 +8,6 @@ public class Plateau {
 	private Cell[][] cells;
 	private int totPet = 0;
 	
-	//Peut être Retirer ?
 	private Plateau(Cell[][]c) {
 		cells = c;
 	}
@@ -17,10 +16,10 @@ public class Plateau {
 		cells = new Cell[t.length][t[0].length];
 		for(int i = 0; i < t.length; i++) {
 			for(int j = 0; j < t[i].length; j++) {
-				//TO DO: Faire un if pour voire si c'est un animal, pour plus tard
 				switch(t[i][j]) {
-					case -1: cells[i][j] = new Mur(); break;
-					default: cells[i][j] = new Bloc(/*i, j, */t[i][j]);
+					case -2: cells[i][j] = new Pet(i,j); totPet++; break;
+					case -1: cells[i][j] = new Mur(i,j); break;
+					default: cells[i][j] = new Bloc(i, j, t[i][j]);
 				}
 			}
 		}
@@ -54,7 +53,8 @@ public class Plateau {
 			for(int i = 0; i < t.length; i++) {
 				String s = liste.get(i);
 				for(int j = 0; j < t[i].length; j++) {
-					if(s.charAt(j) == '#') t[i][j] = -1;
+					if(s.charAt(j) == '@') t[i][j] = -2;
+					else if(s.charAt(j) == '#') t[i][j] = -1;
 					else t[i][j] = (s.charAt(j)) - 48;
 				}
 			}
@@ -66,9 +66,17 @@ public class Plateau {
 	}
 	
 	public boolean levelIsOver() {
+		return totPet == 0 || !canPlay();
+	}
+
+	
+	private boolean canPlay() {
+		for(int i = 0; i < cells.length; i++) {
+			for(int j = 0; j < cells[i].length; j++) {
+				if(canExplose(i, j)) return true;
+			}
+		}
 		return false;
-		//return totPet == 0;
-		//Il faudra vérifier également si le joueur peut encore jouer(si tout les blocs non vides ne peuvent être exploser)
 	}
 	
 	public boolean correctInput(int i, int j) {
@@ -99,6 +107,12 @@ public class Plateau {
 		}
 		return 0;
 	}
+	
+	/******************************************
+	 * 										  *
+	 * URGENT !!!!!!!!!!!!!!!!!!!!! *         *
+	 * ACTUALISER DANS CELL LES I ET J        *
+	 ******************************************/
 	
 	private void swap(int i1, int j1, int i2, int j2) {
 		Cell tmp = cells[i1][j1];
@@ -138,5 +152,13 @@ public class Plateau {
 	 *  - sinon ne rien faire
 	 */
 	
+	public void rescue(Joueur joueur) {
+		for(int j = 0; j < cells[0].length; j++) {
+			if(cells[cells.length - 1][j].estPet()) {
+				joueur.addScore(100);
+				cells[cells[0].length - 1][j] = new Cell(cells.length - 1,j);
+			}
+		}
+	}
 	
 }
