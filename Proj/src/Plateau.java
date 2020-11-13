@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Plateau {
 	private Cell[][] cells;
 	private int totPet = 0;
+	private LinkedList<Mur> murs = new LinkedList<Mur>();
 	
 	private Plateau(Cell[][]c) {
 		cells = c;
@@ -17,9 +18,17 @@ public class Plateau {
 		for(int i = 0; i < t.length; i++) {
 			for(int j = 0; j < t[i].length; j++) {
 				switch(t[i][j]) {
-					case -2: cells[i][j] = new Pet(i,j); totPet++; break;
-					case -1: cells[i][j] = new Mur(i,j); break;
-					default: cells[i][j] = new Bloc(i, j, t[i][j]);
+					case -2: 
+						cells[i][j] = new Pet(i,j); 
+						totPet++; 
+						break;
+					case -1: 
+						Mur m = new Mur(i, j);
+						murs.add(m);
+						cells[i][j] = m;
+						break;
+					default: 
+						cells[i][j] = new Bloc(i, j, t[i][j]);
 				}
 			}
 		}
@@ -31,13 +40,16 @@ public class Plateau {
 	
 	//TO DO: améliorer l'affichage pour plus tard
 	public void afficheT() {
+		System.out.println("# ".repeat(cells[0].length + 2));
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
+				if(j == 0) System.out.print("# ");
 				cells[i][j].afficheT();
 				System.out.print(" ");
 			}
-			System.out.println();
+			System.out.println("# ");
 		}
+		System.out.println("# ".repeat(cells[0].length + 2));
 	}
 	
 	private static int[][] readFile(int n) {
@@ -85,7 +97,7 @@ public class Plateau {
 	
 	public boolean canExplose(int i, int j) {
 		if(!correctInput(i,j)) return false;
-		if(cells[i][j].estMur() || cells[i][j].estVide()) return false;
+		if(cells[i][j].estMur() || cells[i][j].estVide() || cells[i][j].estPet()) return false;
 		int color = cells[i][j].getColor();
 		if(correctInput(i - 1, j) && color == cells[i - 1][j].getColor()) return true;
 		if(correctInput(i + 1, j) && color == cells[i + 1][j].getColor()) return true;
@@ -94,9 +106,15 @@ public class Plateau {
 		return false;
 	}
 	
+	public int explose(int i, int j) {
+		if(canExplose(i,j)) {
+			return explose(i,j,cells[i][j].getColor());
+		}
+		return 0;
+	}
+	
 	public int explose(int i, int j, int color) {
 		if(!correctInput(i, j)) return 0;
-		if(color == -1) color = cells[i][j].getColor();
 		if(cells[i][j].explose(color)) {
 			int tot = 1;
 			tot += explose(i + 1, j, color);
@@ -108,16 +126,13 @@ public class Plateau {
 		return 0;
 	}
 	
-	/******************************************
-	 * 										  *
-	 * URGENT !!!!!!!!!!!!!!!!!!!!! *         *
-	 * ACTUALISER DANS CELL LES I ET J        *
-	 ******************************************/
-	
 	private void swap(int i1, int j1, int i2, int j2) {
 		Cell tmp = cells[i1][j1];
 		cells[i1][j1] = cells[i2][j2];
 		cells[i2][j2] = tmp;
+		
+		cells[i1][j1].change(i1, j1);
+		cells[i2][j2].change(i2, j2);
 	}
 	
 	private boolean canFall(int i, int j) {
@@ -152,11 +167,63 @@ public class Plateau {
 	 *  - sinon ne rien faire
 	 */
 	
+	
+	//Fonction left pour les blocs murs, Il faudra faire la fonction left pour la derniere ligne
+	public boolean left1() {
+		boolean b = false;
+		for(Mur mur : murs) {
+			int[] coord = mur.getIJ();
+			int i = coord[0];
+			int j = coord[1];
+			if((correctInput(i, j - 1) && cells[i][j - 1].estVide()) || (correctInput(i, j - 1) && cells[i][j - 1].estMur() && correctInput(i - 1,j - 1) && cells[i - 1][j - 1].estVide())) {
+				
+				b = deplaceLeft(i - 1, j) || b;
+			}
+		}
+		return b;
+	}
+	
+	//fonction left pour la derniere ligne
+	public boolean left2() {
+		boolean b = false;
+		for(int j = 1; j < cells[0].length; j++) {
+			if(cells[cells.length - 1][j - 1].estVide() && !cells[cells.length - 1][j].estVide() && !cells[cells.length -1][j].estMur()) {
+				b = deplaceLeft(cells.length - 1,j) || b;
+			}
+		}
+		return b;
+	}
+	
+	public boolean deplaceLeft(int ii, int j) {
+		boolean b = false;
+		for(int i = ii; i >= 0; i--) {
+			if(cells[i][j].estMur() || cells[i][j].estVide()) break;
+			if(cells[i][j - 1].estVide()) {
+				swap(i,j,i,j-1);
+				b = true;
+			}
+			
+		}
+		fall();
+		return b;
+	}
+	
+	
+	public void left() {
+		boolean l1 = true;
+		boolean l2 = true;
+		while(l1 || l2) {
+			l1 = left1();
+			l2 = left2();
+		}
+	}
+	
 	public void rescue(Joueur joueur) {
 		for(int j = 0; j < cells[0].length; j++) {
 			if(cells[cells.length - 1][j].estPet()) {
-				joueur.addScore(100);
+				joueur.addScore(1000);
 				cells[cells[0].length - 1][j] = new Cell(cells.length - 1,j);
+				totPet--;
 			}
 		}
 	}

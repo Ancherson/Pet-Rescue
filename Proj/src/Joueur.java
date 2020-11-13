@@ -8,6 +8,10 @@ public class Joueur {
 		score = 0;
 	}
 	
+	public void affiche() {
+		System.out.println(nom + " : " + score);
+	}
+	
 	public void addScore(int score) {
 		this.score += score;
 	}

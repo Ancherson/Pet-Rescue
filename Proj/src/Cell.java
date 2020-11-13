@@ -1,8 +1,12 @@
 
 public class Cell {
-	private int i;
-	private int j;
+	protected int i;
+	protected int j;
 	public Cell(int i, int j) {
+		this.i = i;
+		this.j = j;
+	}
+	public void change(int i, int j) {
 		this.i = i;
 		this.j = j;
 	}

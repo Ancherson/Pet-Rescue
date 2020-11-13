@@ -5,6 +5,11 @@ public class Mur extends Cell{
 		super(i, j);
 	}
 	
+	public int[] getIJ() {
+		int[] t = {i,j};
+		return t;
+	}
+	
 	public boolean estMur() {
 		return true;
 	}
