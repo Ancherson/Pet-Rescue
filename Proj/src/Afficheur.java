@@ -1,4 +1,6 @@
 
 public interface Afficheur {
-	void afficher(Plateau p);
+	void afficherP(Plateau p);
+	void afficheScore(Joueur j);
+	void afficheFinDePartie(Plateau p, Joueur j);
 }

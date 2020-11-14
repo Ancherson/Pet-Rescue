@@ -36,25 +36,26 @@ public class Jeu {
 	public void start() {
 		j = interacteur.quelNom();
 		p = interacteur.quelLevel();
+		run();
 	}
 	
 	public void turn() {
-		afficheur.afficher(p);
+		afficheur.afficherP(p);
+		afficheur.afficheScore(j);
 		int[]coord = interacteur.quelleCase();
-		if(p.canExplose(coord[0], coord[1])) {
-			j.addScore(p.explose(coord[0], coord[1], -1));
-			p.fall();
-		}
-		//Faire p.left()
-		//Vérifier si des Pet sont en bas et les enlever, puis ajouter au score du joueur
-		//refaire p.left()
-		
+		int score = p.explose(coord[0], coord[1]);
+		j.addScore(score);
+		p.fall();
+		p.left();
+		p.rescue(j);
+		p.left();
 	}
 	
 	public void run() {
 		while(!finished()) {
 			turn();
 		}
+		afficheur.afficheFinDePartie(p, j);
 	}
 	
 	public boolean finished() {

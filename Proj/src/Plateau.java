@@ -27,6 +27,9 @@ public class Plateau {
 						murs.add(m);
 						cells[i][j] = m;
 						break;
+					case 0 :
+						cells[i][j] = new Cell(i, j);
+						break;
 					default: 
 						cells[i][j] = new Bloc(i, j, t[i][j]);
 				}
@@ -67,6 +70,7 @@ public class Plateau {
 				for(int j = 0; j < t[i].length; j++) {
 					if(s.charAt(j) == '@') t[i][j] = -2;
 					else if(s.charAt(j) == '#') t[i][j] = -1;
+					else if(s.charAt(j) == '0') t[i][j] = 0;
 					else t[i][j] = (s.charAt(j)) - 48;
 				}
 			}
@@ -79,6 +83,10 @@ public class Plateau {
 	
 	public boolean levelIsOver() {
 		return totPet == 0 || !canPlay();
+	}
+	
+	public boolean aGagne() {
+		return totPet == 0;
 	}
 
 	
@@ -107,6 +115,7 @@ public class Plateau {
 	}
 	
 	public int explose(int i, int j) {
+		System.out.println("explose " + i + " " + j);
 		if(canExplose(i,j)) {
 			return explose(i,j,cells[i][j].getColor());
 		}
