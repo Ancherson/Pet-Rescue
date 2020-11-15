@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Plateau {
 	private Cell[][] cells;
-	private int totPet = 0;
+	public int totPet = 0;
 	private LinkedList<Mur> murs = new LinkedList<Mur>();
 	
 	private Plateau(Cell[][]c) {
@@ -226,14 +226,17 @@ public class Plateau {
 		}
 	}
 	
-	public void rescue(Joueur joueur) {
+	public boolean rescue(Joueur joueur) {
+		boolean b = false;
 		for(int j = 0; j < cells[0].length; j++) {
 			if(cells[cells.length - 1][j].estPet()) {
-				joueur.addScore(1000);
-				cells[cells[0].length - 1][j] = new Cell(cells.length - 1,j);
+				joueur.addScore(10);
+				cells[cells.length - 1][j] = new Cell(cells.length - 1,j);
 				totPet--;
+				b = true;
 			}
 		}
+		return b;
 	}
 	
 }

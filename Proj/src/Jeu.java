@@ -47,8 +47,11 @@ public class Jeu {
 		j.addScore(score);
 		p.fall();
 		p.left();
-		p.rescue(j);
-		p.left();
+		while(p.rescue(j)) {
+			p.fall();
+			p.left();
+		}
+
 	}
 	
 	public void run() {
