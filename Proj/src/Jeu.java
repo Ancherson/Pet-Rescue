@@ -58,9 +58,9 @@ public class Jeu {
 		while(!finished()) {
 			turn();
 		}
-		if(p.aGagne()) {
-			//Vider les blocs pour les ajouter au score
-		}
+		p.afficheT();
+		if(p.aGagne()) p.explosionFinal(j);
+		
 		afficheur.afficheFinDePartie(p, j);
 	}
 	
