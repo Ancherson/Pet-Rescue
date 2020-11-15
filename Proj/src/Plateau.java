@@ -115,7 +115,6 @@ public class Plateau {
 	}
 	
 	public int explose(int i, int j) {
-		System.out.println("explose " + i + " " + j);
 		if(canExplose(i,j)) {
 			return explose(i,j,cells[i][j].getColor());
 		}

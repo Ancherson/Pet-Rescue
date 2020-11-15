@@ -14,12 +14,13 @@ public class TerminalInteracteur implements Interacteur{
 		System.out.println("Quel level (entre 1 et 1)");
 		int i = 0;
 		boolean pbm = true;
-		while(pbm || (i < 3 && i > 0)) {
+		while(pbm || !(i < 3 && i > 0)) {
 			pbm = false;
 			String s = sc.next();
 			try {
 				i = Integer.parseInt(s);
 			}catch(NumberFormatException e) {
+				System.out.println("NON");
 				pbm = true;
 			}
 		}
