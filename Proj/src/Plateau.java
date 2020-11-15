@@ -242,7 +242,7 @@ public class Plateau {
 	
 	// à la fin de la partie on compte le nombre total de blocs restant et on met ce nombre au carré puis on le multiplie par 10,
 	// cela permet d'encourager le joueur à faire le moins de coups possible !
-	public void explosionFinal(Joueur joueur) {
+	public void explosionFinale(Joueur joueur) {
 		int score = 0;
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {

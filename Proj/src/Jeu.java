@@ -59,7 +59,7 @@ public class Jeu {
 			turn();
 		}
 		p.afficheT();
-		if(p.aGagne()) p.explosionFinal(j);
+		if(p.aGagne()) p.explosionFinale(j);
 		
 		afficheur.afficheFinDePartie(p, j);
 	}
