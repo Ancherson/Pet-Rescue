@@ -4,7 +4,6 @@ public class Jeu {
 	Joueur j;
 	Plateau p;
 	Afficheur afficheur;
-	Interacteur interacteur;
 	
 	public Jeu() {
 		demmandeInterface();
@@ -13,11 +12,11 @@ public class Jeu {
 	
 	private void demmandeInterface() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Quel Interface voulez-vous utiliser ? (1 -> Terminal | 2 -> Interface Graphique)");
+		System.out.println("Quel Interface voulez-vous utiliser ? (1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
 		
 		int i = 0;
 		boolean pbm = true;
-		while(pbm || (i != 1 && i != 2)) {
+		while(pbm || (i != 1 && i != 2 && i != 3)) {
 			pbm = false;
 			String s = sc.next();
 			try {
@@ -28,21 +27,25 @@ public class Jeu {
 		}
 		if(i == 1) {
 			afficheur = new TerminalAfficheur();
-			interacteur = new TerminalInteracteur();
+			j = new Humain(new TerminalInteracteur());
+		}
+		else if(i == 3) {
+			afficheur = new TerminalAfficheur();
+			j = new Robot();
 		}
 		//Faudra Renvoyer une instance de l'interface graphique
 	}
 	
 	public void start() {
-		j = interacteur.quelNom();
-		p = interacteur.quelLevel();
+		j.quelNom();
+		p = j.quelLevel();
 		run();
 	}
 	
 	public void turn() {
 		afficheur.afficherP(p);
 		afficheur.afficheScore(j);
-		int[]coord = interacteur.quelleCase();
+		int[]coord = j.quelleCase();
 		int score = p.explose(coord[0], coord[1]);
 		j.addScore(score);
 		p.fall();
@@ -58,7 +61,6 @@ public class Jeu {
 		while(!finished()) {
 			turn();
 		}
-		p.afficheT();
 		if(p.aGagne()) p.explosionFinale(j);
 		
 		afficheur.afficheFinDePartie(p, j);

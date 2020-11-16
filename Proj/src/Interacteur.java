@@ -1,7 +1,7 @@
 
 public interface Interacteur {
 	
-	Joueur quelNom();
+	String quelNom();
 	Plateau quelLevel();
 	int[] quelleCase();
 }

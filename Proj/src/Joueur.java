@@ -1,12 +1,8 @@
 import java.util.Scanner;
 
-public class Joueur {
-	private String nom;
-	private int score;
-	public Joueur(String nom) {
-		this.nom = nom;
-		score = 0;
-	}
+public abstract class Joueur {
+	protected String nom;
+	protected int score;
 	
 	public void affiche() {
 		System.out.println(nom + " : " + score);
@@ -16,5 +12,10 @@ public class Joueur {
 		this.score += score * score * 10;
 	}
 	
+	public abstract void quelNom();
+	
+	public abstract Plateau quelLevel();
+	
+	public abstract int[] quelleCase();
 	
 }
