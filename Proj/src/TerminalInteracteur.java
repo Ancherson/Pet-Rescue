@@ -4,9 +4,9 @@ public class TerminalInteracteur implements Interacteur{
 	private Scanner sc = new Scanner(System.in);
 
 	@Override
-	public Joueur quelNom() {
+	public String quelNom() {
 		System.out.println("Quel est votre nom ?");
-		return new Joueur(sc.next());
+		return sc.next();
 	}
 
 	@Override

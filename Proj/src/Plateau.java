@@ -8,11 +8,7 @@ public class Plateau {
 	private Cell[][] cells;
 	public int totPet = 0;
 	private LinkedList<Mur> murs = new LinkedList<Mur>();
-	
-	private Plateau(Cell[][]c) {
-		cells = c;
-	}
-	
+
 	private Plateau(int[][]t) {
 		cells = new Cell[t.length][t[0].length];
 		for(int i = 0; i < t.length; i++) {
@@ -39,6 +35,19 @@ public class Plateau {
 	
 	public Plateau(int niveau) {
 		this(readFile(niveau));
+	}
+	
+	public Cell[][] getCell() {
+		Cell[][]copy = new Cell[cells.length][cells[0].length];
+		for(int i = 0; i < copy.length; i++) {
+			for(int j = 0; j < copy[i].length; j++) {
+				//TO DO : Cloner les cellules au lieu de seulement copier les references
+				//sinon on pourra appeler des fonctions comme explose qui changera la cellule
+				//Le but etant qu on ne puisse lire seulement le plateau
+				copy[i][j] = cells[i][j];
+			}
+		}
+		return copy;
 	}
 	
 	//TO DO: améliorer l'affichage pour plus tard
