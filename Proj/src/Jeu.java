@@ -25,6 +25,7 @@ public class Jeu {
 				pbm = true;
 			}
 		}
+		sc.close();
 		if(i == 1) {
 			afficheur = new TerminalAfficheur();
 			j = new Humain(new TerminalInteracteur());
