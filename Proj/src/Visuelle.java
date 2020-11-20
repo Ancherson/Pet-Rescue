@@ -17,10 +17,10 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	public Visuelle() {
 		this.setTitle("Pet Rescue");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(400,300);
+		this.setSize(700,500);
 		this.setAlwaysOnTop(true);
 		this.setLocationRelativeTo(null);
-		this.setResizable(false);
+		//this.setResizable(false);
 		
 		this.menu1 = new MenuCommencer();
 		this.menu2 = new MenuNom();
