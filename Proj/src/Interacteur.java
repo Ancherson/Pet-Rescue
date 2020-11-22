@@ -1,7 +1,7 @@
 
 public interface Interacteur {
 	
-	String quelNom();
-	Plateau quelLevel();
-	int[] quelleCase();
+	void start();
+	void prochainCoup();
+	void close();
 }

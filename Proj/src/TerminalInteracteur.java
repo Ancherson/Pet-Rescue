@@ -2,15 +2,25 @@ import java.util.Scanner;
 
 public class TerminalInteracteur implements Interacteur{
 	private Scanner sc = new Scanner(System.in);
-
+	private Jeu j;
+	
+	public TerminalInteracteur(Jeu j) {
+		this.j = j;
+	}
+	
 	@Override
+	public void start() {
+		String nom = quelNom();
+		int level = quelLevel();
+		j.start(nom, level);
+	}
+
 	public String quelNom() {
 		System.out.println("Quel est votre nom ?");
 		return sc.next();
 	}
 
-	@Override
-	public Plateau quelLevel() {
+	public int quelLevel() {
 		System.out.println("Quel level (entre 1 et 1)");
 		int i = 0;
 		boolean pbm = true;
@@ -24,11 +34,11 @@ public class TerminalInteracteur implements Interacteur{
 				pbm = true;
 			}
 		}
-		return new Plateau(i);
+		return i;
 	}
 
 	@Override
-	public int[] quelleCase() {
+	public void prochainCoup() {
 		System.out.println("Quel Case ?");
 		int i = -1;
 		boolean pbm = true;
@@ -53,10 +63,13 @@ public class TerminalInteracteur implements Interacteur{
 				pbm = true;
 			}
 		}
-		
-		int[]t = {i,j};
-		return t;
-		
+		this.j.turn(i,j);
 	}
 
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

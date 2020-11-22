@@ -11,10 +11,12 @@ public abstract class Joueur {
 		this.score += score * score * 10;
 	}
 	
-	public abstract void quelNom();
+	public void quelNom(String name) {
+		nom = name;
+	}
 	
-	public abstract Plateau quelLevel();
+	public abstract void start();
 	
-	public abstract int[] quelleCase();
+	public abstract void prochainCoup();
 	
 }

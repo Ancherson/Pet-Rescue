@@ -6,11 +6,14 @@ public class Jeu {
 	Afficheur afficheur;
 	
 	public Jeu() {
-		demmandeInterface();
-		start();
+		this.demmandeInterface();
 	}
 	
-	private void demmandeInterface() {
+	public Plateau getPlateau() {
+		return p;
+	}
+	
+	public void demmandeInterface() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Quel Interface voulez-vous utiliser ? (1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
 		
@@ -25,29 +28,37 @@ public class Jeu {
 				pbm = true;
 			}
 		}
-		sc.close();
 		if(i == 1) {
 			afficheur = new TerminalAfficheur();
-			j = new Humain(new TerminalInteracteur());
+			Interacteur inter = new TerminalInteracteur(this);
+			j = new Humain(inter);
 		}
 		else if(i == 3) {
 			afficheur = new TerminalAfficheur();
-			j = new Robot();
+			j = new Robot(this);
+		} else {
+			Visuelle v = new Visuelle(this);
+			afficheur = (Afficheur) v;
+			j = new Humain(v);
 		}
-		//Faudra Renvoyer une instance de l'interface graphique
+		
+		j.start();
 	}
 	
-	public void start() {
-		j.quelNom();
-		p = j.quelLevel();
-		run();
+	public void start(String name, int level) {
+		j.quelNom(name);
+		p = new Plateau(level);
+		next();
 	}
 	
-	public void turn() {
+	public void next() {
 		afficheur.afficherP(p);
 		afficheur.afficheScore(j);
-		int[]coord = j.quelleCase();
-		int score = p.explose(coord[0], coord[1]);
+		j.prochainCoup();
+	}
+	
+	public void turn(int ii, int jj) {
+		int score = p.explose(ii, jj);
 		j.addScore(score);
 		p.fall();
 		p.left();
@@ -55,16 +66,13 @@ public class Jeu {
 			p.fall();
 			p.left();
 		}
-
-	}
-	
-	public void run() {
-		while(!finished()) {
-			turn();
-		}
-		if(p.aGagne()) p.explosionFinale(j);
 		
-		afficheur.afficheFinDePartie(p, j);
+		if(finished()) {
+			if(p.aGagne()) p.explosionFinale(j);
+			afficheur.afficheFinDePartie(p, j);
+		}else {
+			next();
+		}
 	}
 	
 	public boolean finished() {

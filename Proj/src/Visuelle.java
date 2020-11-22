@@ -14,7 +14,11 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	private CardLayout cardLayout = new CardLayout();
 	
-	public Visuelle() {
+	private Jeu j;
+	
+	public Visuelle(Jeu j) {
+		this.j = j;
+		
 		this.setTitle("Pet Rescue");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(700,500);
@@ -22,9 +26,9 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		this.setLocationRelativeTo(null);
 		//this.setResizable(false);
 		
-		this.menu1 = new MenuCommencer();
-		this.menu2 = new MenuNom();
-		this.menu3 = new MenuLevel();
+		this.menu1 = new MenuCommencer(this);
+		this.menu2 = new MenuNom(this);
+		this.menu3 = new MenuLevel(this);
 		
 		this.mainPanel = new JPanel(cardLayout);
 		this.mainPanel.add("commencer", menu1);
@@ -35,44 +39,32 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		
 		this.setVisible(true);
 	}
-
-	@Override
-	public String quelNom() {
-		while(!menu1.aAppuyer()) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
+	
+	public void start() {
+		cardLayout.show(mainPanel, "commencer");
+	}
+	
+	public void changeToName() {
 		cardLayout.show(mainPanel, "nom");
-		
-		while(!menu2.aRepondu()) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
+	}
+
+	public void changeToLevel() {
 		cardLayout.show(mainPanel, "level");
-		
+	}
+	
+	public void changeToPlateau(int i) {
+		j.start(quelNom(), i);
+		//Change panel level -> plateau
+	}
+	
+	public String quelNom() {
 		return menu2.getText();
 	}
-
+	
 	@Override
-	public Plateau quelLevel() {
+	public void prochainCoup() {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int[] quelleCase() {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
@@ -89,6 +81,12 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 
 	@Override
 	public void afficheFinDePartie(Plateau p, Joueur j) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void close() {
 		// TODO Auto-generated method stub
 		
 	}

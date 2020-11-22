@@ -7,21 +7,19 @@ import javax.swing.JTextField;
 public class MenuNom extends JPanel{
 	private JLabel question = new JLabel("Quel est ton nom baby ?");
 	private JTextField reponse = new JTextField(30);
-	private boolean aRepondu = false;
+	private Visuelle v;
 	
-	public MenuNom() {
+	public MenuNom(Visuelle v) {
+		this.v = v;
+		
 		JPanel p = new JPanel(new GridLayout(2,1));
 		p.add(question);
 		p.add(reponse);
 		reponse.addActionListener((event) -> {
-			aRepondu = true;
+			v.changeToLevel();
 		});
 		
 		this.add(p);
-	}
-	
-	public boolean aRepondu() {
-		return aRepondu;
 	}
 	
 	public String getText() {

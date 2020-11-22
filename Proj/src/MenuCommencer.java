@@ -17,9 +17,11 @@ import javax.swing.SwingConstants;
 public class MenuCommencer extends JPanel{
 	private JLabel title = new JLabel("PET RESCUE");
 	private JButton bouton = new JButton("Commencer");
-	
-	private boolean aAppuyer = false;
-	public MenuCommencer() {
+	private Visuelle v;
+
+	public MenuCommencer(Visuelle v) {
+		this.v = v;
+		
 		title.setFont(new java.awt.Font("Arial",Font.BOLD,50));
 		title.setForeground(new Color(0x25275E));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -29,7 +31,7 @@ public class MenuCommencer extends JPanel{
 		p1.add(title);
 		
 		bouton.addActionListener((event) -> {
-			aAppuyer = true;
+			v.changeToName();
 		});
 		bouton.setBackground(new Color(0x25273E));
 		bouton.setFocusPainted(false);
@@ -81,17 +83,10 @@ public class MenuCommencer extends JPanel{
 		pBouton.add(bouton);
 		p2.setBackground(new Color(0x25273E));
 		p2.add(pBouton);
-
-
-
-
 		
 		this.setLayout(new BorderLayout());
 		this.add(p1, BorderLayout.NORTH);
 		this.add(p2, BorderLayout.CENTER);
 	}
-	
-	public boolean aAppuyer() {
-		return aAppuyer;
-	}
+
 }
