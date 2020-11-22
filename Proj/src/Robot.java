@@ -12,7 +12,7 @@ public class Robot extends Joueur{
 	public void start() {
 		String nom = noms[(int)(Math.random() * noms.length)];
 		int level = (int)(Math.random() * 2 + 1);
-		jeu.start(nom, level);
+		jeu.start(nom, new Plateau(level));
 	}
 	//Premiere IA un peu débile, mais c'est pour tester
 	//Faudra changer getCell parce que le robot peut actuellement exploser les blocs, donc a changer

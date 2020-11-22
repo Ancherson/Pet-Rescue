@@ -12,7 +12,7 @@ public class TerminalInteracteur implements Interacteur{
 	public void start() {
 		String nom = quelNom();
 		int level = quelLevel();
-		j.start(nom, level);
+		j.start(nom, new Plateau(level));
 	}
 
 	public String quelNom() {

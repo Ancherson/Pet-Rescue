@@ -45,9 +45,9 @@ public class Jeu {
 		j.start();
 	}
 	
-	public void start(String name, int level) {
+	public void start(String name, Plateau p) {
 		j.quelNom(name);
-		p = new Plateau(level);
+		this.p = p;
 		next();
 	}
 	

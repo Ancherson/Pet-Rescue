@@ -10,6 +10,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private MenuCommencer menu1;
 	private MenuNom menu2;
 	private MenuLevel menu3;
+	private VisuPlateau plateau;
 	//Ajouter pour plus tard menu plateau et menu fin
 	
 	private CardLayout cardLayout = new CardLayout();
@@ -53,7 +54,12 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	}
 	
 	public void changeToPlateau(int i) {
-		j.start(quelNom(), i);
+		Plateau p = new Plateau(i);
+		plateau = new VisuPlateau(this, p);
+		j.start(quelNom(), p);
+		this.mainPanel.add("plateau", plateau);
+		this.cardLayout.show(mainPanel, "plateau");
+		this.setSize(plateau.largeur, plateau.hauteur);
 		//Change panel level -> plateau
 	}
 	
@@ -69,8 +75,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 
 	@Override
 	public void afficherP(Plateau p) {
-		// TODO Auto-generated method stub
-		
+		plateau.repaint();
 	}
 
 	@Override

@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class Pet extends Cell{
 	public Pet(int i, int j) {
@@ -5,6 +7,11 @@ public class Pet extends Cell{
 	}
 	public boolean estVide() {
 		return false;
+	}
+	
+	public void afficheG(Graphics g, int scl) {
+		g.setColor(Color.orange);
+		g.fillRect(j * scl, i * scl, scl, scl);
 	}
 	
 	public void afficheT() {
