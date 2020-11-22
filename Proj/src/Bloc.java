@@ -14,8 +14,10 @@ public class Bloc extends Cell{
 		else System.out.print(color);
 	}
 	public void afficheG(Graphics g, int scl) {
-		g.setColor(colors[color]);
+		g.setColor(Color.white);
 		g.fillRect(j * scl, i * scl, scl, scl);
+		g.setColor(colors[color]);
+		g.fillRect(j * scl + 1, i * scl + 1, scl - 1, scl - 1);
 	}
 	public boolean explose(int c) {
 		if(vide || this.color != c) return false;

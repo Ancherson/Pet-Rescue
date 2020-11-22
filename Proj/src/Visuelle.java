@@ -10,12 +10,13 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private MenuCommencer menu1;
 	private MenuNom menu2;
 	private MenuLevel menu3;
-	private VisuPlateau plateau;
+	private MenuJeu menuJeu;
 	//Ajouter pour plus tard menu plateau et menu fin
 	
 	private CardLayout cardLayout = new CardLayout();
 	
 	private Jeu j;
+	private final int hauteurEntete;
 	
 	public Visuelle(Jeu j) {
 		this.j = j;
@@ -25,7 +26,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		this.setSize(700,500);
 		this.setAlwaysOnTop(true);
 		this.setLocationRelativeTo(null);
-		//this.setResizable(false);
+		this.setResizable(false);
 		
 		this.menu1 = new MenuCommencer(this);
 		this.menu2 = new MenuNom(this);
@@ -39,6 +40,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		this.getContentPane().add(mainPanel);
 		
 		this.setVisible(true);
+		
+		this.hauteurEntete = this.getHeight() - this.getContentPane().getHeight();
 	}
 	
 	public void start() {
@@ -55,16 +58,20 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	public void changeToPlateau(int i) {
 		Plateau p = new Plateau(i);
-		plateau = new VisuPlateau(this, p);
+		menuJeu = new MenuJeu(this, p);
+		System.out.println(menuJeu.getWidth() + " " + menuJeu.getHeight());
+		this.setSize(menuJeu.getWidth(), menuJeu.getHeight() + this.hauteurEntete + 1);
 		j.start(quelNom(), p);
-		this.mainPanel.add("plateau", plateau);
-		this.cardLayout.show(mainPanel, "plateau");
-		this.setSize(plateau.largeur, plateau.hauteur);
-		//Change panel level -> plateau
+		this.mainPanel.add("jeu", menuJeu);
+		this.cardLayout.show(mainPanel, "jeu");
 	}
 	
 	public String quelNom() {
 		return menu2.getText();
+	}
+	
+	public void joue(int i, int j) {
+		this.j.turn(i, j);
 	}
 	
 	@Override
@@ -75,13 +82,12 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 
 	@Override
 	public void afficherP(Plateau p) {
-		plateau.repaint();
+		menuJeu.afficheP();
 	}
 
 	@Override
 	public void afficheScore(Joueur j) {
-		// TODO Auto-generated method stub
-		
+		menuJeu.setScore(j.getScore());
 	}
 
 	@Override

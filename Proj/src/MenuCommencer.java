@@ -22,7 +22,7 @@ public class MenuCommencer extends JPanel{
 	public MenuCommencer(Visuelle v) {
 		this.v = v;
 		
-		title.setFont(new java.awt.Font("Arial",Font.BOLD,50));
+		title.setFont(new Font("Arial",Font.BOLD,50));
 		title.setForeground(new Color(0x25275E));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		

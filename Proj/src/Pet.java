@@ -10,8 +10,10 @@ public class Pet extends Cell{
 	}
 	
 	public void afficheG(Graphics g, int scl) {
-		g.setColor(Color.orange);
+		g.setColor(Color.white);
 		g.fillRect(j * scl, i * scl, scl, scl);
+		g.setColor(Color.orange);
+		g.fillRect(j * scl + 1, i * scl + 1, scl - 1, scl - 1);
 	}
 	
 	public void afficheT() {

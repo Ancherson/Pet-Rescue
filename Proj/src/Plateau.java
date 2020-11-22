@@ -266,6 +266,7 @@ public class Plateau {
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
 				if(!cells[i][j].estVide() && !cells[i][j].estMur()) {
+					cells[i][j] = new Cell(i, j);
 					score++;
 				}
 			}

@@ -7,6 +7,10 @@ public abstract class Joueur {
 		System.out.println(nom + " : " + score);
 	}
 	
+	public int getScore() {
+		return score;
+	}
+	
 	public void addScore(int score) {
 		this.score += score * score * 10;
 	}
