@@ -24,7 +24,7 @@ public class MenuCommencer extends JPanel{
 		
 		title.setFont(new Font("Arial",Font.BOLD,50));
 		title.setForeground(new Color(0x25275E));
-		title.setHorizontalAlignment(SwingConstants.CENTER);
+		//title.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel p1 = new JPanel();
 		p1.setBackground(Color.white);
