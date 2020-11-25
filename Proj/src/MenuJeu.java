@@ -16,15 +16,13 @@ public class MenuJeu extends JPanel{
 		this.v = v;
 		this.vPlateau = new VisuPlateau(v, p);
 		
-		System.out.println(vPlateau.largeur + " " + vPlateau.hauteur);
-		
 		this.setLayout(new BorderLayout());
 		
 		JPanel haut = new JPanel();
 		haut.setSize(vPlateau.largeur, 70);
 		score.setFont(new Font("Arial",Font.BOLD,50));
 		score.setForeground(Color.white);
-		haut.setBackground(new Color(0x25273E));
+		haut.setBackground(new Color(0x25275E));
 		haut.add(score);
 		
 		this.add(haut, BorderLayout.NORTH);

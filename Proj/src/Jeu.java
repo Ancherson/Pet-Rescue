@@ -68,7 +68,6 @@ public class Jeu {
 		}
 		
 		if(finished()) {
-			System.out.println("A FINI");
 			if(p.aGagne()) p.explosionFinale(j);
 			afficheur.afficherP(p);
 			afficheur.afficheScore(j);
