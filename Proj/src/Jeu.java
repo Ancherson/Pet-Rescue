@@ -93,6 +93,7 @@ public class Jeu {
 	
 	public void next() {
 		afficheur.afficherP(p);
+		afficheur.afficheCoup(p);
 		afficheur.afficheScore(joueur);
 		joueur.prochainCoup();
 	}

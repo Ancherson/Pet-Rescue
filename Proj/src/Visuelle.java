@@ -59,6 +59,10 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	public void changeToPlateau(int i) {
 		Plateau p = new Plateau(i);
 		menuJeu = new MenuJeu(this, p);
+		
+		int coup = p.getCoup();
+		if(coup > 0) menuJeu.setCoup(coup);
+		
 		this.setSize(menuJeu.getWidth(), menuJeu.getHeight() + this.hauteurEntete + 1);
 		j.start(quelNom(), p);
 		this.mainPanel.add("jeu", menuJeu);
@@ -78,7 +82,6 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	@Override
 	public void prochainCoup() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -92,6 +95,14 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		menuJeu.setScore(j.getScore());
 	}
 
+
+	@Override
+	public void afficheCoup(Plateau p) {
+		int coup = p.getCoup();
+		if(coup >= 0) menuJeu.setCoup(coup);
+		
+	}
+	
 	@Override
 	public void afficheFinDePartie(Plateau p, Joueur j) {
 		// TODO Auto-generated method stub
@@ -103,5 +114,4 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
