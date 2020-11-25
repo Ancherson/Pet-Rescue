@@ -70,7 +70,10 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	}
 	
 	public void joue(int i, int j) {
-		this.j.turn(i, j);
+		this.j.turn(i,j);
+		while(this.j.rescue()) {}
+		if(this.j.finished()) this.j.finDePartie();
+		else this.j.next();
 	}
 	
 	@Override
