@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -9,7 +10,7 @@ import javax.swing.JTextField;
 
 public class MenuNom extends JPanel{
 	private JLabel question = new JLabel("Quel est ton nom baby ?");
-	private JTextField reponse = new JTextField(30);
+	private JTextField reponse = new JTextField();
 	private Visuelle v;
 	
 	public MenuNom(Visuelle v) {
@@ -26,13 +27,18 @@ public class MenuNom extends JPanel{
 		JPanel vide = new JPanel();
 		vide.setBackground(new Color(0x25275E));
 		panneauReponse.add(vide);
-		panneauReponse.add(reponse);
-		reponse.setFont(new Font("Arial",Font.BOLD,30));
-		reponse.setBounds(10, 300, 200, 50);
 		
+		JPanel panneauTextField = new JPanel();
+		panneauTextField.add(reponse);
+		panneauTextField.setBackground(new Color(0x25275E));
+		
+		reponse.setFont(new Font("Arial",Font.BOLD,50));
+		reponse.setPreferredSize(new Dimension(400,50));
+		reponse.setHorizontalAlignment(JTextField.CENTER);
 		reponse.addActionListener((event) -> {
 			v.changeToLevel();
 		});
+		panneauReponse.add(panneauTextField);
 		this.setLayout(new BorderLayout());
 		this.add(panneauQuestion, BorderLayout.NORTH);
 		this.add(panneauReponse);

@@ -59,7 +59,6 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	public void changeToPlateau(int i) {
 		Plateau p = new Plateau(i);
 		menuJeu = new MenuJeu(this, p);
-		System.out.println(menuJeu.getWidth() + " " + menuJeu.getHeight());
 		this.setSize(menuJeu.getWidth(), menuJeu.getHeight() + this.hauteurEntete + 1);
 		j.start(quelNom(), p);
 		this.mainPanel.add("jeu", menuJeu);
