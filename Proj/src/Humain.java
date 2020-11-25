@@ -5,20 +5,15 @@ public class Humain extends Joueur{
 	public Humain(Interacteur i) {
 		interacteur = i;
 	}
-
+	
 	@Override
-	public void quelNom() {
-		this.nom = interacteur.quelNom();
+	public void start() {
+		interacteur.start();
 	}
 
 	@Override
-	public Plateau quelLevel() {
-		return interacteur.quelLevel();
-	}
-
-	@Override
-	public int[] quelleCase() {
-		return interacteur.quelleCase();
+	public void prochainCoup() {
+		interacteur.prochainCoup();
 	}
 	
 }

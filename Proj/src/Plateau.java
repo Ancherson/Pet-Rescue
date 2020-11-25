@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.awt.Graphics;
 
 public class Plateau {
 	private Cell[][] cells;
@@ -37,17 +38,18 @@ public class Plateau {
 		this(readFile(niveau));
 	}
 	
-	public Cell[][] getCell() {
-		Cell[][]copy = new Cell[cells.length][cells[0].length];
-		for(int i = 0; i < copy.length; i++) {
-			for(int j = 0; j < copy[i].length; j++) {
-				//TO DO : Cloner les cellules au lieu de seulement copier les references
-				//sinon on pourra appeler des fonctions comme explose qui changera la cellule
-				//Le but etant qu on ne puisse lire seulement le plateau
-				copy[i][j] = cells[i][j];
-			}
-		}
-		return copy;
+	public boolean estVide(int i, int j) {
+		return cells[i][j].estVide();
+	}
+	
+	public boolean estMur(int i, int j) {
+		return cells[i][j].estMur();
+	}
+	public int getLargeur() {
+		return cells[0].length;
+	}
+	public int getHauteur() {
+		return cells.length;
 	}
 	
 	//TO DO: améliorer l'affichage pour plus tard
@@ -62,6 +64,14 @@ public class Plateau {
 			System.out.println("# ");
 		}
 		System.out.println("# ".repeat(cells[0].length + 2));
+	}
+	
+	public void afficherG(Graphics g, int scl) {
+		for(int i = 0; i < cells.length; i++) {
+			for(int j = 0; j < cells[i].length; j++) {
+				cells[i][j].afficheG(g, scl);
+			}
+		}
 	}
 	
 	private static int[][] readFile(int n) {
@@ -256,6 +266,7 @@ public class Plateau {
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
 				if(!cells[i][j].estVide() && !cells[i][j].estMur()) {
+					cells[i][j] = new Cell(i, j);
 					score++;
 				}
 			}

@@ -1,53 +1,52 @@
 
 public class Robot extends Joueur{
 	
-	private Plateau plateau;
 	private static String[] noms = {"Truc", "Robot", "Tas de Feraille", "Un Humain"};
-
-	@Override
-	public void quelNom() {
-		String nom = noms[(int)(Math.random() * noms.length)];
-		this.nom = nom;
-	}
-
-	@Override
-	public Plateau quelLevel() {
-		plateau = new Plateau((int)(Math.random() * 2 + 1));
-		return plateau;
-	}
-
-	@Override
-	public int[] quelleCase() {
-		
-		System.out.print("Je réfléchit ");
-		for(int i = 0; i < 3; i++) {
-			try {
-				System.out.print(".");
-				Thread.sleep(600);
-			}catch(InterruptedException e) {
-				
-			}
-		}
-		System.out.println();
-		int[] t = think();
-		System.out.println("Je joue (" + t[0] + "," + t[1] + ")");
-		return t;
+	private Jeu jeu;
+	
+	public Robot(Jeu jeu) {
+		this.jeu = jeu;
 	}
 	
+	@Override
+	public void start() {
+		String nom = noms[(int)(Math.random() * noms.length)];
+		int level = (int)(Math.random() * 2 + 1);
+		jeu.start(nom, new Plateau(level));
+	}
 	//Premiere IA un peu débile, mais c'est pour tester
 	//Faudra changer getCell parce que le robot peut actuellement exploser les blocs, donc a changer
 	private int[] think() {
-		Cell[][] cell = plateau.getCell();
+		Plateau plateau = jeu.getPlateau();
 		int i;
 		int j;
 		do {
 			//System.out.println(i + " 0" + j);
-			i = (int)(Math.random() * cell.length);
-			j = (int)(Math.random() * cell[0].length);
+			i = (int)(Math.random() * plateau.getHauteur());
+			j = (int)(Math.random() * plateau.getLargeur());
 		}while(!plateau.canExplose(i, j));
 		
 		int[] t = {i,j};
 		return t;
 	}
-	
+
+	@Override
+	public void prochainCoup()  {
+		int[] prochainCoup = think();
+		
+		System.out.print("Je réfléchis ");
+		for(int i = 0; i < 3; i++) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.print(".");
+		}
+		System.out.println();
+		System.out.println("Je joue en (" + prochainCoup[0] + "," + prochainCoup[1] + ")");
+		
+		jeu.turn(prochainCoup[0], prochainCoup[1]);
+	}
 }

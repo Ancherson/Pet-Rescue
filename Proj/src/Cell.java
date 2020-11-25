@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class Cell {
 	protected int i;
@@ -13,6 +15,11 @@ public class Cell {
 	public void afficheT() {
 		System.out.print(" ");
 	}
+	public void afficheG(Graphics g, int scl) {
+		g.setColor(Color.white);
+		g.fillRect(j * scl, i * scl, scl, scl);
+	}
+	 
 	public boolean explose(int color) {
 		return false;
 	}

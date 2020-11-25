@@ -1,6 +1,5 @@
 
 public class TerminalAfficheur implements Afficheur{
-	
 
 	@Override
 	public void afficherP(Plateau p) {
