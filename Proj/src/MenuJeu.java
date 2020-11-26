@@ -21,11 +21,11 @@ public class MenuJeu extends JPanel{
 		
 		this.setLayout(new BorderLayout());
 		
-		JPanel haut = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 0));
+		JPanel haut = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
 		haut.setPreferredSize(new Dimension(vPlateau.largeur, 70));
-		score.setFont(new Font("Arial",Font.BOLD,40));
+		score.setFont(new Font("Arial",Font.BOLD,30));
 		score.setForeground(Color.white);
-		coup.setFont(new Font("Arial",Font.BOLD,40));
+		coup.setFont(new Font("Arial",Font.BOLD,30));
 		coup.setForeground(Color.white);
 		haut.setBackground(new Color(0x25275E));
 		haut.add(score);

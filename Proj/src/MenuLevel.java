@@ -20,7 +20,7 @@ public class MenuLevel extends JPanel{
 	public MenuLevel(Visuelle v) {
 		
 		JPanel haut = new JPanel();
-		JLabel question = new JLabel("Quel Niveau Veut Tu Faire ?");
+		JLabel question = new JLabel("Quel Niveau Veux Tu Faire ?");
 		question.setFont(new Font("Arial",Font.BOLD,40));
 		question.setForeground(new Color(0x25275E));
 		haut.setBackground(Color.white);
