@@ -63,7 +63,12 @@ public class TerminalInteracteur implements Interacteur{
 				pbm = true;
 			}
 		}
+		
 		this.j.turn(i,j);
+		while(this.j.rescue()) {}
+		if(this.j.finished()) this.j.finDePartie();
+		else this.j.next();
+		
 	}
 
 	@Override

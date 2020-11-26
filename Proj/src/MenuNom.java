@@ -18,7 +18,7 @@ public class MenuNom extends JPanel{
 		
 		JPanel panneauQuestion = new JPanel();
 		panneauQuestion.add(question);
-		question.setFont(new Font("Arial",Font.BOLD,50));
+		question.setFont(new Font("Arial",Font.BOLD,40));
 		question.setForeground(new Color(0x25275E));
 		panneauQuestion.setBackground(Color.white);
 		

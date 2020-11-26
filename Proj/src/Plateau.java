@@ -3,39 +3,56 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import javax.swing.JPanel;
+
 import java.awt.Graphics;
 
 public class Plateau {
 	private Cell[][] cells;
-	public int totPet = 0;
+	private int totPet = 0;
+	private int coup = -1;
 	private LinkedList<Mur> murs = new LinkedList<Mur>();
 
-	private Plateau(int[][]t) {
-		cells = new Cell[t.length][t[0].length];
-		for(int i = 0; i < t.length; i++) {
-			for(int j = 0; j < t[i].length; j++) {
-				switch(t[i][j]) {
-					case -2: 
-						cells[i][j] = new Pet(i,j); 
-						totPet++; 
-						break;
-					case -1: 
-						Mur m = new Mur(i, j);
-						murs.add(m);
-						cells[i][j] = m;
-						break;
-					case 0 :
-						cells[i][j] = new Cell(i, j);
-						break;
-					default: 
-						cells[i][j] = new Bloc(i, j, t[i][j]);
+
+	public Plateau(int niveau) {
+		try {
+			Scanner sc = new Scanner(new File("./niveaux/niveau" + niveau + ".txt"));
+			sc.useDelimiter("\n");
+			LinkedList<String> liste = new LinkedList<String>();
+			while(sc.hasNext()) {
+				liste.add(sc.next());
+			}
+			
+			coup = Integer.parseInt(liste.removeFirst());
+			
+			cells = new Cell[liste.size()][liste.get(0).length()];
+			for(int i = 0; i < cells.length; i++) {
+				String s = liste.get(i);
+				for(int j = 0; j < cells[i].length; j++) {
+					switch(s.charAt(j)) {
+						case '@' : 
+							cells[i][j] = new Pet(i, j);
+							totPet++;
+							break;
+						case '#' :
+							Mur m = new Mur(i, j);
+							murs.add(m);
+							cells[i][j] = m;
+							break;
+						case '0' :
+							cells[i][j] = new Cell(i, j);
+							break;
+						default: 
+							cells[i][j] = new Bloc(i, j, s.charAt(j) - 48);
+						
+					}
 				}
 			}
+		}catch(IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error readFile " + "./niveaux/niveau" + niveau + ".txt", e);
 		}
-	}
-	
-	public Plateau(int niveau) {
-		this(readFile(niveau));
 	}
 	
 	public boolean estVide(int i, int j) {
@@ -50,6 +67,9 @@ public class Plateau {
 	}
 	public int getHauteur() {
 		return cells.length;
+	}
+	public int getCoup() {
+		return coup;
 	}
 	
 	//TO DO: améliorer l'affichage pour plus tard
@@ -69,39 +89,13 @@ public class Plateau {
 	public void afficherG(Graphics g, int scl) {
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
-				cells[i][j].afficheG(g, scl);
+				 cells[i][j].afficheG(g, scl);
 			}
-		}
-	}
-	
-	private static int[][] readFile(int n) {
-		try {
-			Scanner sc = new Scanner(new File("./niveaux/niveau" + n + ".txt"));
-			sc.useDelimiter("\n");
-			LinkedList<String> liste = new LinkedList<String>();
-			while(sc.hasNext()) {
-				liste.add(sc.next());
-			}
-			//TO DO: Traiter le cas où la liste est vide
-			int[][] t = new int[liste.size()][liste.get(0).length()];
-			for(int i = 0; i < t.length; i++) {
-				String s = liste.get(i);
-				for(int j = 0; j < t[i].length; j++) {
-					if(s.charAt(j) == '@') t[i][j] = -2;
-					else if(s.charAt(j) == '#') t[i][j] = -1;
-					else if(s.charAt(j) == '0') t[i][j] = 0;
-					else t[i][j] = (s.charAt(j)) - 48;
-				}
-			}
-			return t;
-		}catch(IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException("Error readFile " + "./niveaux/niveau" + n + ".txt", e);
 		}
 	}
 	
 	public boolean levelIsOver() {
-		return totPet == 0 || !canPlay();
+		return totPet == 0 || !canPlay() || coup == 0;
 	}
 	
 	public boolean aGagne() {
@@ -135,6 +129,7 @@ public class Plateau {
 	
 	public int explose(int i, int j) {
 		if(canExplose(i,j)) {
+			coup--;
 			return explose(i,j,cells[i][j].getColor());
 		}
 		return 0;

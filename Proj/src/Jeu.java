@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Jeu {
-	Joueur j;
+	Joueur joueur;
 	Plateau p;
 	Afficheur afficheur;
 	
@@ -31,50 +31,71 @@ public class Jeu {
 		if(i == 1) {
 			afficheur = new TerminalAfficheur();
 			Interacteur inter = new TerminalInteracteur(this);
-			j = new Humain(inter);
+			joueur = new Humain(inter);
 		}
 		else if(i == 3) {
 			afficheur = new TerminalAfficheur();
-			j = new Robot(this);
+			joueur = new Robot(this);
 		} else {
 			Visuelle v = new Visuelle(this);
 			afficheur = (Afficheur) v;
-			j = new Humain(v);
+			joueur = new Humain(v);
 		}
 		
-		j.start();
+		joueur.start();
 	}
 	
 	public void start(String name, Plateau p) {
-		j.quelNom(name);
+		joueur.quelNom(name);
 		this.p = p;
 		next();
 	}
 	
-	public void next() {
-		afficheur.afficherP(p);
-		afficheur.afficheScore(j);
-		j.prochainCoup();
-	}
-	
-	public void turn(int ii, int jj) {
+	/*public void turn(int ii, int jj) {
 		int score = p.explose(ii, jj);
-		j.addScore(score);
+		joueur.addScore(score);
 		p.fall();
 		p.left();
-		while(p.rescue(j)) {
+		while(p.rescue(joueur)) {
 			p.fall();
 			p.left();
 		}
 		
 		if(finished()) {
-			if(p.aGagne()) p.explosionFinale(j);
+			if(p.aGagne()) p.explosionFinale(joueur);
 			afficheur.afficherP(p);
-			afficheur.afficheScore(j);
-			afficheur.afficheFinDePartie(p, j);
+			afficheur.afficheScore(joueur);
+			afficheur.afficheFinDePartie(p, joueur);
 		}else {
 			next();
 		}
+	}*/
+	
+	public void turn(int i, int j) {
+		joueur.addScore(p.explose(i, j));
+		p.fall();
+		p.left();
+	}
+	
+	public boolean rescue() {
+		boolean b = p.rescue(joueur);
+		p.fall();
+		p.left();
+		return b;
+	}
+	
+	public void finDePartie() {
+		if(p.aGagne()) p.explosionFinale(joueur);
+		afficheur.afficherP(p);
+		afficheur.afficheScore(joueur);
+		afficheur.afficheFinDePartie(p, joueur);
+	}
+	
+	public void next() {
+		afficheur.afficherP(p);
+		afficheur.afficheCoup(p);
+		afficheur.afficheScore(joueur);
+		joueur.prochainCoup();
 	}
 	
 	public boolean finished() {

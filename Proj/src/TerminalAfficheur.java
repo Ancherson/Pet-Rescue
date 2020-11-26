@@ -31,4 +31,12 @@ public class TerminalAfficheur implements Afficheur{
 		
 		j.affiche();
 	}
+
+	@Override
+	public void afficheCoup(Plateau p) {
+		int coup = p.getCoup();
+		if(coup >= 0)
+			System.out.println("Coup : " + coup);
+		
+	}
 }
