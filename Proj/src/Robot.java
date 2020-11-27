@@ -48,5 +48,15 @@ public class Robot extends Joueur{
 		System.out.println("Je joue en (" + prochainCoup[0] + "," + prochainCoup[1] + ")");
 		
 		jeu.turn(prochainCoup[0], prochainCoup[1]);
+		
+		while(this.jeu.rescue()) {
+			this.jeu.move();
+		}
+		
+		if(jeu.finished()) {
+			jeu.finDePartie();
+		}else {
+			jeu.next();
+		}
 	}
 }
