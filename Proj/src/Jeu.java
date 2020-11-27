@@ -51,36 +51,48 @@ public class Jeu {
 		next();
 	}
 	
-	/*public void turn(int ii, int jj) {
-		int score = p.explose(ii, jj);
-		joueur.addScore(score);
+	public void move() {
 		p.fall();
 		p.left();
-		while(p.rescue(joueur)) {
-			p.fall();
-			p.left();
-		}
-		
-		if(finished()) {
-			if(p.aGagne()) p.explosionFinale(joueur);
-			afficheur.afficherP(p);
-			afficheur.afficheScore(joueur);
-			afficheur.afficheFinDePartie(p, joueur);
-		}else {
-			next();
-		}
-	}*/
+		affiche();
+	}
 	
 	public void turn(int i, int j) {
 		joueur.addScore(p.explose(i, j));
-		p.fall();
-		p.left();
+		move();
+		/*while(p.rescue(joueur)) {
+			p.fall();
+			p.left();
+			affiche();
+		}
+		if(finished()) {
+			finDePartie();
+		}else {
+			joueur.prochainCoup();
+		}*/
+		
+	}
+	
+//	public void turn(int i, int j) {
+//		joueur.addScore(p.explose(i, j));
+//		p.fall();
+//		p.left();
+//		affiche();
+//	}
+//	
+	
+	
+	public void affiche() {
+		afficheur.afficherP(p);
+		afficheur.afficheCoup(p);
+		afficheur.afficheScore(joueur);
 	}
 	
 	public boolean rescue() {
 		boolean b = p.rescue(joueur);
 		p.fall();
 		p.left();
+		affiche();
 		return b;
 	}
 	

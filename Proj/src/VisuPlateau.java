@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -56,6 +57,12 @@ public class VisuPlateau extends JPanel{
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		p.afficherG(g, scl);
-	}
+		g.setColor(Color.white);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		p.afficherG(g);
+		if(!p.isMoving()) {
+			v.rescue();
+		}
+
+	}	
 }

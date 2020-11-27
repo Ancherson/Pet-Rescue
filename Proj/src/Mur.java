@@ -10,7 +10,8 @@ public class Mur extends Cell{
 		int[] t = {i,j};
 		return t;
 	}
-	public void afficheG(Graphics g, int scl) {
+	public void afficheG(Graphics g) {
+		int scl = VisuPlateau.scl;
 		g.setColor(Color.black);
 		g.fillRect(j * scl, i * scl, scl, scl);
 	}

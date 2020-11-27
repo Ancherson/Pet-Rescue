@@ -4,6 +4,7 @@ import java.awt.Graphics;
 public class Cell {
 	protected int i;
 	protected int j;
+	
 	public Cell(int i, int j) {
 		this.i = i;
 		this.j = j;
@@ -15,11 +16,17 @@ public class Cell {
 	public void afficheT() {
 		System.out.print(" ");
 	}
-	public void afficheG(Graphics g, int scl) {
+	public void afficheG(Graphics g) {
+		
+		/*int scl = VisuPlateau.scl;
 		g.setColor(Color.white);
-		g.fillRect(j * scl, i * scl, scl, scl);
+		g.fillRect(j * scl, i * scl, scl, scl);*/
 	}
 	 
+	public boolean isMoving() {
+		return false;
+	}
+	
 	public boolean explose(int color) {
 		return false;
 	}

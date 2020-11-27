@@ -86,12 +86,22 @@ public class Plateau {
 		System.out.println("# ".repeat(cells[0].length + 2));
 	}
 	
-	public void afficherG(Graphics g, int scl) {
+	public void afficherG(Graphics g) {
+		
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
-				 cells[i][j].afficheG(g, scl);
+				 cells[i][j].afficheG(g);
 			}
 		}
+	}
+	
+	public boolean isMoving() {
+		for(int i = 0; i < cells.length; i++) {
+			for(int j = 0; j < cells[i].length; j++) {
+				if(cells[i][j].isMoving()) return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean levelIsOver() {

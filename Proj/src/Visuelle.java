@@ -1,4 +1,7 @@
 import java.awt.CardLayout;
+import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.Queue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +19,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private CardLayout cardLayout = new CardLayout();
 	
 	private Jeu j;
+	private boolean running = true;
+	private Thread t;
 	private final int hauteurEntete;
 	
 	public Visuelle(Jeu j) {
@@ -65,6 +70,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		
 		this.setSize(menuJeu.getWidth(), menuJeu.getHeight() + this.hauteurEntete + 1);
 		j.start(quelNom(), p);
+		
 		this.mainPanel.add("jeu", menuJeu);
 		this.cardLayout.show(mainPanel, "jeu");
 	}
@@ -75,11 +81,17 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	public void joue(int i, int j) {
 		this.j.turn(i,j);
-		while(this.j.rescue()) {}
-		if(this.j.finished()) this.j.finDePartie();
-		else this.j.next();
+		
+	}
+	public void rescue() {
+		if(j.rescue()) j.move();
+		else running = false;
 	}
 	
+	public void stop() {
+		running = false;
+	}
+	 
 	@Override
 	public void prochainCoup() {
 		
@@ -87,7 +99,20 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 
 	@Override
 	public void afficherP(Plateau p) {
-		menuJeu.afficheP();
+		running = true;
+		t = new Thread(() -> {
+			while(running) {
+				menuJeu.afficheP();
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		t.start();
+		
 	}
 
 	@Override

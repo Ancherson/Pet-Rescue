@@ -16,6 +16,5 @@ public class MenuFin extends JPanel{
 		
 		
 		JPanel corps = new JPanel(new GridLayout(3,1));
-		
 	}
 }
