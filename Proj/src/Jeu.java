@@ -48,6 +48,7 @@ public class Jeu {
 	public void start(String name, Plateau p) {
 		joueur.quelNom(name);
 		this.p = p;
+		affiche();
 		next();
 	}
 	
@@ -90,9 +91,9 @@ public class Jeu {
 	
 	public boolean rescue() {
 		boolean b = p.rescue(joueur);
-		p.fall();
+		/*p.fall();
 		p.left();
-		affiche();
+		affiche();*/
 		return b;
 	}
 	
@@ -104,9 +105,9 @@ public class Jeu {
 	}
 	
 	public void next() {
-		afficheur.afficherP(p);
-		afficheur.afficheCoup(p);
-		afficheur.afficheScore(joueur);
+//		afficheur.afficherP(p);
+//		afficheur.afficheCoup(p);
+//		afficheur.afficheScore(joueur);
 		joueur.prochainCoup();
 	}
 	

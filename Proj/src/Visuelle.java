@@ -85,7 +85,10 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	}
 	public void rescue() {
 		if(j.rescue()) j.move();
-		else running = false;
+		else {
+			running = false;
+			if(j.finished()) j.finDePartie();
+		}
 	}
 	
 	public void stop() {
@@ -110,6 +113,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 					e.printStackTrace();
 				}
 			}
+			menuJeu.afficheP();
 		});
 		t.start();
 		
