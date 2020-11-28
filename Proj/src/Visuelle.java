@@ -2,9 +2,11 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 
 public class Visuelle extends JFrame implements Afficheur, Interacteur{
@@ -86,13 +88,9 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	public void rescue() {
 		if(j.rescue()) j.move();
 		else {
-			running = false;
 			if(j.finished()) j.finDePartie();
+			running = false;
 		}
-	}
-	
-	public void stop() {
-		running = false;
 	}
 	 
 	@Override
@@ -107,15 +105,17 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 			while(running) {
 				menuJeu.afficheP();
 				try {
-					Thread.sleep(10);
+					Thread.sleep(1000 / 60);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 			}
 			menuJeu.afficheP();
 		});
 		t.start();
+		
 		
 	}
 

@@ -36,8 +36,8 @@ public class Bloc extends Cell{
 		if(!vide) {
 			g.setColor(colors[color]);
 			g.fillRect(j * scl + 1 +  xOff, i * scl + 1 + yOff, scl - 1, scl - 1);
-			if(xOff > 0) xOff--;
-			if(yOff < 0) yOff++;
+			if(xOff > 0) xOff -= 2;
+			if(yOff < 0) yOff += 2;
 		}
 	}
 	public boolean explose(int c) {

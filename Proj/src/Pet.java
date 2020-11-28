@@ -47,8 +47,8 @@ public class Pet extends Cell{
 		g.setColor(Color.orange);
 		g.fillRect(j * scl + 1 + xOff, i * scl + 1 + yOff, scl - 1, scl - 1);*/
 		g.drawImage(image, j * scl + 1 + xOff, i * scl + 1 + yOff, scl - 1, scl - 1, null);
-		if(xOff > 0) xOff--;
-		if(yOff < 0) yOff++;
+		if(xOff > 0) xOff -= 2;
+		if(yOff < 0) yOff += 2;
 	}
 	
 	public void afficheT() {

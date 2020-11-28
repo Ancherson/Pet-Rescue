@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,5 +48,6 @@ public class MenuJeu extends JPanel{
 	
 	public void afficheP() {
 		vPlateau.repaint();
+		Toolkit.getDefaultToolkit().sync();
 	}
 }

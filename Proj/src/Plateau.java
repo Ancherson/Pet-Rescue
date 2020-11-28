@@ -219,7 +219,7 @@ public class Plateau {
 	public boolean left2() {
 		boolean b = false;
 		for(int j = 1; j < cells[0].length; j++) {
-			if(cells[cells.length - 1][j - 1].estVide() && !cells[cells.length - 1][j].estVide() && !cells[cells.length -1][j].estMur()) {
+			if(!cells[cells.length -1][j].estPet()  && cells[cells.length - 1][j - 1].estVide() && !cells[cells.length - 1][j].estVide() && !cells[cells.length -1][j].estMur()) {
 				b = deplaceLeft(cells.length - 1,j) || b;
 			}
 		}
