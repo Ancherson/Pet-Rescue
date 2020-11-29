@@ -12,6 +12,7 @@ public class VisuPlateau extends JPanel{
 	public static final int scl = 70;
 	public final int largeur;
 	public final int hauteur;
+	private boolean lock = false;
 	public VisuPlateau(Visuelle v, Plateau p){
 		this.v = v;
 		this.p = p;
@@ -47,12 +48,21 @@ public class VisuPlateau extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent evt) {
+				if(lock) return;
 				int i = evt.getY() / scl;
 				int j = evt.getX() / scl;
 				System.out.println(i + " " + j);
 				v.joue(i, j);
 			}
 		});
+	}
+	
+	public void lock() {
+		lock = true;
+	}
+	
+	public void unLock() {
+		lock = false;
 	}
 	
 	@Override

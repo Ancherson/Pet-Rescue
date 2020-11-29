@@ -53,6 +53,8 @@ public class Plateau {
 			e.printStackTrace();
 			throw new RuntimeException("Error readFile " + "./niveaux/niveau" + niveau + ".txt", e);
 		}
+		
+		Bloc.melangeCouleur();
 	}
 	
 	public boolean estVide(int i, int j) {

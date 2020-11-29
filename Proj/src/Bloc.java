@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 public class Bloc extends Cell{
 	private int color;
-	private static Color[] colors = {Color.white, Color.red, Color.green, Color.blue, Color.yellow, Color.pink};
+	private static Color[] colors = {Color.red, Color.green, Color.blue, Color.yellow, Color.MAGENTA, Color.cyan};
 	private boolean vide = false;
 	private int xOff = 0;
 	private int yOff = 0;
@@ -34,7 +34,7 @@ public class Bloc extends Cell{
 		/*g.setColor(Color.white);
 		g.fillRect(j * scl + xOff, i * scl + yOff, scl, scl);*/
 		if(!vide) {
-			g.setColor(colors[color]);
+			g.setColor(colors[color - 1]);
 			g.fillRect(j * scl + 1 +  xOff, i * scl + 1 + yOff, scl - 1, scl - 1);
 			if(xOff > 0) xOff -= 2;
 			if(yOff < 0) yOff += 2;
@@ -53,5 +53,20 @@ public class Bloc extends Cell{
 	
 	public int getColor() {
 		return color;
+	}
+	
+	public static void swapColor(int i, int j) {
+		Color ci = colors[i];
+		colors[i] = colors[j];
+		colors[j] = ci;
+	}
+	
+	public static void melangeCouleur() {
+		int n = (int)(Math.random() * 20);
+		for(int i = 0; i < n; i++) {
+			int i1 = (int)(Math.random() * (colors.length - 1)) + 1;
+			int i2 = (int)(Math.random() * (colors.length - 1)) + 1;
+			swapColor(i1,i2);
+		}
 	}
 }

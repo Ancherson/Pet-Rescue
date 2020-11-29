@@ -50,4 +50,12 @@ public class MenuJeu extends JPanel{
 		vPlateau.repaint();
 		Toolkit.getDefaultToolkit().sync();
 	}
+	
+	public void lock() {
+		vPlateau.lock();
+	}
+	
+	public void unLock() {
+		vPlateau.unLock();
+	}
 }

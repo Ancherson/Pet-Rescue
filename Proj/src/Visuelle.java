@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 
@@ -23,7 +24,9 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private Jeu j;
 	private boolean running = true;
 	private Thread t;
-	private final int hauteurEntete;
+	
+	private final int dHauteur;
+	private final int dLargeur;
 	
 	public Visuelle(Jeu j) {
 		this.j = j;
@@ -48,7 +51,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		
 		this.setVisible(true);
 		
-		this.hauteurEntete = this.getHeight() - this.getContentPane().getHeight();
+		this.dHauteur = this.getHeight() - this.getContentPane().getHeight();
+		this.dLargeur = this.getWidth() - this.getContentPane().getWidth();
 	}
 	
 	public void start() {
@@ -70,7 +74,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		int coup = p.getCoup();
 		if(coup > 0) menuJeu.setCoup(coup);
 		
-		this.setSize(menuJeu.getWidth(), menuJeu.getHeight() + this.hauteurEntete + 1);
+		this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
 		j.start(quelNom(), p);
 		
 		this.mainPanel.add("jeu", menuJeu);
@@ -90,6 +94,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		else {
 			if(j.finished()) j.finDePartie();
 			running = false;
+			menuJeu.unLock();
 		}
 	}
 	 
@@ -101,6 +106,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	@Override
 	public void afficherP(Plateau p) {
 		running = true;
+		menuJeu.lock();
 		t = new Thread(() -> {
 			while(running) {
 				menuJeu.afficheP();
