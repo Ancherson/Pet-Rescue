@@ -1,4 +1,6 @@
 
+//Cette classe permet l'Affichage dans le terminal du Jeu
+
 public class TerminalAfficheur implements Afficheur{
 
 	@Override

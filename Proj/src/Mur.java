@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+//Cette classe représente les "Mur" ou blocs Fixes
+
 public class Mur extends Cell{
 	
 	public Mur(int i, int j) {

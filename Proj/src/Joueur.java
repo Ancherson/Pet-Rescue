@@ -1,4 +1,6 @@
 
+//Cette classe représente les joueurs
+
 public abstract class Joueur {
 	protected String nom;
 	protected int score;

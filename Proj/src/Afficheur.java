@@ -1,3 +1,8 @@
+/** *
+ * 
+ * Interface utilisé pour l'affichage du jeu
+ *
+ */
 
 public interface Afficheur {
 	void afficherP(Plateau p);

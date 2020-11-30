@@ -5,14 +5,21 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+//Cette classe gère l'affichage du plateau sur l'interface graphique
+
 public class VisuPlateau extends JPanel{
 	private Visuelle v;
 	private Plateau p;
-	//Largeur des carre
+	
+	//Largeur et hauteur des blocs
 	public static final int scl = 70;
+	
 	public final int largeur;
 	public final int hauteur;
+	
+	//si lock = true, empeche le joueur d'interagir avec le plateau
 	private boolean lock = false;
+	
 	public VisuPlateau(Visuelle v, Plateau p){
 		this.v = v;
 		this.p = p;
@@ -64,6 +71,7 @@ public class VisuPlateau extends JPanel{
 	public void unLock() {
 		lock = false;
 	}
+	
 	
 	@Override
 	protected void paintComponent(Graphics g) {

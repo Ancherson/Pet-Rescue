@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+//Cette Classe permet l'interaction entre le Joueur et le Jeu à travers le terminal
+
 public class TerminalInteracteur implements Interacteur{
 	private Scanner sc = new Scanner(System.in);
 	private Jeu jeu;

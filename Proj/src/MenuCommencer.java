@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+//Classe représentant le menu pour commencer pour l'interface graphique
+
 public class MenuCommencer extends JPanel{
 	private JLabel title = new JLabel("PET RESCUE");
 	private JButton bouton = new JButton("Commencer");

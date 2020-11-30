@@ -8,6 +8,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+//Cette classe représente les animaux que le joueur doit sauver
+
 public class Pet extends Cell{
 	
 	private static BufferedImage image;

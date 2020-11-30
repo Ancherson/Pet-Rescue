@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+//Cette classe représente le menu du jeu, lors de l'affichage du niveau sur l'interface graphique
+
 public class MenuJeu extends JPanel{
 	private Visuelle v;
 	private VisuPlateau vPlateau;
@@ -50,6 +52,8 @@ public class MenuJeu extends JPanel{
 		vPlateau.repaint();
 		Toolkit.getDefaultToolkit().sync();
 	}
+	
+	//Les fonction lock et unlock sont utiles pour empecher le Joueur de jouer lorse de l'animation des blocs qui se déplacent
 	
 	public void lock() {
 		vPlateau.lock();

@@ -10,6 +10,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 
+//Cette classe gère l'interface graphique, à la fois l'affichage et l'interaction avec le joueur
+
 public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	private JPanel mainPanel;
@@ -22,9 +24,13 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private CardLayout cardLayout = new CardLayout();
 	
 	private Jeu j;
+	
+	//Attribut pour l'animation des blocs qui se déplacent
 	private boolean running = true;
 	private Thread t;
 	
+	//ces dimensions représentent l'écart de dimension entre la fenetre et le contenue de la fenetre
+	//permettant de pouvoir redimmensionner plus précisément même si cela ne marche pas parfaitement
 	private final int dHauteur;
 	private final int dLargeur;
 	

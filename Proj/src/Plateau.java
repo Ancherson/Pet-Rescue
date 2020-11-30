@@ -1,5 +1,6 @@
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -8,13 +9,20 @@ import javax.swing.JPanel;
 
 import java.awt.Graphics;
 
+//Cette classe représente le plateau de jeu (la grille)
+
 public class Plateau {
+	//Tableau contenant les cellules (Les blocs, murs et animal sont des cellules par héritage)
 	private Cell[][] cells;
 	private int totPet = 0;
+	
+	//Total coups restants (quand coup < 0 veut dire une infinité)
 	private int coup = -1;
+	
+	//On stocke les murs (bloc fixe) pour ne pas à avoir à les chercher à chaque on parcourant cells
 	private LinkedList<Mur> murs = new LinkedList<Mur>();
 
-
+	//Ce constructeur contruit un plateau à partir d'un entier qui va ensuite chercher le fichier niveauNUM.txt
 	public Plateau(int niveau) {
 		try {
 			Scanner sc = new Scanner(new File("./niveaux/niveau" + niveau + ".txt"));
@@ -75,6 +83,7 @@ public class Plateau {
 	}
 	
 	//TO DO: améliorer l'affichage pour plus tard
+	//Cette fonction permet d'afficher le plateau sur le temrinal
 	public void afficheT() {
 		System.out.println("# ".repeat(cells[0].length + 2));
 		for(int i = 0; i < cells.length; i++) {
@@ -88,6 +97,7 @@ public class Plateau {
 		System.out.println("# ".repeat(cells[0].length + 2));
 	}
 	
+	//Cette fonction permet d'afficher le plateau dans l'interface graphique
 	public void afficherG(Graphics g) {
 		
 		for(int i = 0; i < cells.length; i++) {
@@ -97,6 +107,8 @@ public class Plateau {
 		}
 	}
 	
+	//Cette fonction est utile lors de l'affichage dans l'interface graphique qui permet de savoir si il
+	//existe un bloc ou un animal en train de bouger
 	public boolean isMoving() {
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
@@ -106,15 +118,17 @@ public class Plateau {
 		return false;
 	}
 	
+	//Permet de savoir si la partie est fini
 	public boolean levelIsOver() {
 		return totPet == 0 || !canPlay() || coup == 0;
 	}
 	
+	//Savoir si le joueur a gagné
 	public boolean aGagne() {
 		return totPet == 0;
 	}
 
-	
+	//Savoir si le joueur peut encore jouer
 	private boolean canPlay() {
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
@@ -124,10 +138,14 @@ public class Plateau {
 		return false;
 	}
 	
+	
+	//Savoir si i et j correspondent à une case dans le tableau cells
+	//Permet d'éviter les cas où i et j sont en dehors du tableau
 	public boolean correctInput(int i, int j) {
 		return !(j < 0 || j >= cells[0].length || i < 0 || i >= cells.length);
 	}
 	
+	//Savoir si un bloc peut être explosé
 	public boolean canExplose(int i, int j) {
 		if(!correctInput(i,j)) return false;
 		if(cells[i][j].estMur() || cells[i][j].estVide() || cells[i][j].estPet()) return false;
@@ -139,6 +157,7 @@ public class Plateau {
 		return false;
 	}
 	
+	//fonction qui explose les blocs, et qui appelle la 2eme fonction explose qui explose tous les blocs qui ont la même couleur
 	public int explose(int i, int j) {
 		if(canExplose(i,j)) {
 			coup--;
@@ -147,6 +166,7 @@ public class Plateau {
 		return 0;
 	}
 	
+	//fonction qui explose le bloc (i,j) si sa couleur est la meme que color
 	public int explose(int i, int j, int color) {
 		if(!correctInput(i, j)) return 0;
 		if(cells[i][j].explose(color)) {
@@ -160,6 +180,7 @@ public class Plateau {
 		return 0;
 	}
 	
+	//permet d'echanger les bloc de place
 	private void swap(int i1, int j1, int i2, int j2) {
 		Cell tmp = cells[i1][j1];
 		cells[i1][j1] = cells[i2][j2];
@@ -169,10 +190,12 @@ public class Plateau {
 		cells[i2][j2].change(i2, j2);
 	}
 	
+	//permet de savoir si un bloc peut chuter
 	private boolean canFall(int i, int j) {
 		return (i < cells.length - 1 && !cells[i][j].estMur() && !cells[i][j].estVide() && cells[i + 1][j].estVide());
 	}
 	
+	//fait chuter un bloc jusqu'à ce qu'on ne puisse plus les faire chuter
 	private void cellFall(int i, int j) {
 		while(canFall(i, j)) {
 			swap(i,j,i+1,j);
@@ -180,29 +203,24 @@ public class Plateau {
 		}
 	}
 	
+	//fait chuter les blocs d'une colonne
 	private void colonneFall(int j) {
 		for(int i = cells.length - 1; i >= 0; i--) {
 			cellFall(i,j);
 		}
 	}
 	
+	//fait chuter les blocs
 	public void fall() {
 		for(int j = 0; j < cells[0].length; j++) {
 			colonneFall(j);
 		}
 	}
 	
-	/**
-	 * FAIRE LA FONCTION QUI DECALE SUR LA GAUCHE LES BLOCS
-	 * 
-	 * L'idée (peut être d'autres subtilités): Pour chaque bloc Mur (peut être les stocker quelque part) regarder a gauche: 
-	 * 	- si un bloc vide alors pour toute la suite de bloc audessus du bloc Mur, si cette suite peut aller sur la gauche, la déplacer sur la gauche
-	 *  - si un bloc Mur, regarder audessus de ce bloc et si bloc vide alors pour toute la suite de bloc audessus du bloc Mur, si cette suite peut aller sur la gauche, la déplacer sur la gauche
-	 *  - sinon ne rien faire
-	 */
 	
-	
-	//Fonction left pour les blocs murs, Il faudra faire la fonction left pour la derniere ligne
+	//Fonction left pour les blocs murs
+	//si a gauche du bloc mur y'a rien alors déplacer sur la gauche la pile de bloc au dessus
+	//si a gauche du bloc mur, un autre bloc mur et au dessus de bloc mur y'a rien alors déplacer sur la gauche la pile de bloc au dessus
 	public boolean left1() {
 		boolean b = false;
 		for(Mur mur : murs) {
@@ -218,6 +236,7 @@ public class Plateau {
 	}
 	
 	//fonction left pour la derniere ligne
+	//si un bloc et a gauche rien alors deplacer sur la gauche la pile de blocs
 	public boolean left2() {
 		boolean b = false;
 		for(int j = 1; j < cells[0].length; j++) {
@@ -228,6 +247,8 @@ public class Plateau {
 		return b;
 	}
 	
+	
+	//deplace sur la gauche les pile de blocs
 	public boolean deplaceLeft(int ii, int j) {
 		boolean b = false;
 		for(int i = ii; i >= 0; i--) {
@@ -242,7 +263,8 @@ public class Plateau {
 		return b;
 	}
 	
-	
+	//fonction permettant de le déplacement des blocs sur la gauche
+	//tant qu'il y a un déplacement à faire
 	public void left() {
 		boolean l1 = true;
 		boolean l2 = true;
@@ -252,6 +274,7 @@ public class Plateau {
 		}
 	}
 	
+	//sauve les animaux qui sont sur la derniere ligne
 	public boolean rescue(Joueur joueur) {
 		boolean b = false;
 		for(int j = 0; j < cells[0].length; j++) {
