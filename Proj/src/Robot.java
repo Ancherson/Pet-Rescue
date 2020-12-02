@@ -1,5 +1,9 @@
 
+//Cette classe représente un Robot
+
 public class Robot extends Joueur{
+	
+	//Le robot n'a pas besoin d'interacteur contrairement à l'humain, et est donc relié directement au Jau
 	
 	private static String[] noms = {"Truc", "Robot", "Tas de Feraille", "Un Humain"};
 	private Jeu jeu;
@@ -14,8 +18,9 @@ public class Robot extends Joueur{
 		int level = (int)(Math.random() * 2 + 1);
 		jeu.start(nom, new Plateau(level));
 	}
+	
+	//Fonction pour préparer le coup du robot
 	//Premiere IA un peu débile, mais c'est pour tester
-	//Faudra changer getCell parce que le robot peut actuellement exploser les blocs, donc a changer
 	private int[] think() {
 		Plateau plateau = jeu.getPlateau();
 		int i;
@@ -48,5 +53,15 @@ public class Robot extends Joueur{
 		System.out.println("Je joue en (" + prochainCoup[0] + "," + prochainCoup[1] + ")");
 		
 		jeu.turn(prochainCoup[0], prochainCoup[1]);
+		
+		while(this.jeu.rescue()) {
+			this.jeu.move();
+		}
+		
+		if(jeu.finished()) {
+			jeu.finDePartie();
+		}else {
+			jeu.next();
+		}
 	}
 }

@@ -1,18 +1,20 @@
 import java.util.Scanner;
 
+//Cette Classe permet l'interaction entre le Joueur et le Jeu à travers le terminal
+
 public class TerminalInteracteur implements Interacteur{
 	private Scanner sc = new Scanner(System.in);
-	private Jeu j;
+	private Jeu jeu;
 	
 	public TerminalInteracteur(Jeu j) {
-		this.j = j;
+		this.jeu = j;
 	}
 	
 	@Override
 	public void start() {
 		String nom = quelNom();
 		int level = quelLevel();
-		j.start(nom, new Plateau(level));
+		jeu.start(nom, new Plateau(level));
 	}
 
 	public String quelNom() {
@@ -36,9 +38,8 @@ public class TerminalInteracteur implements Interacteur{
 		}
 		return i;
 	}
-
-	@Override
-	public void prochainCoup() {
+	
+	public int[] quellesCases() {
 		System.out.println("Quel Case ?");
 		int i = -1;
 		boolean pbm = true;
@@ -63,12 +64,33 @@ public class TerminalInteracteur implements Interacteur{
 				pbm = true;
 			}
 		}
+		int[]res = {i,j};
+		return res;
+	}
+
+	@Override
+	public void prochainCoup() {
+		int[]cases = this.quellesCases();
+		int i = cases[0];
+		int j = cases[1];
 		
-		this.j.turn(i,j);
-		while(this.j.rescue()) {}
-		if(this.j.finished()) this.j.finDePartie();
-		else this.j.next();
+		this.jeu.turn(i, j);
 		
+		while(this.jeu.rescue()) {
+			this.jeu.move();
+		}
+		
+		if(jeu.finished()) {
+			jeu.finDePartie();
+		}else {
+			jeu.next();
+		}
+		
+//		this.j.turn(i,j);
+//		while(this.j.rescue()) {}
+//		if(this.j.finished()) this.j.finDePartie();
+//		else this.j.next();
+	
 	}
 
 	@Override

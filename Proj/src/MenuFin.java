@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+//Classe représentant l'écran de fin de jeu
+
 public class MenuFin extends JPanel{
 	public MenuFin(String nom, int score, boolean gagne) {
 		JPanel haut = new JPanel();
@@ -16,6 +18,5 @@ public class MenuFin extends JPanel{
 		
 		
 		JPanel corps = new JPanel(new GridLayout(3,1));
-		
 	}
 }

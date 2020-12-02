@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+//Cette classe représente le menu du choix du prénom du joueur, sur l'interface graphique
+
 public class MenuNom extends JPanel{
 	private JLabel question = new JLabel("Quel est ton nom baby ?");
 	private JTextField reponse = new JTextField();

@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+//Cette classe représente les "Mur" ou blocs Fixes
+
 public class Mur extends Cell{
 	
 	public Mur(int i, int j) {
@@ -10,7 +12,8 @@ public class Mur extends Cell{
 		int[] t = {i,j};
 		return t;
 	}
-	public void afficheG(Graphics g, int scl) {
+	public void afficheG(Graphics g) {
+		int scl = VisuPlateau.scl;
 		g.setColor(Color.black);
 		g.fillRect(j * scl, i * scl, scl, scl);
 	}

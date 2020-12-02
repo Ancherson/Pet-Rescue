@@ -1,8 +1,16 @@
 import java.awt.CardLayout;
+import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
+
+//Cette classe gère l'interface graphique, à la fois l'affichage et l'interaction avec le joueur
 
 public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
@@ -16,7 +24,15 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private CardLayout cardLayout = new CardLayout();
 	
 	private Jeu j;
-	private final int hauteurEntete;
+	
+	//Attribut pour l'animation des blocs qui se déplacent
+	private boolean running = true;
+	private Thread t;
+	
+	//ces dimensions représentent l'écart de dimension entre la fenetre et le contenue de la fenetre
+	//permettant de pouvoir redimmensionner plus précisément même si cela ne marche pas parfaitement
+	private final int dHauteur;
+	private final int dLargeur;
 	
 	public Visuelle(Jeu j) {
 		this.j = j;
@@ -41,7 +57,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		
 		this.setVisible(true);
 		
-		this.hauteurEntete = this.getHeight() - this.getContentPane().getHeight();
+		this.dHauteur = this.getHeight() - this.getContentPane().getHeight();
+		this.dLargeur = this.getWidth() - this.getContentPane().getWidth();
 	}
 	
 	public void start() {
@@ -63,8 +80,9 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		int coup = p.getCoup();
 		if(coup > 0) menuJeu.setCoup(coup);
 		
-		this.setSize(menuJeu.getWidth(), menuJeu.getHeight() + this.hauteurEntete + 1);
+		this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
 		j.start(quelNom(), p);
+		
 		this.mainPanel.add("jeu", menuJeu);
 		this.cardLayout.show(mainPanel, "jeu");
 	}
@@ -75,11 +93,17 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	public void joue(int i, int j) {
 		this.j.turn(i,j);
-		while(this.j.rescue()) {}
-		if(this.j.finished()) this.j.finDePartie();
-		else this.j.next();
+		
 	}
-	
+	public void rescue() {
+		if(j.rescue()) j.move();
+		else {
+			if(j.finished()) j.finDePartie();
+			running = false;
+			menuJeu.unLock();
+		}
+	}
+	 
 	@Override
 	public void prochainCoup() {
 		
@@ -87,7 +111,24 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 
 	@Override
 	public void afficherP(Plateau p) {
-		menuJeu.afficheP();
+		running = true;
+		menuJeu.lock();
+		t = new Thread(() -> {
+			while(running) {
+				menuJeu.afficheP();
+				try {
+					Thread.sleep(1000 / 60);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			menuJeu.afficheP();
+		});
+		t.start();
+		
+		
 	}
 
 	@Override
