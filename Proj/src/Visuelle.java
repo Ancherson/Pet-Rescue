@@ -34,6 +34,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private final int dHauteur;
 	private final int dLargeur;
 	
+	private int maxLevel;
+	
 	public Visuelle(Jeu j) {
 		this.j = j;
 		
@@ -61,6 +63,11 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		this.dLargeur = this.getWidth() - this.getContentPane().getWidth();
 	}
 	
+	@Override
+	public void setMaxLevel(int levelMax) {
+		this.maxLevel = levelMax;
+	}
+	
 	public void start() {
 		cardLayout.show(mainPanel, "commencer");
 	}
@@ -70,6 +77,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	}
 
 	public void changeToLevel() {
+		this.menu3 = new MenuLevel(this);
+		
 		cardLayout.show(mainPanel, "level");
 	}
 	
@@ -106,6 +115,12 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	 
 	@Override
 	public void prochainCoup() {
+		
+	}
+	
+	@Override
+	public void veutRejouer() {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -155,4 +170,5 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -5,9 +5,16 @@ import java.util.Scanner;
 public class TerminalInteracteur implements Interacteur{
 	private Scanner sc = new Scanner(System.in);
 	private Jeu jeu;
+	private int maxLevel = Jeu.TOT_LEVEL; 
 	
 	public TerminalInteracteur(Jeu j) {
 		this.jeu = j;
+	}
+	
+
+	@Override
+	public void setMaxLevel(int levelMax) {
+		this.maxLevel = levelMax;
 	}
 	
 	@Override
@@ -16,6 +23,11 @@ public class TerminalInteracteur implements Interacteur{
 		int level = quelLevel();
 		jeu.start(nom, new Plateau(level));
 	}
+	
+	public void restart() {
+		int level = quelLevel();
+		jeu.restart(new Plateau(level));
+	}
 
 	public String quelNom() {
 		System.out.println("Quel est votre nom ?");
@@ -23,10 +35,10 @@ public class TerminalInteracteur implements Interacteur{
 	}
 
 	public int quelLevel() {
-		System.out.println("Quel level (entre 1 et 1)");
+		System.out.println("Quel level (entre 1 et " + maxLevel + ")");
 		int i = 0;
 		boolean pbm = true;
-		while(pbm || !(i < 3 && i > 0)) {
+		while(pbm || !(i <= maxLevel  && i > 0)) {
 			pbm = false;
 			String s = sc.next();
 			try {
@@ -91,6 +103,16 @@ public class TerminalInteracteur implements Interacteur{
 //		if(this.j.finished()) this.j.finDePartie();
 //		else this.j.next();
 	
+	}
+	
+	public void veutRejouer() {
+		System.out.println("Veux-tu rejouer ? (oui/non)");
+		String s = "";
+		do {
+			s = sc.next();
+		}while(!(s.equals("oui") || s.equals("non")));
+		
+		if(s.equals("oui")) this.restart();
 	}
 
 	@Override

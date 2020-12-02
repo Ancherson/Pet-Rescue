@@ -8,6 +8,8 @@ public class Jeu {
 	Plateau p;
 	Afficheur afficheur;
 	
+	public final static int TOT_LEVEL = 2;
+	
 	public Jeu() {
 		this.demmandeInterface();
 	}
@@ -23,7 +25,7 @@ public class Jeu {
 		
 		int i = 0;
 		boolean pbm = true;
-		while(pbm || (i != 1 && i != 2 && i != 3)) {
+		while(pbm || (i <= 0 || i > TOT_LEVEL)) {
 			pbm = false;
 			String s = sc.next();
 			try {
@@ -57,6 +59,10 @@ public class Jeu {
 		next();
 	}
 	
+	public void restart(Plateau p) {
+		this.p = p;
+	}
+	
 	//Fonction pour deplacer les blocs
 	public void move() {
 		p.fall();
@@ -69,26 +75,7 @@ public class Jeu {
 	public void turn(int i, int j) {
 		joueur.addScore(p.explose(i, j));
 		move();
-		/*while(p.rescue(joueur)) {
-			p.fall();
-			p.left();
-			affiche();
-		}
-		if(finished()) {
-			finDePartie();
-		}else {
-			joueur.prochainCoup();
-		}*/
-		
 	}
-	
-//	public void turn(int i, int j) {
-//		joueur.addScore(p.explose(i, j));
-//		p.fall();
-//		p.left();
-//		affiche();
-//	}
-//	
 	
 	//Foncion pout afficher les infos utiles pour le joueur (plateau, score, coups restants)
 	public void affiche() {
@@ -101,15 +88,16 @@ public class Jeu {
 	//renvoie true pour dire qu'on en a sauvés
 	public boolean rescue() {
 		boolean b = p.rescue(joueur);
-		/*p.fall();
-		p.left();
-		affiche();*/
 		return b;
 	}
 	
 	//Fonction pour lancer la fin du jeu
 	public void finDePartie() {
-		if(p.aGagne()) p.explosionFinale(joueur);
+		if(p.aGagne()) {
+			p.explosionFinale(joueur);
+			joueur.nextLevel();
+			//Faire un appelle a joueur.save();
+		}
 		afficheur.afficherP(p);
 		afficheur.afficheScore(joueur);
 		afficheur.afficheFinDePartie(p, joueur);
@@ -117,9 +105,6 @@ public class Jeu {
 	
 	//Fonction pour demander au joueur son prochain coup
 	public void next() {
-//		afficheur.afficherP(p);
-//		afficheur.afficheCoup(p);
-//		afficheur.afficheScore(joueur);
 		joueur.prochainCoup();
 	}
 	

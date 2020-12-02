@@ -20,4 +20,18 @@ public class Humain extends Joueur{
 		interacteur.prochainCoup();
 	}
 	
+	@Override
+	public void quelNom(String nom) {
+		super.quelNom(nom);
+		/**
+		 * Load les donnes du joueur
+		 */
+		interacteur.setMaxLevel(levelMax);
+	}
+	
+	@Override
+	public void nextLevel() {
+		super.nextLevel();
+		interacteur.setMaxLevel(levelMax);
+	}
 }

@@ -12,6 +12,8 @@ import java.awt.Graphics;
 //Cette classe représente le plateau de jeu (la grille)
 
 public class Plateau {
+	private int numLevel;
+	
 	//Tableau contenant les cellules (Les blocs, murs et animal sont des cellules par héritage)
 	private Cell[][] cells;
 	private int totPet = 0;
@@ -24,6 +26,7 @@ public class Plateau {
 
 	//Ce constructeur contruit un plateau à partir d'un entier qui va ensuite chercher le fichier niveauNUM.txt
 	public Plateau(int niveau) {
+		numLevel = niveau;
 		try {
 			Scanner sc = new Scanner(new File("./niveaux/niveau" + niveau + ".txt"));
 			sc.useDelimiter("\n");
@@ -80,6 +83,9 @@ public class Plateau {
 	}
 	public int getCoup() {
 		return coup;
+	}
+	public int getLevel() {
+		return numLevel;
 	}
 	
 	//TO DO: améliorer l'affichage pour plus tard

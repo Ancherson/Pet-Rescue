@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 //Classe représentant le menu de choix d'un level, sur l'interface graphique
 
 public class MenuLevel extends JPanel{
-	private final int numberLevel = 2;
+	private final int numberLevel = Jeu.TOT_LEVEL;
 	private JButton[] buttons = new JButton[numberLevel];
 	private Visuelle v;
 	

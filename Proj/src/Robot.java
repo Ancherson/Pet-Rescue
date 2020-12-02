@@ -15,7 +15,7 @@ public class Robot extends Joueur{
 	@Override
 	public void start() {
 		String nom = noms[(int)(Math.random() * noms.length)];
-		int level = (int)(Math.random() * 2 + 1);
+		int level = (int)(Math.random() * Jeu.TOT_LEVEL + 1);
 		jeu.start(nom, new Plateau(level));
 	}
 	
