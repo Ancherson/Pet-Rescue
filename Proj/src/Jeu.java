@@ -25,7 +25,7 @@ public class Jeu {
 		
 		int i = 0;
 		boolean pbm = true;
-		while(pbm || (i <= 0 || i > TOT_LEVEL)) {
+		while(pbm || (i <= 0 || i > 3)) {
 			pbm = false;
 			String s = sc.next();
 			try {
@@ -51,16 +51,15 @@ public class Jeu {
 		joueur.start();
 	}
 	
-	//Fonction pour lancer le jeu
-	public void start(String name, Plateau p) {
+	public void newJoueur(String name) {
 		joueur.quelNom(name);
+	}
+	
+	//Fonction pour lancer le jeu
+	public void start(Plateau p) {
 		this.p = p;
 		affiche();
 		next();
-	}
-	
-	public void restart(Plateau p) {
-		this.p = p;
 	}
 	
 	//Fonction pour deplacer les blocs
@@ -95,12 +94,14 @@ public class Jeu {
 	public void finDePartie() {
 		if(p.aGagne()) {
 			p.explosionFinale(joueur);
-			joueur.nextLevel();
+			joueur.nextLevel(p.getLevel());
+			joueur.saveBest(p.getLevel());
 			//Faire un appelle a joueur.save();
 		}
 		afficheur.afficherP(p);
 		afficheur.afficheScore(joueur);
 		afficheur.afficheFinDePartie(p, joueur);
+		joueur.veutRejouer();
 	}
 	
 	//Fonction pour demander au joueur son prochain coup

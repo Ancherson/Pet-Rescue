@@ -21,17 +21,27 @@ public class Humain extends Joueur{
 	}
 	
 	@Override
-	public void quelNom(String nom) {
-		super.quelNom(nom);
+	public void quelNom(String name) {
+		super.quelNom(name);
 		/**
 		 * Load les donnes du joueur
 		 */
 		interacteur.setMaxLevel(levelMax);
 	}
 	
+	public void save() {
+		
+	}
+	
 	@Override
-	public void nextLevel() {
-		super.nextLevel();
+	public void veutRejouer() {
+		super.veutRejouer();
+		interacteur.veutRejouer();
+	}
+	
+	@Override
+	public void nextLevel(int level) {
+		super.nextLevel(level);
 		interacteur.setMaxLevel(levelMax);
 	}
 }

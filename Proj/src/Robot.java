@@ -16,7 +16,8 @@ public class Robot extends Joueur{
 	public void start() {
 		String nom = noms[(int)(Math.random() * noms.length)];
 		int level = (int)(Math.random() * Jeu.TOT_LEVEL + 1);
-		jeu.start(nom, new Plateau(level));
+		jeu.newJoueur(nom);
+		jeu.start(new Plateau(level));
 	}
 	
 	//Fonction pour préparer le coup du robot
@@ -63,5 +64,10 @@ public class Robot extends Joueur{
 		}else {
 			jeu.next();
 		}
+	}
+	
+	@Override
+	public void veutRejouer() {
+		System.out.println("C'est bon pour moi, j'en ai marre !");
 	}
 }

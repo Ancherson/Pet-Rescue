@@ -38,6 +38,7 @@ public class MenuNom extends JPanel{
 		reponse.setPreferredSize(new Dimension(400,50));
 		reponse.setHorizontalAlignment(JTextField.CENTER);
 		reponse.addActionListener((event) -> {
+			v.newJoueur();
 			v.changeToLevel();
 		});
 		panneauReponse.add(panneauTextField);

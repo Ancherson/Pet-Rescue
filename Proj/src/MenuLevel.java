@@ -15,11 +15,13 @@ import javax.swing.JPanel;
 //Classe représentant le menu de choix d'un level, sur l'interface graphique
 
 public class MenuLevel extends JPanel{
-	private final int numberLevel = Jeu.TOT_LEVEL;
-	private JButton[] buttons = new JButton[numberLevel];
+	private int numberLevel;
+	private JButton[] buttons;
 	private Visuelle v;
 	
-	public MenuLevel(Visuelle v) {
+	public MenuLevel(Visuelle v, int levelMax) {
+		numberLevel = levelMax;
+		buttons = new JButton[numberLevel];
 		
 		JPanel haut = new JPanel();
 		JLabel question = new JLabel("Quel Niveau Veux Tu Faire ?");

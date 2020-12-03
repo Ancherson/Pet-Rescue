@@ -58,7 +58,6 @@ public class VisuPlateau extends JPanel{
 				if(lock) return;
 				int i = evt.getY() / scl;
 				int j = evt.getX() / scl;
-				System.out.println(i + " " + j);
 				v.joue(i, j);
 			}
 		});

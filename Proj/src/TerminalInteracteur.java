@@ -20,13 +20,14 @@ public class TerminalInteracteur implements Interacteur{
 	@Override
 	public void start() {
 		String nom = quelNom();
+		jeu.newJoueur(nom);
 		int level = quelLevel();
-		jeu.start(nom, new Plateau(level));
+		jeu.start(new Plateau(level));
 	}
 	
 	public void restart() {
 		int level = quelLevel();
-		jeu.restart(new Plateau(level));
+		jeu.start(new Plateau(level));
 	}
 
 	public String quelNom() {

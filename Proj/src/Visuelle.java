@@ -19,6 +19,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	private MenuNom menu2;
 	private MenuLevel menu3;
 	private MenuJeu menuJeu;
+	private MenuFin menuFin;
 	//Ajouter pour plus tard menu plateau et menu fin
 	
 	private CardLayout cardLayout = new CardLayout();
@@ -48,12 +49,11 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		
 		this.menu1 = new MenuCommencer(this);
 		this.menu2 = new MenuNom(this);
-		this.menu3 = new MenuLevel(this);
+		this.menu3 = new MenuLevel(this, maxLevel);
 		
 		this.mainPanel = new JPanel(cardLayout);
 		this.mainPanel.add("commencer", menu1);
 		this.mainPanel.add("nom", menu2);
-		this.mainPanel.add("level", menu3);
 		
 		this.getContentPane().add(mainPanel);
 		
@@ -75,10 +75,14 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	public void changeToName() {
 		cardLayout.show(mainPanel, "nom");
 	}
+	
+	public void newJoueur() {
+		this.j.newJoueur(quelNom());
+	}
 
 	public void changeToLevel() {
-		this.menu3 = new MenuLevel(this);
-		
+		this.menu3 = new MenuLevel(this, maxLevel);
+		this.mainPanel.add("level", menu3);
 		cardLayout.show(mainPanel, "level");
 	}
 	
@@ -90,7 +94,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		if(coup > 0) menuJeu.setCoup(coup);
 		
 		this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
-		j.start(quelNom(), p);
+		j.start(p);
 		
 		this.mainPanel.add("jeu", menuJeu);
 		this.cardLayout.show(mainPanel, "jeu");
@@ -161,7 +165,10 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	@Override
 	public void afficheFinDePartie(Plateau p, Joueur j) {
-		// TODO Auto-generated method stub
+		menuFin = new MenuFin(this, j.getNom(), j.getScore(), j.getBestScore(p.getLevel()), p.aGagne());
+		this.setSize(700,500);
+		this.mainPanel.add("fin", menuFin);
+		this.cardLayout.show(mainPanel, "fin");
 		
 	}
 
