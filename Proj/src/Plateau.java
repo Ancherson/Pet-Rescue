@@ -28,7 +28,7 @@ public class Plateau {
 	public Plateau(int niveau) {
 		numLevel = niveau;
 		try {
-			Scanner sc = new Scanner(new File("./niveaux/niveau" + niveau + ".txt"));
+			Scanner sc = new Scanner(new File("../niveaux/niveau" + niveau + ".txt"));
 			sc.useDelimiter("\n");
 			LinkedList<String> liste = new LinkedList<String>();
 			while(sc.hasNext()) {
@@ -62,7 +62,7 @@ public class Plateau {
 			}
 		}catch(IOException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Error readFile " + "./niveaux/niveau" + niveau + ".txt", e);
+			throw new RuntimeException("Error readFile " + "../niveaux/niveau" + niveau + ".txt", e);
 		}
 		
 		Bloc.melangeCouleur();

@@ -43,14 +43,14 @@ public class Bloc extends Cell{
 	//Fonction pour afficher dans le terminal
 	public void afficheT() {
 		if(vide) System.out.print(" ");
-		else System.out.print(assocCouleur[color]);
+		else System.out.print(assocCouleur[color - 1]);
 	}
 	
 	//Fonction pour afficher dans l'interface graphique
 	public void afficheG(Graphics g) {
 		int scl = VisuPlateau.scl;
 		if(!vide) {
-			g.setColor(colors[assocCouleur[color]]);
+			g.setColor(colors[assocCouleur[color - 1]]);
 			g.fillRect(j * scl + 1 +  xOff, i * scl + 1 + yOff, scl - 1, scl - 1);
 			if(xOff > 0) xOff -= 2;
 			if(yOff < 0) yOff += 2;
@@ -61,6 +61,7 @@ public class Bloc extends Cell{
 	public boolean explose(int c) {
 		if(vide || this.color != c) return false;
 		vide = true;
+		color = 0;
 		return true;
 	}
 	

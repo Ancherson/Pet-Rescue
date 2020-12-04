@@ -8,7 +8,7 @@ public class Jeu {
 	Plateau p;
 	Afficheur afficheur;
 	
-	public final static int TOT_LEVEL = 2;
+	public final static int TOT_LEVEL = 6;
 	
 	public Jeu() {
 		this.demmandeInterface();
@@ -21,7 +21,7 @@ public class Jeu {
 	//Cette fonction demande qu'elle interface à utiliser
 	public void demmandeInterface() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Quel Interface voulez-vous utiliser ? (1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
+		System.out.println("Quel Interface voulez-vous utiliser ?\n(1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
 		
 		int i = 0;
 		boolean pbm = true;

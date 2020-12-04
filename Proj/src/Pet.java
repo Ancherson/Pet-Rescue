@@ -20,7 +20,7 @@ public class Pet extends Cell{
 		super(i, j);
 		if(image == null) {
 			try {
-				image = ImageIO.read(new File("./pet.png"));
+				image = ImageIO.read(new File("../pet.png"));
 			} catch(Exception e) {
 				throw new RuntimeException();
 			}
