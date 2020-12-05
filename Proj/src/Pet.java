@@ -22,8 +22,8 @@ public class Pet extends Cell{
 		if(images == null) {
 			try {
 				images = new BufferedImage[2];
-				images[0] = ImageIO.read(new File("../animal.png"));
-				images[1] = ImageIO.read(new File("../panda.png"));	
+				images[0] = ImageIO.read(new File("./animal.png"));
+				images[1] = ImageIO.read(new File("./panda.png"));	
 			} catch(Exception e) {
 				throw new RuntimeException();
 			}

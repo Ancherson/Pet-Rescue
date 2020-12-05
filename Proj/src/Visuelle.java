@@ -1,5 +1,6 @@
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
@@ -32,8 +33,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	//ces dimensions représentent l'écart de dimension entre la fenetre et le contenue de la fenetre
 	//permettant de pouvoir redimmensionner plus précisément même si cela ne marche pas parfaitement
-	private final int dHauteur;
-	private final int dLargeur;
+	private int dHauteur;
+	private int dLargeur;
 	
 	private int maxLevel;
 	
@@ -57,10 +58,12 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		
 		this.getContentPane().add(mainPanel);
 		
-		this.setVisible(true);
+		EventQueue.invokeLater(() -> {
+			this.setVisible(true);
+			this.dHauteur = this.getHeight() - this.getContentPane().getHeight();
+			this.dLargeur = this.getWidth() - this.getContentPane().getWidth();
+		});
 		
-		this.dHauteur = this.getHeight() - this.getContentPane().getHeight();
-		this.dLargeur = this.getWidth() - this.getContentPane().getWidth();
 	}
 	
 	@Override
@@ -145,8 +148,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 			}
 			menuJeu.afficheP();
 		});
-		t.start();
-		
+		EventQueue.invokeLater(() -> t.start());
 		
 	}
 
