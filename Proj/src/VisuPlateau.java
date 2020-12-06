@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,7 +13,7 @@ public class VisuPlateau extends JPanel{
 	private Plateau p;
 	
 	//Largeur et hauteur des blocs
-	public static final int scl = 70;
+	public static final int scl = 50;
 	
 	public final int largeur;
 	public final int hauteur;
@@ -61,6 +62,7 @@ public class VisuPlateau extends JPanel{
 				v.joue(i, j);
 			}
 		});
+		this.setPreferredSize(new Dimension(largeur,hauteur));
 	}
 	
 	public void lock() {

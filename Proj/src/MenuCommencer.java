@@ -25,7 +25,6 @@ public class MenuCommencer extends JPanel{
 	private JLabel title = new JLabel("PET RESCUE");
 	private JButton bouton = new JButton("Commencer");
 	private Visuelle v;
-	private BufferedImage background;
 	private BufferedImage titre;
 
 	public MenuCommencer(Visuelle v) {
@@ -33,14 +32,11 @@ public class MenuCommencer extends JPanel{
 		
 		
 		try {
-			background = ImageIO.read(new File("./back.png"));
 			titre = ImageIO.read(new File("./PetRescue.png"));
 		} catch (IOException e) {
-			throw new RuntimeException("Erreur load image ./back.png");
+			throw new RuntimeException("Erreur load image ./PetRescue.png");
 		}
 		
-		
-		this.repaint();
 		
 		bouton.addActionListener((event) -> {
 			v.changeToName();
@@ -101,7 +97,7 @@ public class MenuCommencer extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), this);
+		g.drawImage(v.getBack(), 0, 0, this.getWidth(), this.getHeight(), this);
 		g.drawImage(titre, 200, 20, 200 + 200, 50 + 200, this);
 	}
 

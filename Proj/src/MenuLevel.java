@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -26,14 +27,14 @@ public class MenuLevel extends JPanel{
 		JPanel haut = new JPanel();
 		JLabel question = new JLabel("Quel Niveau Veux Tu Faire ?");
 		question.setFont(new Font("Arial",Font.BOLD,40));
-		question.setForeground(new Color(0x25275E));
-		haut.setBackground(Color.white);
+		question.setForeground(Color.white);
+		haut.setBackground(new Color(0x25275E));
 		haut.add(question);
 		
 		
 		
 		JPanel panneauBoutton = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
-		panneauBoutton.setBackground(new Color(0x25275E));
+		panneauBoutton.setOpaque(false);
 		this.v = v;
 		for(int i = 0; i < buttons.length; i++) {
 			final int j = i + 1;
@@ -81,5 +82,11 @@ public class MenuLevel extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.add(haut, BorderLayout.NORTH);
 		this.add(panneauBoutton);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(v.getBack(), 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 }

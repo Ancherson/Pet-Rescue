@@ -1,10 +1,14 @@
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -29,6 +33,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	//Attribut pour l'animation des blocs qui se déplacent
 	private boolean running = true;
+	private BufferedImage background;
 	private Thread t;
 	
 	//ces dimensions représentent l'écart de dimension entre la fenetre et le contenue de la fenetre
@@ -40,6 +45,12 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	public Visuelle(Jeu j) {
 		this.j = j;
+		
+		try {
+			background = ImageIO.read(new File("./back.png"));
+		} catch (IOException e) {
+			throw new RuntimeException();
+		}
 		
 		this.setTitle("Pet Rescue");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,6 +75,10 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 			this.dLargeur = this.getWidth() - this.getContentPane().getWidth();
 		});
 		
+	}
+	
+	public BufferedImage getBack() {
+		return background;
 	}
 	
 	@Override
@@ -96,7 +111,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		int coup = p.getCoup();
 		if(coup > 0) menuJeu.setCoup(coup);
 		
-		this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
+		//this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
 		j.start(p);
 		
 		this.mainPanel.add("jeu", menuJeu);
@@ -168,7 +183,6 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	@Override
 	public void afficheFinDePartie(Plateau p, Joueur j) {
 		menuFin = new MenuFin(this, j.getNom(), j.getScore(), j.getBestScore(p.getLevel()), p.aGagne());
-		this.setSize(700,500);
 		this.mainPanel.add("fin", menuFin);
 		this.cardLayout.show(mainPanel, "fin");
 		
