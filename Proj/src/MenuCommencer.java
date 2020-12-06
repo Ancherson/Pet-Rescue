@@ -102,7 +102,7 @@ public class MenuCommencer extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), this);
-		g.drawImage(titre, 175, 25, 175 + 200, 25 + 200, this);
+		g.drawImage(titre, 200, 20, 200 + 200, 50 + 200, this);
 	}
 
 }
