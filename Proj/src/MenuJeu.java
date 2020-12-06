@@ -43,7 +43,6 @@ public class MenuJeu extends JPanel{
 		
 		this.add(panneauPlateau, BorderLayout.CENTER);
 		int panneauHeight = v.getHeight() - (int)haut.getPreferredSize().getHeight();
-		System.out.println(panneauHeight);
 		panneauPlateau.setLayout(new FlowLayout(FlowLayout.CENTER,0,(panneauHeight - vPlateau.getHeight()) / 2));
 		//this.setSize(vPlateau.largeur, vPlateau.hauteur + haut.getPreferredSize().height);
 		

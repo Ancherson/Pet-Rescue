@@ -18,11 +18,12 @@ import javax.swing.JPanel;
 public class MenuLevel extends JPanel{
 	private int numberLevel;
 	private JButton[] buttons;
+	private JLabel[] fauxBoutons;
 	private Visuelle v;
 	
 	public MenuLevel(Visuelle v, int levelMax) {
 		numberLevel = levelMax;
-		buttons = new JButton[numberLevel];
+		buttons = new JButton[levelMax];
 		
 		JPanel haut = new JPanel();
 		JLabel question = new JLabel("Quel Niveau Veux Tu Faire ?");
@@ -33,8 +34,8 @@ public class MenuLevel extends JPanel{
 		
 		
 		
-		JPanel panneauBoutton = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
-		panneauBoutton.setOpaque(false);
+		JPanel panneauBouton = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
+		panneauBouton.setOpaque(false);
 		this.v = v;
 		for(int i = 0; i < buttons.length; i++) {
 			final int j = i + 1;
@@ -75,13 +76,24 @@ public class MenuLevel extends JPanel{
 				@Override
 				public void mouseClicked(MouseEvent arg0) {}
 			});
-			
-			panneauBoutton.add(buttons[i]);
+			panneauBouton.add(buttons[i]);
+		}
+		
+		fauxBoutons = new JLabel[Jeu.TOT_LEVEL - levelMax];
+		for(int i = 0; i < fauxBoutons.length; i++) {
+			fauxBoutons[i] = new JLabel("" + (i + levelMax + 1));
+			fauxBoutons[i].setOpaque(true);
+			fauxBoutons[i].setBackground(new Color(0x27252E));
+			fauxBoutons[i].setForeground(Color.white);
+			fauxBoutons[i].setPreferredSize(new Dimension(70,70));
+			fauxBoutons[i].setFont(new Font("Arial",Font.BOLD,30));
+			fauxBoutons[i].setHorizontalAlignment(0);
+			panneauBouton.add(fauxBoutons[i]);
 		}
 		
 		this.setLayout(new BorderLayout());
 		this.add(haut, BorderLayout.NORTH);
-		this.add(panneauBoutton);
+		this.add(panneauBouton);
 	}
 	
 	@Override
