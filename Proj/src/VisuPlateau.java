@@ -62,6 +62,8 @@ public class VisuPlateau extends JPanel{
 				v.joue(i, j);
 			}
 		});
+		this.setOpaque(false);
+		
 		this.setPreferredSize(new Dimension(largeur,hauteur));
 	}
 	
@@ -73,10 +75,10 @@ public class VisuPlateau extends JPanel{
 		lock = false;
 	}
 	
-	
 	@Override
 	protected void paintComponent(Graphics g) {
-		g.setColor(Color.white);
+		super.paintComponent(g);
+		g.setColor(new Color(0,0,0,100));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		p.afficherG(g);
 		if(!p.isMoving()) {
