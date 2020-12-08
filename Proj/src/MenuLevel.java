@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -15,23 +16,26 @@ import javax.swing.JPanel;
 //Classe représentant le menu de choix d'un level, sur l'interface graphique
 
 public class MenuLevel extends JPanel{
-	private final int numberLevel = 2;
-	private JButton[] buttons = new JButton[numberLevel];
+	private int numberLevel;
+	private JButton[] buttons;
+	private JLabel[] fauxBoutons;
 	private Visuelle v;
 	
-	public MenuLevel(Visuelle v) {
+	public MenuLevel(Visuelle v, int levelMax) {
+		numberLevel = levelMax;
+		buttons = new JButton[levelMax];
 		
 		JPanel haut = new JPanel();
 		JLabel question = new JLabel("Quel Niveau Veux Tu Faire ?");
 		question.setFont(new Font("Arial",Font.BOLD,40));
-		question.setForeground(new Color(0x25275E));
-		haut.setBackground(Color.white);
+		question.setForeground(Color.white);
+		haut.setBackground(new Color(0x25275E));
 		haut.add(question);
 		
 		
 		
-		JPanel panneauBoutton = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
-		panneauBoutton.setBackground(new Color(0x25275E));
+		JPanel panneauBouton = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
+		panneauBouton.setOpaque(false);
 		this.v = v;
 		for(int i = 0; i < buttons.length; i++) {
 			final int j = i + 1;
@@ -72,12 +76,29 @@ public class MenuLevel extends JPanel{
 				@Override
 				public void mouseClicked(MouseEvent arg0) {}
 			});
-			
-			panneauBoutton.add(buttons[i]);
+			panneauBouton.add(buttons[i]);
+		}
+		
+		fauxBoutons = new JLabel[Jeu.TOT_LEVEL - levelMax];
+		for(int i = 0; i < fauxBoutons.length; i++) {
+			fauxBoutons[i] = new JLabel("" + (i + levelMax + 1));
+			fauxBoutons[i].setOpaque(true);
+			fauxBoutons[i].setBackground(new Color(0x27252E));
+			fauxBoutons[i].setForeground(Color.white);
+			fauxBoutons[i].setPreferredSize(new Dimension(70,70));
+			fauxBoutons[i].setFont(new Font("Arial",Font.BOLD,30));
+			fauxBoutons[i].setHorizontalAlignment(0);
+			panneauBouton.add(fauxBoutons[i]);
 		}
 		
 		this.setLayout(new BorderLayout());
 		this.add(haut, BorderLayout.NORTH);
-		this.add(panneauBoutton);
+		this.add(panneauBouton);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(v.getBack(), 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 }

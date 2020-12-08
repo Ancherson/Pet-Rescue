@@ -8,6 +8,8 @@ public class Jeu {
 	Plateau p;
 	Afficheur afficheur;
 	
+	public final static int TOT_LEVEL = 6;
+	
 	public Jeu() {
 		this.demmandeInterface();
 	}
@@ -19,11 +21,11 @@ public class Jeu {
 	//Cette fonction demande qu'elle interface à utiliser
 	public void demmandeInterface() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Quel Interface voulez-vous utiliser ? (1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
+		System.out.println("Quel Interface voulez-vous utiliser ?\n(1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
 		
 		int i = 0;
 		boolean pbm = true;
-		while(pbm || (i != 1 && i != 2 && i != 3)) {
+		while(pbm || (i <= 0 || i > 3)) {
 			pbm = false;
 			String s = sc.next();
 			try {
@@ -49,9 +51,12 @@ public class Jeu {
 		joueur.start();
 	}
 	
-	//Fonction pour lancer le jeu
-	public void start(String name, Plateau p) {
+	public void newJoueur(String name) {
 		joueur.quelNom(name);
+	}
+	
+	//Fonction pour lancer le jeu
+	public void start(Plateau p) {
 		this.p = p;
 		affiche();
 		next();
@@ -69,26 +74,7 @@ public class Jeu {
 	public void turn(int i, int j) {
 		joueur.addScore(p.explose(i, j));
 		move();
-		/*while(p.rescue(joueur)) {
-			p.fall();
-			p.left();
-			affiche();
-		}
-		if(finished()) {
-			finDePartie();
-		}else {
-			joueur.prochainCoup();
-		}*/
-		
 	}
-	
-//	public void turn(int i, int j) {
-//		joueur.addScore(p.explose(i, j));
-//		p.fall();
-//		p.left();
-//		affiche();
-//	}
-//	
 	
 	//Foncion pout afficher les infos utiles pour le joueur (plateau, score, coups restants)
 	public void affiche() {
@@ -101,25 +87,25 @@ public class Jeu {
 	//renvoie true pour dire qu'on en a sauvés
 	public boolean rescue() {
 		boolean b = p.rescue(joueur);
-		/*p.fall();
-		p.left();
-		affiche();*/
 		return b;
 	}
 	
 	//Fonction pour lancer la fin du jeu
 	public void finDePartie() {
-		if(p.aGagne()) p.explosionFinale(joueur);
+		if(p.aGagne()) {
+			p.explosionFinale(joueur);
+			joueur.nextLevel(p.getLevel());
+			joueur.saveBest(p.getLevel());
+			//Faire un appelle a joueur.save();
+		}
 		afficheur.afficherP(p);
 		afficheur.afficheScore(joueur);
 		afficheur.afficheFinDePartie(p, joueur);
+		joueur.veutRejouer();
 	}
 	
 	//Fonction pour demander au joueur son prochain coup
 	public void next() {
-//		afficheur.afficherP(p);
-//		afficheur.afficheCoup(p);
-//		afficheur.afficheScore(joueur);
 		joueur.prochainCoup();
 	}
 	

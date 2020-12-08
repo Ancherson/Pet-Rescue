@@ -12,19 +12,24 @@ import javax.swing.JPanel;
 
 public class Pet extends Cell{
 	
-	private static BufferedImage image;
+	private static BufferedImage[] images;
+	private BufferedImage image;
 	private int xOff = 0;
 	private int yOff = 0;
 	
 	public Pet(int i, int j)  {
 		super(i, j);
-		if(image == null) {
+		if(images == null) {
 			try {
-				image = ImageIO.read(new File("./pet.png"));
+				images = new BufferedImage[2];
+				images[0] = ImageIO.read(new File("./animal.png"));
+				images[1] = ImageIO.read(new File("./panda.png"));	
 			} catch(Exception e) {
 				throw new RuntimeException();
 			}
 		}
+		if(Math.random() < 0.5) image = images[0];
+		else image = images[1];
 	}
 	public boolean estVide() {
 		return false;

@@ -3,11 +3,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,17 +25,18 @@ public class MenuCommencer extends JPanel{
 	private JLabel title = new JLabel("PET RESCUE");
 	private JButton bouton = new JButton("Commencer");
 	private Visuelle v;
+	private BufferedImage titre;
 
 	public MenuCommencer(Visuelle v) {
 		this.v = v;
 		
-		title.setFont(new Font("Arial",Font.BOLD,50));
-		title.setForeground(new Color(0x25275E));
-		//title.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel p1 = new JPanel();
-		p1.setBackground(Color.white);
-		p1.add(title);
+		try {
+			titre = ImageIO.read(new File("./PetRescue.png"));
+		} catch (IOException e) {
+			throw new RuntimeException("Erreur load image ./PetRescue.png");
+		}
+		
 		
 		bouton.addActionListener((event) -> {
 			v.changeToName();
@@ -74,21 +80,25 @@ public class MenuCommencer extends JPanel{
 			}
 			;
 		});
-		
-		JPanel p2 = new JPanel(new GridLayout(3,1));
-		JLabel test = new JLabel("");
-		test.setBackground(new Color(0x25275E));
-
-		p2.add(test);
+		this.setLayout(new GridLayout(3,1));
 		JPanel pBouton = new JPanel();
-		pBouton.setBackground(new Color(0x25275E));
+		pBouton.setOpaque(false);
+		bouton.setPreferredSize(new Dimension(300,50));
 		pBouton.add(bouton);
-		p2.setBackground(new Color(0x25275E));
-		p2.add(pBouton);
-		
-		this.setLayout(new BorderLayout());
-		this.add(p1, BorderLayout.NORTH);
-		this.add(p2, BorderLayout.CENTER);
+		JPanel vide1 = new JPanel();
+		vide1.setOpaque(false);
+		JPanel vide2 = new JPanel();
+		vide2.setOpaque(false);
+		this.add(vide1);
+		this.add(vide2);
+		this.add(pBouton);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(v.getBack(), 0, 0, this.getWidth(), this.getHeight(), this);
+		g.drawImage(titre, 200, 20, 200 + 200, 50 + 200, this);
 	}
 
 }

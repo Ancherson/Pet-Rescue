@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -21,29 +22,36 @@ public class MenuNom extends JPanel{
 		JPanel panneauQuestion = new JPanel();
 		panneauQuestion.add(question);
 		question.setFont(new Font("Arial",Font.BOLD,40));
-		question.setForeground(new Color(0x25275E));
-		panneauQuestion.setBackground(Color.white);
+		question.setForeground(Color.white);
+		panneauQuestion.setBackground(new Color(0x25275E));
 		
 		JPanel panneauReponse = new JPanel(new GridLayout(3,1));
-		panneauReponse.setBackground(new Color(0x25275E));
+		panneauReponse.setOpaque(false);
 		JPanel vide = new JPanel();
-		vide.setBackground(new Color(0x25275E));
+		vide.setOpaque(false);
 		panneauReponse.add(vide);
 		
 		JPanel panneauTextField = new JPanel();
+		panneauTextField.setOpaque(false);
 		panneauTextField.add(reponse);
-		panneauTextField.setBackground(new Color(0x25275E));
 		
 		reponse.setFont(new Font("Arial",Font.BOLD,50));
 		reponse.setPreferredSize(new Dimension(400,50));
 		reponse.setHorizontalAlignment(JTextField.CENTER);
 		reponse.addActionListener((event) -> {
+			v.newJoueur();
 			v.changeToLevel();
 		});
 		panneauReponse.add(panneauTextField);
 		this.setLayout(new BorderLayout());
 		this.add(panneauQuestion, BorderLayout.NORTH);
 		this.add(panneauReponse);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(v.getBack(), 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 	
 	public String getText() {
