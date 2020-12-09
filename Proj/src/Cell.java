@@ -22,20 +22,7 @@ public class Cell {
 		this.j = j;
 	}
 	
-	//Affichage dans le terminal
-	public void afficheT() {
-		System.out.print(" ");
-	}
-	
-	//Affichage dans l'interface graphique
-	public void afficheG(Graphics g) {
-		
-	}
-	
 	//Toutes les méthodes ci-dessous seront redéfinits dans les sous-classes
-	public boolean isMoving() {
-		return false;
-	}
 	
 	public boolean explose(int color) {
 		return false;
@@ -52,5 +39,17 @@ public class Cell {
 	}
 	public boolean estPet() {
 		return false;
+	}
+	public int getXOff() {
+		return 0;
+	}
+	public int getYOff() {
+		return 0;
+	}
+	public void clearOffset() {
+		//rien
+	}
+	public Cell clone() {
+		return new Cell(i,j);
 	}
 }

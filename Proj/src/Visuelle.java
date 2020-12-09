@@ -107,15 +107,13 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	public void changeToPlateau(int i) {
 		Plateau p = new Plateau(i);
 		menuJeu = new MenuJeu(this, p);
+		this.mainPanel.add("jeu", menuJeu);
 		
 		int coup = p.getCoup();
 		if(coup > 0) menuJeu.setCoup(coup);
 		
 		//this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
 		j.start(p);
-		
-		this.mainPanel.add("jeu", menuJeu);
-		this.cardLayout.show(mainPanel, "jeu");
 	}
 	
 	public String quelNom() {
@@ -148,6 +146,8 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 
 	@Override
 	public void afficherP(Plateau p) {
+		menuJeu.prepare(p);
+		this.cardLayout.show(mainPanel, "jeu");
 		running = true;
 		menuJeu.lock();
 		t = new Thread(() -> {

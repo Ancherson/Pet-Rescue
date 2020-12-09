@@ -5,7 +5,25 @@ public class TerminalAfficheur implements Afficheur{
 
 	@Override
 	public void afficherP(Plateau p) {
-		p.afficheT();
+		Cell[][] copyPlateau = p.copy();
+		System.out.println("# ".repeat(copyPlateau[0].length + 2));
+		for(int i = 0; i < copyPlateau.length; i++) {
+			for(int j = 0; j < copyPlateau[i].length; j++) {
+				if(j == 0) System.out.print("# ");
+				Cell c = copyPlateau[i][j];
+				if(c.estPet()) {
+					System.out.print("@ ");
+				}else if(c.estMur()) {
+					System.out.print("# ");
+				}else if(c.estVide()) {
+					System.out.print("  ");
+				}else {
+					System.out.print(c.getColor() + " ");
+				}
+			}
+			System.out.println("#");
+		}
+		System.out.println("# ".repeat(copyPlateau[0].length + 2));
 	}
 
 	@Override

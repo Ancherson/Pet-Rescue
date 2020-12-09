@@ -64,8 +64,6 @@ public class Plateau {
 			e.printStackTrace();
 			throw new RuntimeException("Error readFile " + "./niveaux/niveau" + niveau + ".txt", e);
 		}
-		
-		Bloc.melangeCouleur();
 	}
 	
 	public boolean estVide(int i, int j) {
@@ -86,42 +84,6 @@ public class Plateau {
 	}
 	public int getLevel() {
 		return numLevel;
-	}
-	
-	//TO DO: améliorer l'affichage pour plus tard
-	//Cette fonction permet d'afficher le plateau sur le temrinal
-	public void afficheT() {
-		System.out.println("# ".repeat(cells[0].length + 2));
-		for(int i = 0; i < cells.length; i++) {
-			for(int j = 0; j < cells[i].length; j++) {
-				if(j == 0) System.out.print("# ");
-				cells[i][j].afficheT();
-				System.out.print(" ");
-			}
-			System.out.println("# ");
-		}
-		System.out.println("# ".repeat(cells[0].length + 2));
-	}
-	
-	//Cette fonction permet d'afficher le plateau dans l'interface graphique
-	public void afficherG(Graphics g) {
-		
-		for(int i = 0; i < cells.length; i++) {
-			for(int j = 0; j < cells[i].length; j++) {
-				 cells[i][j].afficheG(g);
-			}
-		}
-	}
-	
-	//Cette fonction est utile lors de l'affichage dans l'interface graphique qui permet de savoir si il
-	//existe un bloc ou un animal en train de bouger
-	public boolean isMoving() {
-		for(int i = 0; i < cells.length; i++) {
-			for(int j = 0; j < cells[i].length; j++) {
-				if(cells[i][j].isMoving()) return true;
-			}
-		}
-		return false;
 	}
 	
 	//Permet de savoir si la partie est fini
@@ -308,6 +270,24 @@ public class Plateau {
 			}
 		}
 		joueur.addScore(score);
+	}
+	
+	public Cell[][] copy() {
+		Cell[][] copyCells = new Cell[cells.length][cells[0].length];
+		for(int i = 0; i < copyCells.length; i++) {
+			for(int j = 0; j < copyCells[i].length; j++) {
+				copyCells[i][j] = cells[i][j].clone();
+			}
+		}
+		return copyCells;
+	}
+	
+	public void clearOffset() {
+		for(int i = 0; i < cells.length; i++) {
+			for(int j = 0; j < cells[i].length; j++) {
+				cells[i][j].clearOffset();
+			}
+		}
 	}
 	
 }
