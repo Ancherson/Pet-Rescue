@@ -10,27 +10,12 @@ import javax.imageio.ImageIO;
 
 public class Mur extends Cell{
 	
-	private static BufferedImage image;
-	
 	public Mur(int i, int j) {
 		super(i, j);
-		if(image == null) {
-			try {
-				image = ImageIO.read(new File("./mur.png"));
-			} catch (IOException e) {
-				throw new RuntimeException("error load ./mur.png");
-			}
-		}
 	}
 	public int[] getIJ() {
 		int[] t = {i,j};
 		return t;
-	}
-	public void afficheG(Graphics g) {
-		int scl = VisuPlateau.scl;
-		/*g.setColor(Color.black);
-		g.fillRect(j * scl, i * scl, scl, scl);*/
-		g.drawImage(image, j * scl, i * scl, scl, scl, null);
 	}
 	
 	public boolean estMur() {
@@ -39,7 +24,7 @@ public class Mur extends Cell{
 	public boolean estVide() {
 		return false;
 	}
-	public void afficheT() {
-		System.out.print("#");
+	public Mur clone() {
+		return new Mur(i,j);
 	}
 }

@@ -64,6 +64,7 @@ public class Jeu {
 	
 	//Fonction pour deplacer les blocs
 	public void move() {
+		p.clearOffset();
 		p.fall();
 		p.left();
 		affiche();

@@ -21,7 +21,7 @@ public class MenuJeu extends JPanel{
 	
 	public MenuJeu(Visuelle v, Plateau p) {
 		this.v = v;
-		this.vPlateau = new VisuPlateau(v, p);
+		this.vPlateau = new VisuPlateau(v,p);
 		
 		this.setLayout(new BorderLayout());
 		
@@ -75,5 +75,9 @@ public class MenuJeu extends JPanel{
 	
 	public void unLock() {
 		vPlateau.unLock();
+	}
+	
+	public void prepare(Plateau p) {
+		vPlateau.prepare(p);
 	}
 }
