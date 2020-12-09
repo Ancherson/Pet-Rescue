@@ -89,6 +89,7 @@ public class VisuPlateau extends JPanel{
 		} catch(Exception e) {
 			throw new RuntimeException();
 		}
+		melange();
 	}
 	
 	public void lock() {
@@ -111,7 +112,6 @@ public class VisuPlateau extends JPanel{
 	}
 	
 	public void prepare(Plateau p) {
-		melange();
 		copyPlateau = p.copy();
 		xOffs = new int[copyPlateau.length][copyPlateau[0].length];
 		yOffs = new int[copyPlateau.length][copyPlateau[0].length];
