@@ -19,7 +19,7 @@ public class VisuPlateau extends JPanel{
 	private int[][] yOffs;
 	
 	//Largeur et hauteur des blocs
-	public final int scl = 50;
+	private final int scl = 50;
 	
 	public final int largeur;
 	public final int hauteur;
@@ -99,7 +99,19 @@ public class VisuPlateau extends JPanel{
 		lock = false;
 	}
 	
+	public void melange() {
+		int n = (int)(Math.random() * 20);
+		for(int i = 0; i < n; i++) {
+			int a = (int)(Math.random() * colors.length);
+			int b = (int)(Math.random() * colors.length);
+			Color c = colors[a];
+			colors[a] = colors[b];
+			colors[b] = c;
+		}
+	}
+	
 	public void prepare(Plateau p) {
+		melange();
 		copyPlateau = p.copy();
 		xOffs = new int[copyPlateau.length][copyPlateau[0].length];
 		yOffs = new int[copyPlateau.length][copyPlateau[0].length];
