@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 //Cette Classe permet de regrouper un peu toutes les classe pour qu'elles interagissent entre elles
@@ -97,7 +98,10 @@ public class Jeu {
 			p.explosionFinale(joueur);
 			joueur.nextLevel(p.getLevel());
 			joueur.saveBest(p.getLevel());
-			//Faire un appelle a joueur.save();
+			if(joueur instanceof Humain) {
+				Humain h = (Humain)joueur;
+				h.save();
+			}
 		}
 		afficheur.afficherP(p);
 		afficheur.afficheScore(joueur);

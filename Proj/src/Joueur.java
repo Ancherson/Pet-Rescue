@@ -7,7 +7,7 @@ public abstract class Joueur {
 	
 
 	protected int levelMax = 1;
-	private int[] bestScores = new int[Jeu.TOT_LEVEL];
+	protected int[] bestScores = new int[Jeu.TOT_LEVEL];
 	
 	public String getNom() {
 		return nom;
@@ -45,6 +45,7 @@ public abstract class Joueur {
 	public void veutRejouer() {
 		score = 0;
 	}
+	
 	
 	public abstract void start();
 	
