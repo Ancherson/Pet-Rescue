@@ -71,6 +71,10 @@ public class Jeu {
 		affiche();
 	}
 	
+	public void fusee(int j) {
+		p.fusee(j);
+		move();
+	}
 	
 	//Fonction pour jouer dans la case i,j du plateau
 	public void turn(int i, int j) {

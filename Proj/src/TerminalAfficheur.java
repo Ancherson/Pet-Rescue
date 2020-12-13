@@ -65,4 +65,11 @@ public class TerminalAfficheur implements Afficheur{
 			System.out.println("Coup : " + coup);
 		
 	}
+
+	@Override
+	public void afficheFusee(Plateau p) {
+		int fusee = p.getFusee();
+		if(fusee > 0) 
+			System.out.println("Fusees : " + p.getFusee());
+	}
 }

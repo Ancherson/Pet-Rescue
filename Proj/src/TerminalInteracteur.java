@@ -80,17 +80,72 @@ public class TerminalInteracteur implements Interacteur{
 		int[]res = {i,j};
 		return res;
 	}
+	
+	public int quelleAction() {
+		System.out.println("Quelle action veut-tu faire\n"
+						 + "(1 -> Case | 2 -> Fusee)");
+		boolean pbm = true;
+		int i = 0;
+		while(pbm || !(i == 1 || i == 2)) {
+			pbm = false;
+			String s = sc.next();
+			try {
+				i = Integer.parseInt(s);
+			}catch(NumberFormatException e) {
+				System.out.println("NON");
+				pbm = true;
+			}
+		}
+		
+		return i;
+	}
+	
+	public int quelleColonne() {
+		System.out.println("Quelle Colonne ?");
+		int max = jeu.getPlateau().getLargeur();
+		boolean pbm = true;
+		int j = 0;
+		while(pbm || !(j >= 0 && j < max)) {
+			pbm = false;
+			String s = sc.next();
+			try {
+				j = Integer.parseInt(s);
+			}catch(NumberFormatException e) {
+				System.out.println("NON");
+				pbm = true;
+			}
+		}
+		
+		return j;
+	}
+	
+	public void turn() {
+		int[] cases= this.quellesCases();
+		int i = cases [0];
+		int j = cases [1];
+		
+		jeu.turn(i, j);
+	}
+	
+	public void fusee() {
+		int col = quelleColonne();
+		jeu.fusee(col);
+	}
 
 	@Override
 	public void prochainCoup() {
-		int[]cases = this.quellesCases();
-		int i = cases[0];
-		int j = cases[1];
-		
-		this.jeu.turn(i, j);
-		
-		while(this.jeu.rescue()) {
-			this.jeu.move();
+		if(jeu.getPlateau().getFusee() > 0) {
+			int action = quelleAction();
+			if(action == 1) turn();
+			if(action == 2) fusee();
+		}
+		else turn();
+		move();
+	}
+	
+	public void move() {
+		while(jeu.rescue()) {
+			jeu.move();
 		}
 		
 		if(jeu.finished()) {
@@ -98,12 +153,6 @@ public class TerminalInteracteur implements Interacteur{
 		}else {
 			jeu.next();
 		}
-		
-//		this.j.turn(i,j);
-//		while(this.j.rescue()) {}
-//		if(this.j.finished()) this.j.finDePartie();
-//		else this.j.next();
-	
 	}
 	
 	public void veutRejouer() {

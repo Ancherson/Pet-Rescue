@@ -18,6 +18,8 @@ public class Plateau {
 	private Cell[][] cells;
 	private int totPet = 0;
 	
+	private int nbFusee = 3;
+	
 	//Total coups restants (quand coup < 0 veut dire une infinité)
 	private int coup = -1;
 	
@@ -256,6 +258,18 @@ public class Plateau {
 		return b;
 	}
 	
+	public void fusee(int j) {
+		for(int i = 0; i < cells.length; i++) {
+			if(cells[i][j] instanceof Bloc) {
+				cells[i][j] = new Cell(i,j);
+			}
+		}
+		nbFusee--;
+	}
+	
+	public int getFusee() {
+		return nbFusee;
+	}
 	
 	// à la fin de la partie on compte le nombre total de blocs restant et on met ce nombre au carré puis on le multiplie par 10,
 	// cela permet d'encourager le joueur à faire le moins de coups possible !
