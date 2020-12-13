@@ -67,9 +67,9 @@ public class TerminalAfficheur implements Afficheur{
 	}
 
 	@Override
-	public void afficheFusee(Plateau p) {
-		int fusee = p.getFusee();
+	public void afficheFusee(Joueur joueur) {
+		int fusee = joueur.getFusee();
 		if(fusee > 0) 
-			System.out.println("Fusees : " + p.getFusee());
+			System.out.println("Fusees : " + fusee);
 	}
 }

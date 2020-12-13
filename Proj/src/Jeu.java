@@ -56,6 +56,10 @@ public class Jeu {
 		joueur.quelNom(name);
 	}
 	
+	public int getFusee() {
+		return joueur.getFusee();
+	}
+	
 	//Fonction pour lancer le jeu
 	public void start(Plateau p) {
 		this.p = p;
@@ -73,6 +77,7 @@ public class Jeu {
 	
 	public void fusee(int j) {
 		p.fusee(j);
+		joueur.enleveFusee();
 		move();
 	}
 	
@@ -86,6 +91,7 @@ public class Jeu {
 	public void affiche() {
 		afficheur.afficherP(p);
 		afficheur.afficheCoup(p);
+		afficheur.afficheFusee(joueur);
 		afficheur.afficheScore(joueur);
 	}
 	
@@ -120,6 +126,6 @@ public class Jeu {
 	
 	//fonction disant si oui ou non une partie est finie
 	public boolean finished() {
-		return p.levelIsOver();
+		return p.levelIsOver(joueur);
 	}
 }

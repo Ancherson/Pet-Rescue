@@ -4,13 +4,21 @@
 public abstract class Joueur {
 	protected String nom;
 	protected int score;
-	
+	protected int nbFusee = 3;
 
 	protected int levelMax = 1;
 	protected int[] bestScores = new int[Jeu.TOT_LEVEL];
 	
 	public String getNom() {
 		return nom;
+	}
+	
+	public int getFusee() {
+		return nbFusee;
+	}
+	
+	public void enleveFusee() {
+		if(nbFusee > 0) nbFusee--;
 	}
 	
 	public void affiche() {
@@ -39,7 +47,10 @@ public abstract class Joueur {
 	}
 	
 	public void nextLevel(int level) {
-		if(Jeu.TOT_LEVEL > levelMax && levelMax == level) levelMax++;
+		if(Jeu.TOT_LEVEL > levelMax && levelMax == level) {
+			levelMax++;
+			nbFusee++;
+		}
 	}
 	
 	public void veutRejouer() {

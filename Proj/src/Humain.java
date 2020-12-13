@@ -44,6 +44,7 @@ public class Humain extends Joueur{
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(f));
 			oos.writeInt(levelMax);
+			oos.writeInt(nbFusee);
 			for(int i = 0; i < bestScores.length; i++) {
 				oos.writeInt(bestScores[i]);
 			}
@@ -59,6 +60,7 @@ public class Humain extends Joueur{
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
 		
 		levelMax = ois.readInt();
+		nbFusee = ois.readInt();
 		int i = 0;
 		boolean pbm = false;
 		while(!pbm && i < bestScores.length) {

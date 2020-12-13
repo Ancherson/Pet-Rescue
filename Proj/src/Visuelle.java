@@ -195,7 +195,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	}
 
 	@Override
-	public void afficheFusee(Plateau p) {
+	public void afficheFusee(Joueur j) {
 		// TODO Auto-generated method stub
 		
 	}

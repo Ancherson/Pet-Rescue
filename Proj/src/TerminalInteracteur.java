@@ -81,12 +81,19 @@ public class TerminalInteracteur implements Interacteur{
 		return res;
 	}
 	
-	public int quelleAction() {
-		System.out.println("Quelle action veut-tu faire\n"
-						 + "(1 -> Case | 2 -> Fusee)");
+	public int quelleAction(int tot) {
+		
+		System.out.println("Quelle action veut-tu faire ?");
+		String[]actions = {"Cases", "Menu", "Fusee"};
+		String message = "";
+		for(int i = 0; i < actions.length && i < tot; i++) {
+			message += " | " + (i+1) + " -> " + actions[i];
+		}
+		message = message.substring(3);
+		System.out.println(message);
 		boolean pbm = true;
 		int i = 0;
-		while(pbm || !(i == 1 || i == 2)) {
+		while(pbm || !(i >= 1 && i <= tot)) {
 			pbm = false;
 			String s = sc.next();
 			try {
@@ -134,12 +141,17 @@ public class TerminalInteracteur implements Interacteur{
 
 	@Override
 	public void prochainCoup() {
-		if(jeu.getPlateau().getFusee() > 0) {
-			int action = quelleAction();
+		if(jeu.getFusee() > 0) {
+			int action = quelleAction(3);
 			if(action == 1) turn();
-			if(action == 2) fusee();
+			if(action == 3) fusee();
+			if(action == 2) jeu.finDePartie();
 		}
-		else turn();
+		else {
+			int action = quelleAction(2);
+			if(action == 1) turn();
+			if(action == 2) jeu.finDePartie();
+		}
 		move();
 	}
 	
