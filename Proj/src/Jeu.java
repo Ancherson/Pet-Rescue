@@ -76,9 +76,11 @@ public class Jeu {
 	}
 	
 	public void fusee(int j) {
-		p.fusee(j);
-		joueur.enleveFusee();
-		move();
+		if(joueur.getFusee() > 0) {
+			p.fusee(j);
+			joueur.enleveFusee();
+			move();
+		}
 	}
 	
 	//Fonction pour jouer dans la case i,j du plateau

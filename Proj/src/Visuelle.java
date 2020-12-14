@@ -38,8 +38,6 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	//ces dimensions représentent l'écart de dimension entre la fenetre et le contenue de la fenetre
 	//permettant de pouvoir redimmensionner plus précisément même si cela ne marche pas parfaitement
-	private int dHauteur;
-	private int dLargeur;
 	
 	private int maxLevel;
 	
@@ -71,8 +69,6 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		
 		EventQueue.invokeLater(() -> {
 			this.setVisible(true);
-			this.dHauteur = this.getHeight() - this.getContentPane().getHeight();
-			this.dLargeur = this.getWidth() - this.getContentPane().getWidth();
 		});
 		
 	}
@@ -124,6 +120,10 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		this.j.turn(i,j);
 		
 	}
+	public void fusee(int j) {
+		this.j.fusee(j);
+	}
+	
 	public void rescue() {
 		if(j.rescue()) j.move();
 		else {
@@ -196,7 +196,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 
 	@Override
 	public void afficheFusee(Joueur j) {
-		// TODO Auto-generated method stub
+		menuJeu.setNbFusee(j.getFusee());
 		
 	}
 
