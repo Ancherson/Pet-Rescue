@@ -84,7 +84,7 @@ public class TerminalInteracteur implements Interacteur{
 	public int quelleAction(int tot) {
 		
 		System.out.println("Quelle action veut-tu faire ?");
-		String[]actions = {"Cases", "Menu", "Fusee"};
+		String[]actions = {"Cases", "Abandonne", "Fusee"};
 		String message = "";
 		for(int i = 0; i < actions.length && i < tot; i++) {
 			message += " | " + (i+1) + " -> " + actions[i];

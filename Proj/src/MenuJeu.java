@@ -90,12 +90,12 @@ public class MenuJeu extends JPanel{
 		
 		JPanel droite = new JPanel(new GridLayout(4,1));
 		droite.setOpaque(false);
-		JButton retour = new JButton("Retour");
-		retour.addActionListener(event -> v.changeToLevel());
+		JButton abandonne = new JButton("Abandonne");
+		abandonne.addActionListener(event -> v.fin());
 		droite.add(this.getVide());
 		droite.add(this.getVide());
 		droite.add(this.getVide());
-		droite.add(getPanelButton(retour));
+		droite.add(getPanelButton(abandonne));
 		
 		gc.gridx = 2;
 		gc.gridy = 0;
@@ -121,7 +121,7 @@ public class MenuJeu extends JPanel{
 		fusee.setIcon(imageFusee1);
 		fusee.setVerticalTextPosition(SwingConstants.BOTTOM);
 		fusee.setHorizontalTextPosition(SwingConstants.CENTER);
-		fusee.setBackground(new Color(50,50,50));
+		fusee.setBackground(new Color(150,150,150));
 		fusee.setFont(new Font("Arial", Font.BOLD, 12));
 		fusee.setForeground(Color.white);
 		fusee.setPreferredSize(new Dimension(80,80));
@@ -138,15 +138,15 @@ public class MenuJeu extends JPanel{
 	}
 	
 	public void fuseeChangeCouleur() {
-		if(fusee.getBackground().getGreen() == 50) {
+		if(fusee.getBackground().getBlue() != 0) {
 			fusee.setBackground(new Color(0,150,0));
 		}else {
-			fusee.setBackground(new Color(50,50,50));
+			fusee.setBackground(new Color(150,150,150));
 		}
 	}
 	
 	public void setNbFusee(int nb) {
-		fusee.setBackground(new Color(50,50,50));
+		fusee.setBackground(new Color(150,150,150));
 		if(nb != nbFusee) {
 			this.nbFusee = nb;
 			if(nb > 0) {

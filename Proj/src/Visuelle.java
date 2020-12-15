@@ -127,12 +127,16 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	public void rescue() {
 		if(j.rescue()) j.move();
 		else {
-			if(j.finished()) j.finDePartie();
+			if(j.finished()) fin();
 			running = false;
 			menuJeu.unLock();
 		}
 	}
-	 
+	
+	public void fin() {
+		j.finDePartie();
+	}
+	
 	@Override
 	public void prochainCoup() {
 		
