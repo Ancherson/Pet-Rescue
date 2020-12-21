@@ -1,3 +1,5 @@
+package jeu;
+
 import java.util.Scanner;
 
 //Cette Classe permet l'interaction entre le Joueur et le Jeu à travers le terminal
@@ -141,18 +143,19 @@ public class TerminalInteracteur implements Interacteur{
 
 	@Override
 	public void prochainCoup() {
+		int action;
 		if(jeu.getFusee() > 0) {
-			int action = quelleAction(3);
+			action = quelleAction(3);
 			if(action == 1) turn();
-			if(action == 3) fusee();
-			if(action == 2) jeu.finDePartie();
+			else if(action == 3) fusee();
+			else if(action == 2) jeu.finDePartie();
 		}
 		else {
-			int action = quelleAction(2);
+			action = quelleAction(2);
 			if(action == 1) turn();
 			if(action == 2) jeu.finDePartie();
 		}
-		move();
+		if(action == 1 || action == 3) move();
 	}
 	
 	public void move() {
@@ -175,6 +178,7 @@ public class TerminalInteracteur implements Interacteur{
 		}while(!(s.equals("oui") || s.equals("non")));
 		
 		if(s.equals("oui")) this.restart();
+		System.out.println("COUCOU");
 	}
 
 	@Override

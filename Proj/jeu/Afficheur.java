@@ -1,3 +1,5 @@
+package jeu;
+
 /** *
  * 
  * Interface utilisé pour l'affichage du jeu

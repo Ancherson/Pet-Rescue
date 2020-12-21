@@ -1,3 +1,5 @@
+package jeu;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -103,24 +105,24 @@ public class VisuPlateau extends JPanel{
 		this.setPreferredSize(new Dimension(largeur,hauteur));
 		
 		try {
-			imageMur = ImageIO.read(new File("./mur.png"));
+			imageMur = ImageIO.read(new File("./images/mur.png"));
 		} catch (IOException e) {
-			throw new RuntimeException("error load ./mur.png");
+			throw new RuntimeException("error load ./images/mur.png");
 		}
 		
 		try {
 			imagesPet = new BufferedImage[2];
-			imagesPet[0] = ImageIO.read(new File("./animal.png"));
-			imagesPet[1] = ImageIO.read(new File("./panda.png"));	
+			imagesPet[0] = ImageIO.read(new File("./images/animal.png"));
+			imagesPet[1] = ImageIO.read(new File("./images/panda.png"));	
 		} catch(IOException e) {
 			throw new RuntimeException();
 		}
 		melange();
 		
 		try {
-			imageFusee = ImageIO.read(new File("./fusee1.png"));
+			imageFusee = ImageIO.read(new File("./images/fusee1.png"));
 		}catch(IOException e) {
-			throw new RuntimeException("error load ./fusee1.png");
+			throw new RuntimeException("error load ./images/fusee1.png");
 		}
 	}
 	

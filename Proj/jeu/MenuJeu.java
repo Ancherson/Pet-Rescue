@@ -1,3 +1,5 @@
+package jeu;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,13 +10,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -108,11 +105,11 @@ public class MenuJeu extends JPanel{
 	}
 	
 	public void initialiseImageFusee() {
-		ImageIcon image = new ImageIcon("./fusee2.png");
+		ImageIcon image = new ImageIcon("./images/fusee2.png");
 		Image imageNew = image.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);
 		imageFusee1 = new ImageIcon(imageNew);
 		
-		image = new ImageIcon("./fusee2Dead.png");
+		image = new ImageIcon("./images/fusee2Dead.png");
 		imageNew = image.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);
 		imageFusee2 = new ImageIcon(imageNew);
 	}

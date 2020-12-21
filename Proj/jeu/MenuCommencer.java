@@ -1,11 +1,10 @@
-import java.awt.BorderLayout;
+package jeu;
+
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -14,15 +13,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 //Classe représentant le menu pour commencer pour l'interface graphique
 
 public class MenuCommencer extends JPanel{
-	private JLabel title = new JLabel("PET RESCUE");
 	private JButton bouton = new JButton("Commencer");
 	private Visuelle v;
 	private BufferedImage titre;
@@ -32,9 +27,9 @@ public class MenuCommencer extends JPanel{
 		
 		
 		try {
-			titre = ImageIO.read(new File("./PetRescue.png"));
+			titre = ImageIO.read(new File("./images/PetRescue.png"));
 		} catch (IOException e) {
-			throw new RuntimeException("Erreur load image ./PetRescue.png");
+			throw new RuntimeException("Erreur load image ./images/PetRescue.png");
 		}
 		
 		

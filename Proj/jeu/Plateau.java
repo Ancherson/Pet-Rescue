@@ -1,3 +1,4 @@
+package jeu;
 
 import java.io.File;
 
@@ -5,9 +6,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import javax.swing.JPanel;
-
-import java.awt.Graphics;
 
 //Cette classe représente le plateau de jeu (la grille)
 

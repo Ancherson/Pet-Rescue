@@ -1,3 +1,5 @@
+package jeu;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,13 +18,11 @@ import javax.swing.JPanel;
 //Classe représentant le menu de choix d'un level, sur l'interface graphique
 
 public class MenuLevel extends JPanel{
-	private int numberLevel;
 	private JButton[] buttons;
 	private JLabel[] fauxBoutons;
 	private Visuelle v;
 	
 	public MenuLevel(Visuelle v, int levelMax) {
-		numberLevel = levelMax;
 		buttons = new JButton[levelMax];
 		
 		JPanel haut = new JPanel();

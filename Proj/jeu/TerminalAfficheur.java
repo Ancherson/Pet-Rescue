@@ -1,3 +1,4 @@
+package jeu;
 
 //Cette classe permet l'Affichage dans le terminal du Jeu
 
