@@ -126,7 +126,6 @@ public class MenuJeu extends JPanel{
 		fusee.setFocusPainted(false);
 		
 		fusee.addActionListener((evt) -> {
-			System.out.println(this.nbFusee);
 			if(this.nbFusee > 0) {
 				this.fuseeChangeCouleur();
 				vPlateau.toggleFusee();

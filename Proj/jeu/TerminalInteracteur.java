@@ -178,7 +178,6 @@ public class TerminalInteracteur implements Interacteur{
 		}while(!(s.equals("oui") || s.equals("non")));
 		
 		if(s.equals("oui")) this.restart();
-		System.out.println("COUCOU");
 	}
 
 	@Override

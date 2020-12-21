@@ -55,8 +55,8 @@ public class TerminalAfficheur implements Afficheur{
 			System.out.println("#               #");
 			System.out.println("#################");
 		}
-		
 		j.affiche();
+		System.out.println("Best Score : " + j.getBestScore(p.getLevel()));
 	}
 
 	@Override
