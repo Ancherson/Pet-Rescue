@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,10 @@ public class VisuPlateau extends JPanel{
 	//si lock = true, empeche le joueur d'interagir avec le plateau
 	private boolean lock = false;
 	
+	private boolean fusee = false;
+	private int xFusee = -1;
+	private BufferedImage imageFusee;
+	
 	private BufferedImage imageMur;
 	private BufferedImage[] imagesPet = new BufferedImage[2];
 	private Color[] colors = {Color.red, Color.green, Color.blue, Color.yellow, Color.MAGENTA, Color.cyan};
@@ -35,7 +40,7 @@ public class VisuPlateau extends JPanel{
 	public VisuPlateau(Visuelle v, Plateau p){
 		this.v = v;
 		largeur = scl * p.getLargeur();
-		hauteur = scl * p.getHauteur();
+		hauteur = scl * p.getHauteur() + 80;
 		this.setSize(largeur, hauteur);
 		
 		this.addMouseListener(new MouseListener() {
@@ -67,11 +72,32 @@ public class VisuPlateau extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				if(lock) return;
+				if(fusee) {
+					v.fusee(xFusee);
+					toggleFusee();
+					return;
+				}
 				int i = evt.getY() / scl;
 				int j = evt.getX() / scl;
 				v.joue(i, j);
 			}
 		});
+		this.addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent evt) {
+				if(fusee) {
+					xFusee = evt.getX() / scl;
+					repaint();
+				}
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+
+			}
+		});
+		
 		this.setOpaque(false);
 		
 		this.setPreferredSize(new Dimension(largeur,hauteur));
@@ -86,10 +112,16 @@ public class VisuPlateau extends JPanel{
 			imagesPet = new BufferedImage[2];
 			imagesPet[0] = ImageIO.read(new File("./animal.png"));
 			imagesPet[1] = ImageIO.read(new File("./panda.png"));	
-		} catch(Exception e) {
+		} catch(IOException e) {
 			throw new RuntimeException();
 		}
 		melange();
+		
+		try {
+			imageFusee = ImageIO.read(new File("./fusee1.png"));
+		}catch(IOException e) {
+			throw new RuntimeException("error load ./fusee1.png");
+		}
 	}
 	
 	public void lock() {
@@ -155,11 +187,22 @@ public class VisuPlateau extends JPanel{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(new Color(0,0,0,100));
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.fillRect(0, 0, this.getWidth(), this.getHeight() - 80);
 		afficheP(g);
+		if(fusee && xFusee >= 0) {
+			g.drawImage(imageFusee, xFusee * scl, this.getHeight() - 80, scl, 80, this);
+		}
 		if(!isMoving) {
 			v.rescue();
 		}
 
 	}	
+	
+	public void toggleFusee() {
+		fusee = !fusee;
+		if(!fusee) {
+			xFusee = -1;
+			repaint();
+		}
+	}
 }

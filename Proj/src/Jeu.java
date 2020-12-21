@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 //Cette Classe permet de regrouper un peu toutes les classe pour qu'elles interagissent entre elles
@@ -55,6 +56,10 @@ public class Jeu {
 		joueur.quelNom(name);
 	}
 	
+	public int getFusee() {
+		return joueur.getFusee();
+	}
+	
 	//Fonction pour lancer le jeu
 	public void start(Plateau p) {
 		this.p = p;
@@ -70,6 +75,13 @@ public class Jeu {
 		affiche();
 	}
 	
+	public void fusee(int j) {
+		if(joueur.getFusee() > 0) {
+			p.fusee(j);
+			joueur.enleveFusee();
+			move();
+		}
+	}
 	
 	//Fonction pour jouer dans la case i,j du plateau
 	public void turn(int i, int j) {
@@ -81,6 +93,7 @@ public class Jeu {
 	public void affiche() {
 		afficheur.afficherP(p);
 		afficheur.afficheCoup(p);
+		afficheur.afficheFusee(joueur);
 		afficheur.afficheScore(joueur);
 	}
 	
@@ -97,7 +110,10 @@ public class Jeu {
 			p.explosionFinale(joueur);
 			joueur.nextLevel(p.getLevel());
 			joueur.saveBest(p.getLevel());
-			//Faire un appelle a joueur.save();
+			if(joueur instanceof Humain) {
+				Humain h = (Humain)joueur;
+				h.save();
+			}
 		}
 		afficheur.afficherP(p);
 		afficheur.afficheScore(joueur);
@@ -112,6 +128,6 @@ public class Jeu {
 	
 	//fonction disant si oui ou non une partie est finie
 	public boolean finished() {
-		return p.levelIsOver();
+		return p.levelIsOver(joueur);
 	}
 }

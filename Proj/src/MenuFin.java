@@ -44,7 +44,7 @@ public class MenuFin extends JPanel{
 		bestScore.setFont(new Font("Arial",Font.BOLD,40));
 		bestScore.setHorizontalAlignment(0);
 		
-		JButton recommencer = new JButton("Recommencer");
+		JButton recommencer = new JButton("Menu");
 		recommencer.addActionListener((event) -> {
 			v.changeToLevel();
 		});

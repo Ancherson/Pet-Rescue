@@ -87,8 +87,8 @@ public class Plateau {
 	}
 	
 	//Permet de savoir si la partie est fini
-	public boolean levelIsOver() {
-		return totPet == 0 || !canPlay() || coup == 0;
+	public boolean levelIsOver(Joueur joueur) {
+		return totPet == 0 || !canPlay(joueur) || coup == 0;
 	}
 	
 	//Savoir si le joueur a gagné
@@ -97,7 +97,8 @@ public class Plateau {
 	}
 
 	//Savoir si le joueur peut encore jouer
-	private boolean canPlay() {
+	private boolean canPlay(Joueur joueur) {
+		if(joueur.getFusee() > 0) return true;
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
 				if(canExplose(i, j)) return true;
@@ -256,6 +257,13 @@ public class Plateau {
 		return b;
 	}
 	
+	public void fusee(int j) {
+		for(int i = 0; i < cells.length; i++) {
+			if(cells[i][j] instanceof Bloc) {
+				cells[i][j] = new Cell(i,j);
+			}
+		}
+	}
 	
 	// à la fin de la partie on compte le nombre total de blocs restant et on met ce nombre au carré puis on le multiplie par 10,
 	// cela permet d'encourager le joueur à faire le moins de coups possible !
