@@ -104,7 +104,6 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		int coup = p.getCoup();
 		if(coup > 0) menuJeu.setCoup(coup);
 		
-		//this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
 		j.start(p);
 	}
 	
