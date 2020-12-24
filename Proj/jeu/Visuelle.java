@@ -1,18 +1,14 @@
+package jeu;
+
 import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Queue;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 
 
 //Cette classe gère l'interface graphique, à la fois l'affichage et l'interaction avec le joueur
@@ -45,7 +41,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		this.j = j;
 		
 		try {
-			background = ImageIO.read(new File("./back.png"));
+			background = ImageIO.read(new File("./images/back.png"));
 		} catch (IOException e) {
 			throw new RuntimeException();
 		}
@@ -108,7 +104,6 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 		int coup = p.getCoup();
 		if(coup > 0) menuJeu.setCoup(coup);
 		
-		//this.setSize(menuJeu.getWidth() + this.dLargeur, menuJeu.getHeight() + this.dHauteur + 1);
 		j.start(p);
 	}
 	

@@ -1,3 +1,4 @@
+package jeu;
 
 //Cette classe représente les joueurs
 

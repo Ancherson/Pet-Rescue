@@ -1,3 +1,4 @@
+package jeu;
 
 //Cette interface est utilisé pour les interacteur
 public interface Interacteur {
