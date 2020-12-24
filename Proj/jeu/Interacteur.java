@@ -6,6 +6,5 @@ public interface Interacteur {
 	void start();
 	void veutRejouer();
 	void prochainCoup();
-	void close();
 	void setMaxLevel(int levelMax);
 }

@@ -10,6 +10,7 @@ public class Robot extends Joueur{
 	private Jeu jeu;
 	
 	public Robot(Jeu jeu) {
+		this.nbFusee = 0;
 		this.jeu = jeu;
 	}
 	
