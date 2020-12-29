@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Jeu {
 	//Le joueur est soit un Robot ou un Humain
-	Joueur joueur;
-	Plateau p;
-	Afficheur afficheur;
+	private Joueur joueur;
+	private Plateau p;
+	private Afficheur afficheur;
 	
 	public final static int TOT_LEVEL = 8;
 	
@@ -21,7 +21,7 @@ public class Jeu {
 	}
 	
 	//Cette fonction demande qu'elle interface à utiliser
-	public void demmandeInterface() {
+	private void demmandeInterface() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Quel Interface voulez-vous utiliser ?\n(1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
 		
