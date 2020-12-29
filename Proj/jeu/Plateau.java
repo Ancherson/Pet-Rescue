@@ -108,7 +108,7 @@ public class Plateau {
 	
 	//Savoir si i et j correspondent à une case dans le tableau cells
 	//Permet d'éviter les cas où i et j sont en dehors du tableau
-	public boolean correctInput(int i, int j) {
+	private boolean correctInput(int i, int j) {
 		return !(j < 0 || j >= cells[0].length || i < 0 || i >= cells.length);
 	}
 	
@@ -134,7 +134,7 @@ public class Plateau {
 	}
 	
 	//fonction qui explose le bloc (i,j) si sa couleur est la meme que color
-	public int explose(int i, int j, int color) {
+	private int explose(int i, int j, int color) {
 		if(!correctInput(i, j)) return 0;
 		if(cells[i][j].explose(color)) {
 			int tot = 1;
@@ -188,7 +188,7 @@ public class Plateau {
 	//Fonction left pour les blocs murs
 	//si a gauche du bloc mur y'a rien alors déplacer sur la gauche la pile de bloc au dessus
 	//si a gauche du bloc mur, un autre bloc mur et au dessus de bloc mur y'a rien alors déplacer sur la gauche la pile de bloc au dessus
-	public boolean left1() {
+	private boolean left1() {
 		boolean b = false;
 		for(Mur mur : murs) {
 			int[] coord = mur.getIJ();
@@ -204,7 +204,7 @@ public class Plateau {
 	
 	//fonction left pour la derniere ligne
 	//si un bloc et a gauche rien alors deplacer sur la gauche la pile de blocs
-	public boolean left2() {
+	private boolean left2() {
 		boolean b = false;
 		for(int j = 1; j < cells[0].length; j++) {
 			if(!cells[cells.length -1][j].estPet()  && cells[cells.length - 1][j - 1].estVide() && !cells[cells.length - 1][j].estVide() && !cells[cells.length -1][j].estMur()) {
@@ -216,7 +216,7 @@ public class Plateau {
 	
 	
 	//deplace sur la gauche les pile de blocs
-	public boolean deplaceLeft(int ii, int j) {
+	private boolean deplaceLeft(int ii, int j) {
 		boolean b = false;
 		for(int i = ii; i >= 0; i--) {
 			if(cells[i][j].estMur() || cells[i][j].estVide()) break;

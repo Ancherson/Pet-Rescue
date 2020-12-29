@@ -180,10 +180,4 @@ public class TerminalInteracteur implements Interacteur{
 		if(s.equals("oui")) this.restart();
 	}
 
-	@Override
-	public void close() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
