@@ -56,7 +56,7 @@ public class TerminalInteracteur implements Interacteur{
 	}
 	
 	public int[] quellesCases() {
-		System.out.println("Quel Colone (A,B,C...)?");
+		System.out.println("Quel Colonne (A,B,C...)?");
 		int i = -1;
 		boolean pbm = true;
 		while(pbm) {
@@ -110,7 +110,7 @@ public class TerminalInteracteur implements Interacteur{
 	}
 	
 	public int quelleColonne() {
-		System.out.println("Quel Colone (A,B,C...)?");
+		System.out.println("Quel Colonne (A,B,C...)?");
 		int max = jeu.getPlateau().getLargeur();
 		boolean pbm = true;
 		int j = 0;
