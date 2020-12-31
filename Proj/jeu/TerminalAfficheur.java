@@ -7,8 +7,21 @@ public class TerminalAfficheur implements Afficheur{
 	@Override
 	public void afficherP(Plateau p) {
 		Cell[][] copyPlateau = p.copy();
-		System.out.println("# ".repeat(copyPlateau[0].length + 2));
+		System.out.print(" ".repeat(5));
+		for(int i = 0; i < copyPlateau[0].length; i++) {
+			char colone = (char) (i+65);
+			System.out.print(colone +" ");
+		}
+		System.out.println("");
+		System.out.print(" ".repeat(3));
+		System.out.println("# ".repeat(copyPlateau[0].length+2));
 		for(int i = 0; i < copyPlateau.length; i++) {
+			int ligne = i+1;
+			
+			if (ligne > 9) 	System.out.print(ligne+" ");
+			
+			else System.out.print(" " + ligne+" ");
+			
 			for(int j = 0; j < copyPlateau[i].length; j++) {
 				if(j == 0) System.out.print("# ");
 				Cell c = copyPlateau[i][j];
@@ -24,7 +37,8 @@ public class TerminalAfficheur implements Afficheur{
 			}
 			System.out.println("#");
 		}
-		System.out.println("# ".repeat(copyPlateau[0].length + 2));
+		System.out.print(" ".repeat(3));
+		System.out.println("# ".repeat(copyPlateau[0].length+2));
 	}
 
 	@Override

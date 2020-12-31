@@ -38,6 +38,7 @@ public class TerminalInteracteur implements Interacteur{
 	}
 
 	public int quelLevel() {
+		if (maxLevel == 1) return 1;
 		System.out.println("Quel level (entre 1 et " + maxLevel + ")");
 		int i = 0;
 		boolean pbm = true;
@@ -55,31 +56,30 @@ public class TerminalInteracteur implements Interacteur{
 	}
 	
 	public int[] quellesCases() {
-		System.out.println("Quel Case ?");
+		System.out.println("Quel Colone (A,B,C...)?");
 		int i = -1;
 		boolean pbm = true;
 		while(pbm) {
 			pbm = false;
 			String s = sc.next();
-			try {
-				i = Integer.parseInt(s);
-			}catch(NumberFormatException e) {
-				pbm = true;
-			}
+			s = s.toUpperCase();
+			char col = s.charAt(0);
+			i = (int) (col)-65;
+			pbm = (s.length() != 1 || i<0);
 		}
-		
+		System.out.println("Quel Ligne (1,2,3...)?");
 		int j = -1;
 	    pbm = true;
 		while(pbm) {
 			pbm = false;
 			String s = sc.next();
 			try {
-				j = Integer.parseInt(s);
+				j = Integer.parseInt(s)-1;
 			}catch(NumberFormatException e) {
 				pbm = true;
 			}
 		}
-		int[]res = {i,j};
+		int[]res = {j,i};
 		return res;
 	}
 	
@@ -110,21 +110,18 @@ public class TerminalInteracteur implements Interacteur{
 	}
 	
 	public int quelleColonne() {
-		System.out.println("Quelle Colonne ?");
+		System.out.println("Quel Colone (A,B,C...)?");
 		int max = jeu.getPlateau().getLargeur();
 		boolean pbm = true;
 		int j = 0;
 		while(pbm || !(j >= 0 && j < max)) {
 			pbm = false;
 			String s = sc.next();
-			try {
-				j = Integer.parseInt(s);
-			}catch(NumberFormatException e) {
-				System.out.println("NON");
-				pbm = true;
-			}
+			s = s.toUpperCase();
+			char col = s.charAt(0);
+			j = (int) (col)-65;
+			pbm = (s.length() != 1 || j<0);
 		}
-		
 		return j;
 	}
 	
