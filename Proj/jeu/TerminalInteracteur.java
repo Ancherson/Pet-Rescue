@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TerminalInteracteur implements Interacteur{
 	private Scanner sc = new Scanner(System.in);
 	private Jeu jeu;
-	private int maxLevel = Jeu.TOT_LEVEL; 
+	private int maxLevel = Jeu.TOT_LEVEL;
 	
 	public TerminalInteracteur(Jeu j) {
 		this.jeu = j;
@@ -56,30 +56,14 @@ public class TerminalInteracteur implements Interacteur{
 	}
 	
 	public int[] quellesCases() {
-		System.out.println("Quel Colonne (A,B,C...)?");
-		int i = -1;
-		boolean pbm = true;
-		while(pbm) {
-			pbm = false;
-			String s = sc.next();
-			s = s.toUpperCase();
-			char col = s.charAt(0);
-			i = (int) (col)-65;
-			pbm = (s.length() != 1 || i<0);
-		}
-		System.out.println("Quel Ligne (1,2,3...)?");
-		int j = -1;
-	    pbm = true;
-		while(pbm) {
-			pbm = false;
-			String s = sc.next();
-			try {
-				j = Integer.parseInt(s)-1;
-			}catch(NumberFormatException e) {
-				pbm = true;
-			}
-		}
+		Plateau p = jeu.getPlateau();
+		int i = quelleColonne();
+		int j = quelleLigne();
 		int[]res = {j,i};
+		if(!p.canExplose(j, i)) {
+			System.out.println("Mauvaise case, ne peut pas exploser !");
+			return quellesCases();
+		}
 		return res;
 	}
 	
@@ -110,6 +94,7 @@ public class TerminalInteracteur implements Interacteur{
 	}
 	
 	public int quelleColonne() {
+		Plateau p = jeu.getPlateau();
 		System.out.println("Quel Colonne (A,B,C...)?");
 		int max = jeu.getPlateau().getLargeur();
 		boolean pbm = true;
@@ -120,11 +105,39 @@ public class TerminalInteracteur implements Interacteur{
 			s = s.toUpperCase();
 			char col = s.charAt(0);
 			j = (int) (col)-65;
-			pbm = (s.length() != 1 || j<0);
+			
+			if(s.length()>1) {
+				System.out.println("Mauvais format");
+				pbm = true;
+			}
+			else if (j<0 || j>=p.getHauteur()) {
+				System.out.println("Colonne inexistante");
+			}
 		}
 		return j;
 	}
 	
+	public int quelleLigne() {
+		Plateau p = jeu.getPlateau();
+		System.out.println("Quel Ligne (1,2,3...)?");
+		int j = -1;
+	    boolean pbm = true;
+		while(pbm) {
+			pbm = false;
+			String s = sc.next();
+			try {
+				j = Integer.parseInt(s)-1;
+				}catch(NumberFormatException e) {
+				pbm = true;
+				System.out.println("Mauvais format");
+				}
+			if(!pbm) {
+				pbm = (j<0 || j>= p.getLargeur());
+				System.out.println("Ligne inexistante");
+				}
+			}
+		return j;
+		}
 	public void turn() {
 		int[] cases= this.quellesCases();
 		int i = cases [0];
@@ -168,7 +181,7 @@ public class TerminalInteracteur implements Interacteur{
 	}
 	
 	public void veutRejouer() {
-		System.out.println("Veux-tu rejouer ? (oui/non)");
+		System.out.println("Veux-tu continuer à jouer ? (oui/non)");
 		String s = "";
 		do {
 			s = sc.next();
