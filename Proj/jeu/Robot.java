@@ -1,11 +1,13 @@
 package jeu;
 
+import java.util.Scanner;
+
 //Cette classe représente un Robot
 
 public class Robot extends Joueur{
 	
 	//Le robot n'a pas besoin d'interacteur contrairement à l'humain, et est donc relié directement au Jau
-	
+	private Scanner sc = new Scanner(System.in);
 	private static String[] noms = {"Truc", "Robot", "Tas de Feraille", "Un Humain"};
 	private Jeu jeu;
 	
@@ -16,8 +18,29 @@ public class Robot extends Joueur{
 	
 	@Override
 	public void start() {
+		System.out.println("Quel niveau (1 à 8, 0 pour random)?");
+		int level = -1;
+	    boolean pbm = true;
+		while(pbm) {
+			pbm = false;
+			String s = sc.next();
+			try {
+				level = Integer.parseInt(s);
+				if(level>Jeu.TOT_LEVEL ||level<0) {
+					pbm=true;
+					System.out.println("Mauvais chiffre");
+				}
+				}catch(NumberFormatException e) {
+				pbm = true;
+				System.out.println("Mauvais format");
+				}
+		}		
 		String nom = noms[(int)(Math.random() * noms.length)];
-		int level = (int)(Math.random() * Jeu.TOT_LEVEL + 1);
+		if(level==0) {
+			level = (int)(Math.random() * Jeu.TOT_LEVEL + 1);
+			System.out.println(nom + ": Je vais faire le niveau "+ level);
+		}
+
 		jeu.newJoueur(nom);
 		jeu.start(new Plateau(level));
 	}
@@ -53,7 +76,9 @@ public class Robot extends Joueur{
 			System.out.print(".");
 		}
 		System.out.println();
-		System.out.println("Je joue en (" + prochainCoup[0] + "," + prochainCoup[1] + ")");
+		char col = (char) (prochainCoup[1]+65);
+		int ligne = prochainCoup[0]+1;
+		System.out.println("Je joue en (" + col + "," + ligne + ")");
 		
 		jeu.turn(prochainCoup[0], prochainCoup[1]);
 		

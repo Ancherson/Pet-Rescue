@@ -34,8 +34,11 @@ public class Jeu {
 				i = Integer.parseInt(s);
 			}catch(NumberFormatException e) {
 				pbm = true;
+				System.out.println("Rentre un chiffre");
 			}
+			if(!pbm && (i <= 0 || i > 3)) System.out.println("Chiffre entre 1 et 3");
 		}
+
 		if(i == 1) {
 			afficheur = new TerminalAfficheur();
 			Interacteur inter = new TerminalInteracteur(this);
