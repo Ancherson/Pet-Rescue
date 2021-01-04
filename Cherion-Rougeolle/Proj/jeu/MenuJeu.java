@@ -32,6 +32,7 @@ public class MenuJeu extends JPanel{
 	private JLabel score = new JLabel("Score : 0");
 	private JLabel coup = new JLabel();
 	
+	private boolean lock = false;
 	
 	public MenuJeu(Visuelle v, Plateau p) {
 		this.v = v;
@@ -123,7 +124,7 @@ public class MenuJeu extends JPanel{
 		fusee.setFocusPainted(false);
 		
 		fusee.addActionListener((evt) -> {
-			if(this.nbFusee > 0) {
+			if(!lock && this.nbFusee > 0) {
 				this.fuseeChangeCouleur();
 				vPlateau.toggleFusee();
 			}
@@ -187,10 +188,12 @@ public class MenuJeu extends JPanel{
 	
 	//Les fonction lock et unlock sont utiles pour empecher le Joueur de jouer lorse de l'animation des blocs qui se déplacent
 	public void lock() {
+		lock = true;
 		vPlateau.lock();
 	}
 	
 	public void unLock() {
+		lock = false;
 		vPlateau.unLock();
 	}
 	

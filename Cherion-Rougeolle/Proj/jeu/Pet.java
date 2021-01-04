@@ -4,6 +4,7 @@ package jeu;
 
 public class Pet extends Cell{
 	
+	//xOff et yOff représente la différence de déplacement du bloc entre deux affichages
 	private int xOff = 0;
 	private int yOff = 0;
 	private int imageNum = (int)(Math.random() * 2);
