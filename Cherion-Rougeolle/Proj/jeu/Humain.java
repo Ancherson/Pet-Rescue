@@ -28,6 +28,7 @@ public class Humain extends Joueur{
 		interacteur.prochainCoup();
 	}
 	
+	//Permet de mettre le nom dans l'attribut nom et charge les données du joueur
 	@Override
 	public void quelNom(String name) {
 		super.quelNom(name);
@@ -39,6 +40,7 @@ public class Humain extends Joueur{
 		interacteur.setMaxLevel(levelMax);
 	}
 	
+	//Permet de sauvegrader les données du joueur
 	public void save() {
 		File f = new File("./Sauvegardes/" + nom + ".txt");
 		ObjectOutputStream oos;
@@ -55,6 +57,7 @@ public class Humain extends Joueur{
 		} 
 	}
 	
+	//Charge les données du joueur
 	public void load() throws IOException {
 		File f = new File("./Sauvegardes/" + nom + ".txt");
 		if(!f.exists()) return;
@@ -81,6 +84,7 @@ public class Humain extends Joueur{
 		interacteur.veutRejouer();
 	}
 	
+	//Permet d'incrémenter le niveau maximum auquel il peut jouer
 	@Override
 	public void nextLevel(int level) {
 		super.nextLevel(level);

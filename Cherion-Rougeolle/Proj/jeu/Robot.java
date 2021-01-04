@@ -12,6 +12,7 @@ public class Robot extends Joueur{
 	private Jeu jeu;
 	
 	public Robot(Jeu jeu) {
+		//Peut pas utiliser de fusées
 		this.nbFusee = 0;
 		this.jeu = jeu;
 	}
@@ -46,7 +47,7 @@ public class Robot extends Joueur{
 	}
 	
 	//Fonction pour préparer le coup du robot
-	//Premiere IA un peu débile, mais c'est pour tester
+	//L'IA est vraiment nul, elle joue aléatoirement sur une case qui peut exploser
 	private int[] think() {
 		Plateau plateau = jeu.getPlateau();
 		int i;
@@ -60,7 +61,8 @@ public class Robot extends Joueur{
 		int[] t = {i,j};
 		return t;
 	}
-
+	
+	
 	@Override
 	public void prochainCoup()  {
 		int[] prochainCoup = think();

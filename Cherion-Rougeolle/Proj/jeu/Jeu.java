@@ -56,6 +56,7 @@ public class Jeu {
 		joueur.start();
 	}
 	
+	//Permet de changer le nom du joueur
 	public void newJoueur(String name) {
 		joueur.quelNom(name);
 	}
@@ -79,6 +80,7 @@ public class Jeu {
 		affiche();
 	}
 	
+	//Permet de jouer une fusée
 	public void fusee(int j) {
 		if(joueur.getFusee() > 0) {
 			p.fusee(j);

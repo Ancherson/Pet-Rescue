@@ -7,7 +7,10 @@ public abstract class Joueur {
 	protected int score;
 	protected int nbFusee = 3;
 
+	//Représente le niveau maximum auquel le joueur peut jouer
 	protected int levelMax = 1;
+	
+	//Représente les meilleurs scores sur chacun des niveaux
 	protected int[] bestScores = new int[Jeu.TOT_LEVEL];
 	
 	public String getNom() {
@@ -42,6 +45,7 @@ public abstract class Joueur {
 		nom = name;
 	}
 	
+	//Sauvegarde le meilleur score
 	public void saveBest(int niveau) {
 		if(score > bestScores[niveau - 1])
 			bestScores[niveau - 1] = score;

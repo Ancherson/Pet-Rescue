@@ -1,17 +1,13 @@
 package jeu;
 
-/**
- * 
- * Cette classe représente les blocs colorés qui peuvent explosés
- *
- */
-
+// Cette classe représente les blocs colorés qui peuvent explosés
+ 
 public class Bloc extends Cell{
 	//représente la couleur du bloc
 	private int color;
 	private boolean vide = false;
 	
-	//xOff et yOff sont utiles pour l'affichage sur l'interface graphique
+	//xOff et yOff représente la différence de déplacement du bloc entre deux affichages
 	private int xOff = 0;
 	private int yOff = 0;
 	

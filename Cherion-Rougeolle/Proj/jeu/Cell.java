@@ -6,7 +6,7 @@ package jeu;
 public class Cell {
 	
 	//i et j represente la position dans le plateau (i la ligne et j la colonne) 
-	//ils sont utile pour l'affichage dans l'affichage dans l'interface graphique
+	//ils sont utile pour les classes Bloc et Pet pour mettre à jour les attributs xOff et yOff
 	protected int i;
 	protected int j;
 	

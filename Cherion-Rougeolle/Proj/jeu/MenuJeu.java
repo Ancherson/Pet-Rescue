@@ -37,8 +37,6 @@ public class MenuJeu extends JPanel{
 		this.v = v;
 		this.vPlateau = new VisuPlateau(v,p);
 		
-		//JPanel mainPanel = new JPanel(new BorderLayout());
-		
 		this.setLayout(new BorderLayout());
 		
 		JPanel haut = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
@@ -50,8 +48,7 @@ public class MenuJeu extends JPanel{
 		haut.setBackground(new Color(0x25275E));
 		haut.add(score);
 		haut.add(coup);
-		
-		//mainPanel.add(haut, BorderLayout.NORTH);
+	
 		this.add(haut, BorderLayout.NORTH);
 		
 		GridBagLayout gb = new GridBagLayout();
@@ -184,11 +181,11 @@ public class MenuJeu extends JPanel{
 	
 	public void afficheP() {
 		vPlateau.repaint();
+		//Cette ligne permet de "fluidifier" l'animation
 		Toolkit.getDefaultToolkit().sync();
 	}
 	
 	//Les fonction lock et unlock sont utiles pour empecher le Joueur de jouer lorse de l'animation des blocs qui se déplacent
-	
 	public void lock() {
 		vPlateau.lock();
 	}
@@ -197,6 +194,7 @@ public class MenuJeu extends JPanel{
 		vPlateau.unLock();
 	}
 	
+	//Fonction qui envoie le plateau à au VisuPlateau
 	public void prepare(Plateau p) {
 		vPlateau.prepare(p);
 	}

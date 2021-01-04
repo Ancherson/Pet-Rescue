@@ -27,13 +27,11 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	
 	private Jeu j;
 	
-	//Attribut pour l'animation des blocs qui se déplacent
+	//Attributs pour l'animation des blocs qui se déplacent
 	private boolean running = true;
-	private BufferedImage background;
 	private Thread t;
 	
-	//ces dimensions représentent l'écart de dimension entre la fenetre et le contenue de la fenetre
-	//permettant de pouvoir redimmensionner plus précisément même si cela ne marche pas parfaitement
+	private BufferedImage background;
 	
 	private int maxLevel;
 	

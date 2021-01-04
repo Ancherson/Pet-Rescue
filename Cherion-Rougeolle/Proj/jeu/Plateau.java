@@ -255,6 +255,7 @@ public class Plateau {
 		return b;
 	}
 	
+	//retire toutes les Cell de la colonne j qui peuvent être détruit
 	public void fusee(int j) {
 		for(int i = 0; i < cells.length; i++) {
 			if(cells[i][j] instanceof Bloc) {
@@ -278,6 +279,7 @@ public class Plateau {
 		joueur.addScore(score);
 	}
 	
+	//revoie une copie du plateau
 	public Cell[][] copy() {
 		Cell[][] copyCells = new Cell[cells.length][cells[0].length];
 		for(int i = 0; i < copyCells.length; i++) {
@@ -288,6 +290,7 @@ public class Plateau {
 		return copyCells;
 	}
 	
+	//permet de réinitialiser xOff et yOff des Bloc et des Pet
 	public void clearOffset() {
 		for(int i = 0; i < cells.length; i++) {
 			for(int j = 0; j < cells[i].length; j++) {
