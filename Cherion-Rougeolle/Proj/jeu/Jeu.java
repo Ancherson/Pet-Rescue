@@ -23,7 +23,7 @@ public class Jeu {
 	//Cette fonction demande qu'elle interface à utiliser
 	private void demmandeInterface() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Quel Interface voulez-vous utiliser ?\n(1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
+		System.out.println("Quelle interface voulez-vous utiliser ?\n(1 -> Terminal | 2 -> Interface Graphique | 3 -> Robot)");
 		
 		int i = 0;
 		boolean pbm = true;

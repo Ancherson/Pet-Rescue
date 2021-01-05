@@ -33,13 +33,13 @@ public class TerminalInteracteur implements Interacteur{
 	}
 
 	public String quelNom() {
-		System.out.println("Quel est votre nom ?");
+		System.out.println("Quel est ton nom baby ?");
 		return sc.next();
 	}
 
 	public int quelLevel() {
 		if (maxLevel == 1) return 1;
-		System.out.println("Quel level (entre 1 et " + maxLevel + ")");
+		System.out.println("Quel niveau (entre 1 et " + maxLevel + ")");
 		int i = 0;
 		boolean pbm = true;
 		while(pbm || !(i <= maxLevel  && i > 0)) {
@@ -69,7 +69,7 @@ public class TerminalInteracteur implements Interacteur{
 	
 	public int quelleAction(int tot) {
 		
-		System.out.println("Quelle action veut-tu faire ?");
+		System.out.println("Quelle action veux-tu faire ?");
 		String[]actions = {"Cases", "Abandonne", "Fusee"};
 		String message = "";
 		for(int i = 0; i < actions.length && i < tot; i++) {
@@ -95,7 +95,7 @@ public class TerminalInteracteur implements Interacteur{
 	
 	public int quelleColonne() {
 		Plateau p = jeu.getPlateau();
-		System.out.println("Quel Colonne (A,B,C...)?");
+		System.out.println("Quelle Colonne (A,B,C...)?");
 		int max = jeu.getPlateau().getLargeur();
 		boolean pbm = true;
 		int j = 0;
@@ -119,7 +119,7 @@ public class TerminalInteracteur implements Interacteur{
 	
 	public int quelleLigne() {
 		Plateau p = jeu.getPlateau();
-		System.out.println("Quel Ligne (1,2,3...)?");
+		System.out.println("Quelle Ligne (1,2,3...)?");
 		int j = -1;
 	    boolean pbm = true;
 		while(pbm) {
