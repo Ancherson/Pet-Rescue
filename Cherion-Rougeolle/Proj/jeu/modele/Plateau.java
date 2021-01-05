@@ -1,10 +1,12 @@
-package jeu;
+package jeu.modele;
 
 import java.io.File;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import jeu.joueur.Joueur;
 
 
 //Cette classe représente le plateau de jeu (la grille)

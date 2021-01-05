@@ -1,4 +1,4 @@
-package jeu;
+package jeu.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +12,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import jeu.modele.Bloc;
+import jeu.modele.Cell;
+import jeu.modele.Pet;
+import jeu.modele.Plateau;
 
 //Cette classe gère l'affichage du plateau sur l'interface graphique
 

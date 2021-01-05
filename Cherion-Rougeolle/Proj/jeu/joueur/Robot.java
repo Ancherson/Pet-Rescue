@@ -1,6 +1,9 @@
-package jeu;
+package jeu.joueur;
 
 import java.util.Scanner;
+
+import jeu.Jeu;
+import jeu.modele.Plateau;
 
 //Cette classe représente un Robot
 

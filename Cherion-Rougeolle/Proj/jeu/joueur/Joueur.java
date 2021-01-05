@@ -1,4 +1,6 @@
-package jeu;
+package jeu.joueur;
+
+import jeu.Jeu;
 
 //Cette classe représente les joueurs
 

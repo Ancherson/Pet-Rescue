@@ -1,4 +1,4 @@
-package jeu;
+package jeu.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +14,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import jeu.Jeu;
 
 //Classe représentant le menu de choix d'un level, sur l'interface graphique
 

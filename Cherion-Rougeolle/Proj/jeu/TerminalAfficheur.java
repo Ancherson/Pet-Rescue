@@ -1,5 +1,9 @@
 package jeu;
 
+import jeu.joueur.Joueur;
+import jeu.modele.Cell;
+import jeu.modele.Plateau;
+
 //Cette classe permet l'Affichage dans le terminal du Jeu
 
 public class TerminalAfficheur implements Afficheur{

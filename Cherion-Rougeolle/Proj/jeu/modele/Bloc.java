@@ -1,4 +1,4 @@
-package jeu;
+package jeu.modele;
 
 // Cette classe représente les blocs colorés qui peuvent explosés
  

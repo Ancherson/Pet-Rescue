@@ -2,6 +2,9 @@ package jeu;
 
 import java.util.Scanner;
 
+import jeu.joueur.Interacteur;
+import jeu.modele.Plateau;
+
 //Cette Classe permet l'interaction entre le Joueur et le Jeu à travers le terminal
 
 public class TerminalInteracteur implements Interacteur{

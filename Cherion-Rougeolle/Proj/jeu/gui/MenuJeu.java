@@ -1,4 +1,4 @@
-package jeu;
+package jeu.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import jeu.modele.Plateau;
 
 //Cette classe représente le menu du jeu, lors de l'affichage du niveau sur l'interface graphique
 
