@@ -88,7 +88,7 @@ public class TerminalInteracteur implements Interacteur{
 			try {
 				i = Integer.parseInt(s);
 			}catch(NumberFormatException e) {
-				System.out.println("NON");
+				System.out.println("Un entier entre 1 et " + tot);
 				pbm = true;
 			}
 		}
