@@ -27,10 +27,6 @@ public abstract class Joueur {
 		if(nbFusee > 0) nbFusee--;
 	}
 	
-	public void affiche() {
-		System.out.println(nom + " : " + score);
-	}
-	
 	public int getScore() {
 		return score;
 	}
