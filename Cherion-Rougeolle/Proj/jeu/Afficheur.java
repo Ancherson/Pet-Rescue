@@ -1,5 +1,7 @@
 package jeu;
 
+import jeu.joueur.Joueur;
+import jeu.modele.Plateau;
 
 // Interface utilisé pour l'affichage du jeu
 

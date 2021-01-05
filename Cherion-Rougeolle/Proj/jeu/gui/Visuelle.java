@@ -1,4 +1,4 @@
-package jeu;
+package jeu.gui;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
@@ -9,6 +9,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import jeu.Afficheur;
+import jeu.Jeu;
+import jeu.joueur.Interacteur;
+import jeu.joueur.Joueur;
+import jeu.modele.Plateau;
 
 
 //Cette classe gère l'interface graphique, à la fois l'affichage et l'interaction avec le joueur
@@ -118,6 +124,9 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 	}
 	
 	public void rescue() {
+		while(t.isAlive()) {
+			running = false;
+		}
 		if(j.rescue()) j.move();
 		else {
 			if(j.finished()) fin();
@@ -160,7 +169,7 @@ public class Visuelle extends JFrame implements Afficheur, Interacteur{
 			}
 			menuJeu.afficheP();
 		});
-		EventQueue.invokeLater(() -> t.start());
+		t.start();
 		
 	}
 

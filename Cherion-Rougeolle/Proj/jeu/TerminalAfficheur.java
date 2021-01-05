@@ -1,5 +1,9 @@
 package jeu;
 
+import jeu.joueur.Joueur;
+import jeu.modele.Cell;
+import jeu.modele.Plateau;
+
 //Cette classe permet l'Affichage dans le terminal du Jeu
 
 public class TerminalAfficheur implements Afficheur{
@@ -43,7 +47,7 @@ public class TerminalAfficheur implements Afficheur{
 
 	@Override
 	public void afficheScore(Joueur j) {
-		j.affiche();
+		System.out.println(j.getNom() + " : " + j.getScore());
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -69,7 +73,7 @@ public class TerminalAfficheur implements Afficheur{
 			System.out.println("#               #");
 			System.out.println("#################");
 		}
-		j.affiche();
+		System.out.println(j.getNom() + " : " + j.getScore());
 		System.out.println("Best Score : " + j.getBestScore(p.getLevel()));
 	}
 

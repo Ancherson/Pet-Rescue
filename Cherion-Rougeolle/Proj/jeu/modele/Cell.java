@@ -1,4 +1,4 @@
-package jeu;
+package jeu.modele;
 
 //Cette classe représente toutes les cellules du plateau, elle est étendue par Bloc, Pet, Mur
 //Cette classe à elle toute seule représente un case vide

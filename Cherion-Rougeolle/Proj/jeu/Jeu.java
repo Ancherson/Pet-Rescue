@@ -2,6 +2,13 @@ package jeu;
 
 import java.util.Scanner;
 
+import jeu.gui.Visuelle;
+import jeu.joueur.Humain;
+import jeu.joueur.Interacteur;
+import jeu.joueur.Joueur;
+import jeu.joueur.Robot;
+import jeu.modele.Plateau;
+
 //Cette Classe permet de regrouper un peu toutes les classe pour qu'elles interagissent entre elles
 
 public class Jeu {

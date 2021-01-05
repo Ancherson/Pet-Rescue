@@ -1,4 +1,6 @@
-package jeu;
+package jeu.joueur;
+
+import jeu.Jeu;
 
 //Cette classe représente les joueurs
 
@@ -23,10 +25,6 @@ public abstract class Joueur {
 	
 	public void enleveFusee() {
 		if(nbFusee > 0) nbFusee--;
-	}
-	
-	public void affiche() {
-		System.out.println(nom + " : " + score);
 	}
 	
 	public int getScore() {

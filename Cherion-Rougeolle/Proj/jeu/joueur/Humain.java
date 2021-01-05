@@ -1,4 +1,4 @@
-package jeu;
+package jeu.joueur;
 
 import java.io.File;
 import java.io.FileInputStream;
